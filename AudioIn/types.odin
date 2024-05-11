@@ -1,0 +1,42 @@
+package audioin
+
+import "core:c"
+
+// TODO: should be c.int
+SceAudioInErrorCode :: enum i64 {
+	//! Undefined error
+	FATAL                = 0x80260100,
+	//! Bad value of port number
+	INVALID_PORT         = 0x80260101,
+	//! Invalid sample length
+	INVALID_SIZE         = 0x80260102,
+	//! Invalid sample frequency
+	INVALID_SAMPLE_FREQ  = 0x80260103,
+	//! Invalid port type
+	INVALID_PORT_TYPE    = 0x80260104,
+	//! Invalid pointer value
+	INVALID_POINTER      = 0x80260105,
+	//! Invalid port param
+	INVALID_PORT_PARAM   = 0x80260106,
+	//! Cannot open no ports
+	PORT_FULL            = 0x80260107,
+	//! Not enough memory
+	OUT_OF_MEMORY        = 0x80260108,
+	//! Port is not opened
+	NOT_OPENED           = 0x80260109,
+	//! Tried to input while busy
+	BUSY                 = 0x8026010A,
+	//! Invalid parameter
+	INVALID_PARAMETER    = 0x8026010B
+}
+
+SceAudioInPortType :: enum c.int {
+	VOICE   = 0,
+	RAW     = 2
+}
+
+SceAudioInParam :: enum c.int {
+	PARAM_FORMAT_S16_MONO  = 0,
+	GETSTATUS_MUTE         = 1
+}
+
