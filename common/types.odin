@@ -196,7 +196,6 @@ SceSystemParamTimeFormat :: enum c.int {
 // rtc.h start
 //
 
-// TODO: should be c.int
 RtcErrorCode :: enum c.uint {
 	INVALID_VALUE        = 0x80251000,
 	INVALID_POINTER      = 0x80251001,

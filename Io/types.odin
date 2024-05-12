@@ -100,12 +100,6 @@ SceIoAccessMode :: enum c.int {
 	S_IFMT		= 0170000, //!< Format bits mask
 }
 
-// TODO:
-// File mode checking macros
-//#define SCE_S_ISLNK(m)	(((m) & SCE_S_IFMT) == SCE_S_IFLNK)
-//#define SCE_S_ISREG(m)	(((m) & SCE_S_IFMT) == SCE_S_IFREG)
-//#define SCE_S_ISDIR(m)	(((m) & SCE_S_IFMT) == SCE_S_IFDIR)
-
 /** File modes, used for the st_attr parameter in ::SceIoStat. */
 SceIoFileMode :: enum c.int {
 	SO_IXOTH            = 0x0001,               //!< Hidden execute permission
@@ -116,12 +110,6 @@ SceIoFileMode :: enum c.int {
 	SO_IFREG            = 0x0020,               //!< Regular file
 	SO_IFMT             = 0x0038,               //!< Format mask
 }
-
-// TODO:
-// File mode checking macros
-//#define SCE_SO_ISLNK(m)	(((m) & SCE_SO_IFMT) == SCE_SO_IFLNK)
-//#define SCE_SO_ISREG(m)	(((m) & SCE_SO_IFMT) == SCE_SO_IFREG)
-//#define SCE_SO_ISDIR(m)	(((m) & SCE_SO_IFMT) == SCE_SO_IFDIR)
 
 /** Structure to hold the status information about a file */
 SceIoStat :: struct {

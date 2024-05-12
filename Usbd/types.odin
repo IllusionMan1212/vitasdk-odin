@@ -52,7 +52,6 @@ SCE_USBD_DEVICE_SPEED_LS :: 0
 SCE_USBD_DEVICE_SPEED_FS :: 1
 SCE_USBD_DEVICE_SPEED_HS :: 2
 
-// TODO:
 SceUsbdErrorCode :: enum c.uint {
 	ERROR_NOT_INITIALIZED     = 0x80240001,
 	ERROR_ALREADY_INITIALIZED = 0x80240002,
@@ -241,3 +240,118 @@ SceUsbdIsochTransferStatus :: struct {
 	unk2: ^c.uintptr_t, // ret up to 0x28 buff. 10 * 4 bytes. or 8*5 bytes
 	unk3: c.uint32_t, // ret 4. ptr?
 }
+
+SCE_USBD_PROBE_SUCCEEDED     ::  (0)
+SCE_USBD_PROBE_FAILED        ::  (-1)
+SCE_USBD_ATTACH_SUCCEEDED    ::  (0)
+SCE_USBD_ATTACH_FAILED       ::  (-1)
+SCE_USBD_DETACH_SUCCEEDED    ::  (0)
+SCE_USBD_DETACH_FAILED       ::  (-1)
+
+SCE_USBD_MAX_LS_CONTROL_PACKET_SIZE     :: 8
+SCE_USBD_MAX_FS_CONTROL_PACKET_SIZE     :: 64
+SCE_USBD_MAX_ISOCHRONOUS_PACKET_SIZE    :: 1023
+SCE_USBD_MAX_LS_INTERRUPT_PACKET_SIZE   :: 8
+SCE_USBD_MAX_FS_INTERRUPT_PACKET_SIZE   :: 64
+SCE_USBD_MAX_BULK_PACKET_SIZE           :: 64
+
+SCE_USBD_FEATURE_ENDPOINT_HALT          ::     0x00
+SCE_USBD_FEATURE_DEVICE_REMOTE_WAKEUP   ::     0x01
+
+SceUsbdDriver :: struct {
+	name: cstring,
+	probe: #type ^proc "c" (device_id: c.int) -> c.int,
+	attach: #type ^proc "c" (device_id: c.int) -> c.int,
+	detach: #type ^proc "c" (device_id: c.int) -> c.int,
+}
+
+SceUsbdCompositeDriver :: struct {
+	name: cstring,
+	probe: #type ^proc "c" (device_id: c.int, desc: ^SceUsbdEndpointDescriptor) -> c.int, // endpoint descriptor should be interface one
+	attach: #type ^proc "c" (device_id: c.int) -> c.int,
+	detach: #type ^proc "c" (device_id: c.int) -> c.int,
+}
+
+SceUsbdDeviceRequest :: struct {
+	bmRequestType: c.uint8_t,
+	bRequest: c.uint8_t,
+	wValue: c.uint16_t,
+	wIndex: c.uint16_t,
+	wLength: c.uint16_t,
+}
+#assert(size_of(SceUsbdDeviceRequest) == 8)
+
+SceUsbdReqtype :: enum c.int {
+	DIR_BITS                  = 0x80,
+	DIR_TO_DEVICE             = 0x00,
+	DIR_TO_HOST               = 0x80,
+	TYPE_BITS                 = 0x60,
+	TYPE_STANDARD             = 0x00,
+	TYPE_CLASS                = 0x20,
+	TYPE_VENDOR               = 0x40,
+	TYPE_RESERVED             = 0x60,
+	RECIP_BITS                = 0x1f,
+	RECIP_DEVICE              = 0x00,
+	RECIP_INTERFACE           = 0x01,
+	RECIP_ENDPOINT            = 0x02,
+	RECIP_OTHER               = 0x03,
+}
+
+SceUsbdRequest :: enum c.int {
+	GET_STATUS                = 0x00,
+	CLEAR_FEATURE             = 0x01,
+	SET_FEATURE               = 0x03,
+	SET_ADDRESS               = 0x05,
+	GET_DESCRIPTOR            = 0x06,
+	SET_DESCRIPTOR            = 0x07,
+	GET_CONFIGURATION         = 0x08,
+	SET_CONFIGURATION         = 0x09,
+	GET_INTERFACE             = 0x0a,
+	SET_INTERFACE             = 0x0b,
+	SYNCH_FRAME               = 0x0c
+}
+
+ksceUsbdIsochPswLen :: bit_field c.uint16_t {
+	len: c.uint16_t | 12,
+	PSW: c.uint16_t | 4,
+}
+#assert(size_of(ksceUsbdIsochPswLen) == 2)
+
+ksceUsbdIsochTransfer :: struct {
+	buffer_base: rawptr,
+	relative_start_frame: c.int32_t,
+	num_packets: c.int32_t,
+	packets: [8]ksceUsbdIsochPswLen,
+}
+
+ksceUsbdDoneCallback :: #type ^proc "c" (result: c.int32_t, count: c.int32_t, arg: rawptr)
+ksceUsbdIsochDoneCallback :: #type ^proc "c" (result: c.int32_t, req: ^ksceUsbdIsochTransfer, arg: rawptr)
+
+// OHCI/EHCI completion codes
+OHCI_CC_NO_ERROR                    ::  0x0
+OHCI_CC_CRC                         ::  0x1
+OHCI_CC_BIT_STUFFING                ::  0x2
+OHCI_CC_DATA_TOGGLE_MISMATCH        ::  0x3
+OHCI_CC_STALL                       ::  0x4
+OHCI_CC_DEVICE_NOT_RESPONDING       ::  0x5
+OHCI_CC_PID_CHECK_FAILURE           ::  0x6
+OHCI_CC_UNEXPECTED_PID              ::  0x7
+OHCI_CC_DATA_OVERRUN                ::  0x8
+OHCI_CC_DATA_UNDERRUN               ::  0x9
+OHCI_CC_BUFFER_OVERRUN              ::  0xc
+OHCI_CC_BUFFER_UNDERRUN             ::  0xd
+OHCI_CC_NOT_ACCESSED1               ::  0xe
+OHCI_CC_NOT_ACCESSED2               ::  0xf
+EHCI_CC_MISSED_MICRO_FRAME          ::  0x10
+EHCI_CC_XACT                        ::  0x20
+EHCI_CC_BABBLE                      ::  0x30
+EHCI_CC_DATABUF                     ::  0x40
+EHCI_CC_HALTED                      ::  0x50
+
+// Isochronous transfer(PSW) completion codes
+USBD_CC_NOERR              :: 0x0
+USBD_CC_MISSED_MICRO_FRAME :: 0x1
+USBD_CC_XACTERR            :: 0x2
+USBD_CC_BABBLE             :: 0x4
+USBD_CC_DATABUF            :: 0x8
+

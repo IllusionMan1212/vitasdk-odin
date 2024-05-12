@@ -12,7 +12,6 @@ SCE_IME_WORK_BUFFER_SIZE          :: (20*1024)
 SCE_IME_MAX_PREEDIT_LENGTH        :: (30)
 SCE_IME_MAX_TEXT_LENGTH           :: (2048)
 
-// TODO: should be c.int
 SceImeDialogErrorCode :: enum c.uint {
 	PARAM                      = 0x80102001,
 	INTERNAL                   = 0x80102002,
@@ -71,7 +70,6 @@ SceImeDialogResult :: struct {
 }
 #assert(size_of(SceImeDialogResult) == 0x24)
 
-// TODO: should be c.int
 SceImeErrorCode :: enum c.uint {
 	ALREADY_OPENED               = 0x80100700,
 	NOT_OPENED                   = 0x80100701,

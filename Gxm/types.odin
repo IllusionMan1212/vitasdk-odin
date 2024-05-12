@@ -5,8 +5,7 @@ import sce "../common"
 
 // Error Codes
 
-// TODO: should be c.int
-SceGxmErrorCode :: enum i64 {
+SceGxmErrorCode :: enum c.uint {
 	UNINITIALIZED                                 = 0x805B0000,
 	ALREADY_INITIALIZED                           = 0x805B0001,
 	OUT_OF_MEMORY                                 = 0x805B0002,
@@ -1391,7 +1390,6 @@ SceGxmRenderTargetParams :: struct {
 #assert(size_of(SceGxmRenderTargetParams) == 0x14)
 
 
-// TODO: should be c.int
 /** GXT error codes */
 SceGxtErrorCode :: enum c.uint {
 	INVALID_VALUE     = 0x805D0000,

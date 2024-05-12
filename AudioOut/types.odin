@@ -2,8 +2,7 @@ package audioout
 
 import "core:c"
 
-// TODO: should be c.int
-SceAudioOutErrorCode :: enum i64 {
+SceAudioOutErrorCode :: enum c.uint {
 	NOT_OPENED          = 0x80260001,
 	BUSY                = 0x80260002,
 	INVALID_PORT        = 0x80260003,

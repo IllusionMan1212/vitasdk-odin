@@ -5,7 +5,6 @@ import sce "../common"
 
 // Error Codes
 
-// TODO: should be c.int
 SceFiberErrorCode :: enum c.uint {
 	NULL       = 0x80590001,
 	ALIGNMENT  = 0x80590002,

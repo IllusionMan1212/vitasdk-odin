@@ -9,7 +9,6 @@ SceMotionMagFieldStability :: enum c.int {
 	STABLE      = 2
 }
 
-// TODO:
 SceMotionErrorCode :: enum c.uint {
 	DATA_INVALID       = 0x80360200,
 	READING            = 0x80360201,

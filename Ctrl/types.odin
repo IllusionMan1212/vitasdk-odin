@@ -1,9 +1,9 @@
 package ctrl
 
 import "core:c"
+import sce "../common"
 
-// TODO: this should be a c.int
-SceCtrlErrorCode :: enum i64 {
+SceCtrlErrorCode :: enum c.uint {
 	INVALID_ARG   = 0x80340001,
 	PRIV_REQUIRED = 0x80340002,
 	NO_DEVICE     = 0x80340020,
@@ -131,4 +131,21 @@ SceCtrlPortInfo :: struct {
 	unk: [11]c.uint8_t,  //!< Unknown
 }
 #assert(size_of(SceCtrlPortInfo) == 0x10)
+
+/** Structure to pass as argument to ::ksceCtrlRegisterVirtualControllerDriver */
+SceCtrlVirtualControllerDriver :: struct {
+	readButtons: #type ^proc "c" (port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int,
+	setActuator: #type ^proc "c" (port: c.int, #by_ptr pState: SceCtrlActuator) -> c.int,
+	getBatteryInfo: #type ^proc "c" (port: c.int, batt: ^sce.UInt8) -> c.int,
+	disconnect: #type ^proc "c" (port: c.int) -> c.int,
+	setTurnOffInterval: #type ^proc "c" (port: c.int) -> c.int,
+	getActiveControllerPort: #type ^proc "c" () -> c.int,
+	changePortAssign: #type ^proc "c" (port1: c.int, port2: c.int) -> c.int,
+	unk0: #type ^proc "c" () -> c.int,
+	getControllerPortInfo: #type ^proc "c" (info: ^SceCtrlPortInfo) -> c.int,
+	setLightBar: #type ^proc "c" (port: c.int, r: sce.UInt8, g: sce.UInt8, b: sce.UInt8) -> c.int,
+	resetLightBar: #type ^proc "c" (port: c.int) -> c.int,
+	unk1: #type ^proc "c" (port: c.int) -> c.int,
+	singleControllerMode: #type ^proc "c" (port: c.int) -> c.int,
+}
 

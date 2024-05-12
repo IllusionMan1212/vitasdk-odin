@@ -3,7 +3,7 @@ package touch
 import "core:c"
 import sce "../common"
 
-SCE_TOUCH_MAX_REPORT :: 8	//!< FIXME 6 on front | 4 on back
+SCE_TOUCH_MAX_REPORT :: 8
 
 /** Touch error codes */
 SceTouchErrorCode :: enum c.uint {

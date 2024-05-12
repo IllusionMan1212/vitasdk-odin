@@ -3,8 +3,7 @@ package kernel
 import "core:c"
 import sce "../common"
 
-// TODO: this should be a c.int
-SceKernelErrorCode :: enum i64 {
+SceKernelErrorCode :: enum c.uint {
 	OK                                                = 0x0,
 	ERROR                                       = 0x80020001,
 	NOT_IMPLEMENTED                             = 0x80020002,

@@ -3,7 +3,6 @@ package sysmodule
 import "core:c"
 
 /** Errorcodes for SceSysmodule */
-// TODO:
 SceSysmoduleErrorCode :: enum c.uint {
 	LOADED                = 0,          //!< Module is already loaded
 	ERROR_INVALID_VALUE   = 0x805A1000, //!< Invalid value

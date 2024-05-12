@@ -70,7 +70,6 @@ when size_of(rawptr) == 4 {
 /**
  * Error Codes
  */
- // TODO: should be c.int
 SceJpegEncArmErrorCode :: enum c.uint {
 	/**
 	 * The image dimensions given are not supported, or are larger
@@ -120,7 +119,6 @@ when size_of(rawptr) == 4 {
 	#assert(size_of(SceJpegEncoderContext) == 4)
 }
 
-// TODO: should be c.int
 SceJpegEncErrorCode :: enum c.uint {
 	IMAGE_SIZE                = 0x80650200,
 	INSUFFICIENT_BUFFER       = 0x80650201,

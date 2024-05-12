@@ -8,7 +8,6 @@ SceFontHandle :: rawptr
 
 /* struct */
 
-// TODO:
 SceFontErrorCode :: enum c.uint {
 	OUT_OF_MEMORY        = 0x80460001,
 	INVALID_LIBID        = 0x80460002,

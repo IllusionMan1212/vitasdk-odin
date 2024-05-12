@@ -3,9 +3,8 @@ package camera
 import "core:c"
 import sce "../common"
 
-// TODO: should be c.int
 /** Camera error codes. */
-SceCameraErrorCode :: enum i64 {
+SceCameraErrorCode :: enum c.uint {
 	PARAM               = 0x802E0000,
 	ALREADY_INIT        = 0x802E0001,
 	NOT_INIT            = 0x802E0002,

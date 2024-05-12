@@ -3,7 +3,6 @@ package usbaudioin
 import "core:c"
 import sce "../common"
 
-// TODO: 
 SceUsbAudioInErrorCode :: enum c.uint {
     INVALID_ARGUMENT = 0x803e0001,
     DUPLICATE_ID = 0x803e0002,

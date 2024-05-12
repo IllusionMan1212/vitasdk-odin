@@ -4,8 +4,7 @@ import "core:c"
 import sce "../common"
 import audiodec "../Audiodec"
 
-// TODO: should be c.int
-SceAtracErrorCode :: enum i64 {
+SceAtracErrorCode :: enum c.uint {
 	INVALID_POINTER               = 0x80630000,
 	INVALID_SIZE                  = 0x80630001,
 	INVALID_WORD_LENGTH           = 0x80630002,
@@ -113,7 +112,7 @@ SceAtracContentInfo :: struct {
 /* Stream information structure */
 SceAtracStreamInfo :: struct {
   size: sce.UInt32,
-	pWritePosition: ^sce.UChar8, // TODO: multipointer???
+	pWritePosition: ^sce.UChar8,
 	readPosition: sce.UInt32,
 	writableSize: sce.UInt32,
 }

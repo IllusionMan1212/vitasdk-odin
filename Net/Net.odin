@@ -2,6 +2,7 @@ package net
 
 import "core:c"
 foreign import net "system:SceNet_stub"
+foreign import netps "system:SceNetPsForDriver_stub"
 
 @(link_prefix = "sceNet")
 foreign net {
@@ -74,8 +75,6 @@ foreign net {
     InetNtop :: proc(af: c.int, src: rawptr, dst: cstring, size: c.uint) -> cstring ---
     InetPton :: proc(af: c.int, src: cstring, dst: rawptr) -> c.int ---
 
-    //TODO : create BSD aliases ?
-
     Htonll :: proc(host64: c.ulonglong) -> c.ulonglong ---
     Htonl :: proc(host32: c.uint) -> c.uint ---
     Htons :: proc(host16: c.ushort) -> c.ushort ---
@@ -89,4 +88,16 @@ foreign net {
     * @return pointer to int.
     */
     ErrnoLoc :: proc() -> ^c.int ---
+}
+
+foreign netps {
+  ksceNetSocket :: proc(name: cstring, domain: c.int, type: c.int, protocol: c.int) -> c.int ---
+  ksceNetAccept :: proc(s: c.int, addr: ^SceNetSockaddr, addrlen: ^c.uint) -> c.int ---
+  ksceNetBind :: proc(s: c.int, #by_ptr addr: SceNetSockaddr, addrlen: c.uint) -> c.int ---
+  ksceNetConnect :: proc(s: c.int, #by_ptr name: SceNetSockaddr, namelen: c.uint) -> c.int ---
+  ksceNetListen :: proc(s: c.int, backlog: c.int) -> c.int ---
+  ksceNetRecvfrom :: proc(s: c.int, buf: rawptr, len: c.uint, flags: c.int, from: ^SceNetSockaddr, fromlen: ^c.uint) -> c.int ---
+  ksceNetSendto :: proc(s: c.int, msg: rawptr, len: c.uint, flags: c.int, #by_ptr to: SceNetSockaddr, tolen: c.uint) -> c.int ---
+  ksceNetSetsockopt :: proc(s: c.int, level: c.int, optname: c.int, optval: rawptr, optlen: c.uint) -> c.int ---
+  ksceNetClose :: proc(s: c.int) -> c.int ---
 }

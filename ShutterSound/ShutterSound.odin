@@ -4,7 +4,6 @@ import "core:c"
 
 foreign import shuttersound "system:SceShutterSound_stub"
 
-// TODO:
 SceShutterSoundErrorCode :: enum c.uint {
 	INVALID_ARGUMENT = 0x80105201, //!< Invalid argument
 	INTERNAL         = 0x80105202, //!< Internal error

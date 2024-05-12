@@ -6,8 +6,7 @@ import sce "../common"
 SceAvPlayerHandle :: distinct c.int
 #assert(size_of(SceAvPlayerHandle) == 4)
 
-// TODO: should be c.int
-SceAvPlayerErrorCode :: enum i64 {
+SceAvPlayerErrorCode :: enum c.uint {
 	INVALID_PARAM = 0x806A0001,
 	OUT_OF_MEMORY = 0x806A0003
 }

@@ -13,8 +13,7 @@ SceAppUtilSaveDataSaveMode :: enum c.int {
 	DIRECTORY = 2,
 }
 
-// TODO: should be c.int
-SceAppUtilErrorCode :: enum i64 {
+SceAppUtilErrorCode :: enum c.uint {
 	PARAMETER                   = 0x80100600,
 	NOT_INITIALIZED             = 0x80100601,
 	NO_MEMORY                   = 0x80100602,

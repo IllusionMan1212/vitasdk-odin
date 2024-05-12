@@ -25,7 +25,7 @@ foreign http {
     HttpAbortRequest :: proc(reqId: c.int) -> c.int ---
     HttpGetResponseContentLength :: proc(reqId: c.int, contentLength: ^c.ulonglong) -> c.int ---
     HttpGetStatusCode :: proc(reqId: c.int, statusCode: ^c.int) -> c.int ---
-    HttpGetAllResponseHeaders :: proc(reqId: c.int, header: ^[^]c.char, headerSize: ^c.uint) -> c.int --- // TODO: header is multipointer, cstring or double pointer to char??
+    HttpGetAllResponseHeaders :: proc(reqId: c.int, header: ^[^]c.char, headerSize: ^c.uint) -> c.int ---
     HttpReadData :: proc(reqId: c.int, data: rawptr, size: c.uint) -> c.int ---
     HttpAddRequestHeader :: proc(id: c.int, name: cstring, value: cstring, mode: c.uint) -> c.int ---
     HttpRemoveRequestHeader :: proc(id: c.int, name: cstring) -> c.int ---

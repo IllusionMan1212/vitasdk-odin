@@ -15,8 +15,7 @@ SCE_HTTP_DEFAULT_TRY_AUTH_MAX : c.uint : (6)
 
 SCE_HTTP_INVALID_ID :: 0
 
-// TODO: this should be a c.int
-SceHttpErrorCode :: enum i64 {
+SceHttpErrorCode :: enum c.uint {
     BEFORE_INIT                 = 0x80431001,
     ALREADY_INITED              = 0x80431020,
     BUSY                        = 0x80431021,
@@ -58,8 +57,7 @@ SceHttpErrorCode :: enum i64 {
     RESOLVER_ENORECORD          = 0x8043600A,
 }
 
-// TODO: this should be a c.int
-SceHttpsErrorCode :: enum u32 {
+SceHttpsErrorCode :: enum c.uint {
     CERT      = 0x80435060,
     HANDSHAKE = 0x80435061,
     IO        = 0x80435062,
@@ -219,7 +217,7 @@ SceHttpSslVersion :: enum c.int {
 }
 
 SceHttpsData :: struct {
-    ptr:  ^c.char, // TODO: multipointer or maybe cstring??
+    ptr: ^c.char,
     size: c.uint,
 }
 when size_of(builtin.rawptr) == 4 {
@@ -244,7 +242,7 @@ SceHttpAuthInfoCallback :: #type ^proc(
     password: cstring,
     needEntity: c.int,
     entityBody: ^[^]c.uchar,
-    entitySize: ^c.uint,// TODO:??
+    entitySize: ^c.uint,
     save: ^c.int,
     userArg: rawptr,
 ) -> c.int

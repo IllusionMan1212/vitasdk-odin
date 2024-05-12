@@ -185,8 +185,7 @@ when size_of(rawptr) == 4 {
 }
 
 /** Net Error Codes */
-// TODO: this should be a c.int
-SceNetErrorCode :: enum i64 {
+SceNetErrorCode :: enum c.uint {
 	EPERM                     = 0x80410101,
 	ENOENT                    = 0x80410102,
 	ESRCH                     = 0x80410103,

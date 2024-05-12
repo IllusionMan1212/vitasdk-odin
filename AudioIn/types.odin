@@ -2,8 +2,7 @@ package audioin
 
 import "core:c"
 
-// TODO: should be c.int
-SceAudioInErrorCode :: enum i64 {
+SceAudioInErrorCode :: enum c.uint {
 	//! Undefined error
 	FATAL                = 0x80260100,
 	//! Bad value of port number

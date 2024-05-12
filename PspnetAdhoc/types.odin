@@ -12,7 +12,6 @@ SCE_NET_ADHOCCTL_GROUPNAME_LEN :: 8
 SCE_NET_ADHOCCTL_NICKNAME_LEN :: 128
 SCE_NET_ADHOCCTL_BSSID_LEN  :: 6
 
-// TODO:
 ScePspnetAdhocErrorCode :: enum c.uint {
 	INVALID_SOCKET_ID      = 0x80410701,
 	INVALID_ADDR           = 0x80410702,
@@ -106,7 +105,6 @@ ScePspnetAdhocFlags :: enum c.int {
   ALERTALL = ALERTSEND | ALERTRECV | ALERTPOLL | ALERTCONNECT | ALERTACCEPT | ALERTFLUSH,
 }
 
-// TODO:
 ScePspnetAdhocctlErrorCode :: enum c.uint {
 	INVALID_ARG             = 0x80410B04,
 	ALREADY_INITIALIZED     = 0x80410B07,

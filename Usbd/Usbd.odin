@@ -4,6 +4,7 @@ import "core:c"
 import sce "../common"
 
 foreign import usbd "system:SceUsbd_stub"
+foreign import usbdkern "system:SceUsbdForDriver_stub"
 
 @(link_prefix = "sceUsbd")
 foreign usbd {
@@ -276,4 +277,184 @@ foreign usbd {
 	*
 	*/
 	AttachCompositeLdd :: proc(uid: sce.UID, param: ^SceUsbdAttachCompositeParam) -> c.int ---
+}
+
+foreign usbdkern {
+	/**
+	* Register USB driver
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param driver driver struct
+	*
+	*/
+	ksceUsbdRegisterDriver :: proc(#by_ptr driver: SceUsbdDriver) -> c.int ---
+
+	/**
+	* Register USB driver for composite devices
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param driver driver struct
+	*
+	*/
+	ksceUsbdRegisterCompositeLdd :: proc(#by_ptr driver: SceUsbdCompositeDriver) -> c.int ---
+
+	/**
+	* De-register USB driver
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param driver driver struct
+	*
+	*/
+	ksceUsbdUnregisterDriver :: proc(#by_ptr driver: SceUsbdDriver) -> c.int ---
+
+	/**
+	* De-register USB driver for composite devices
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param driver driver struct
+	*
+	*/
+	ksceUsbdUnregisterCompositeLdd :: proc(#by_ptr driver: SceUsbdCompositeDriver) -> c.int ---
+
+
+	/**
+	* Return usb descriptor
+	*
+	* @return descriptor data on success, NULL on error
+	*
+	* @param device_id device id
+	* @param start pointer to descriptor to start scanning from (may be NULL)
+	* @param type descriptor type
+	*
+	*/
+	ksceUsbdScanStaticDescriptor :: proc(device_id: sce.UID, start: rawptr, type: SceUsbdDescriptorType) -> rawptr ---
+
+	/**
+	* Open communication pipe to endpoint
+	*
+	* @return pipe uid on success, < 0 on error
+	*
+	* @param device_id device id
+	* @param endpoint endpoint (may be null for default configuration endpoint)
+	*
+	*/
+	ksceUsbdOpenPipe :: proc(device_id: c.int, endpoint: ^SceUsbdEndpointDescriptor) -> sce.UID ---
+
+	/**
+	* Close communication pipe to endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	*
+	*/
+	ksceUsbdClosePipe :: proc(pipe_id: sce.UID) -> c.int ---
+
+	/**
+	* Transfer data to/from endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	* @param req transfer request
+	* @param buffer data
+	* @param cb transfer callback
+	* @param user_data userdata to pass to callback
+	*
+	*/
+	ksceUsbdControlTransfer :: proc(pipe_id: sce.UID, #by_ptr req: SceUsbdDeviceRequest, buffer: [^]c.uchar, cb: ksceUsbdDoneCallback, user_data: rawptr) -> c.int ---
+
+	/**
+	* Transfer data to/from interrupt endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	* @param buffer data
+	* @param length data length
+	* @param cb transfer callback
+	* @param user_data userdata to pass to callback
+	*
+	*/
+	ksceUsbdInterruptTransfer :: proc(pipe_id: sce.UID, buffer: [^]c.uchar, length: sce.Size, cb: ksceUsbdDoneCallback, user_data: rawptr) -> c.int ---
+
+	/**
+	* Transfer isochronous data to/from endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	* @param transfer transfer request
+	* @param cb transfer callback
+	* @param user_data userdata to pass to callback
+	*
+	*/
+	ksceUsbdIsochronousTransfer :: proc(pipe_id: sce.UID, transfer: ^ksceUsbdIsochTransfer, cb: ksceUsbdIsochDoneCallback, user_data: rawptr) -> c.int ---
+
+	/**
+	* Transfer data to/from endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	* @param buffer data
+	* @param length data length
+	* @param cb transfer callback
+	* @param user_data userdata to pass to callback
+	*
+	* @note buffer pointer must be 64b aligned
+	*/
+	ksceUsbdBulkTransfer :: proc(pipe_id: sce.UID, buffer: [^]c.uchar, length: c.uint, cb: ksceUsbdDoneCallback, user_data: rawptr) -> c.int ---
+
+	/**
+	* Transfer data to/from endpoint
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param pipe_id pipe id
+	* @param buffer data
+	* @param length data length
+	* @param cb transfer callback
+	* @param user_data userdata to pass to callback
+	*
+	* @note buffer pointer must be 64b aligned
+	*/
+	ksceUsbdBulkTransfer2 :: proc(pipe_id: c.int, buffer: [^]c.uchar, length: c.uint, cb: ksceUsbdDoneCallback, user_data: rawptr) -> c.int ---
+
+
+	/**
+	* Get device location
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param device_id device id
+	* @param[out] location device location data (port)
+	*
+	*/
+	ksceUsbdGetDeviceLocation :: proc(device_id: sce.UID, location: ^c.uint8_t) -> c.int ---
+
+	ksceUsbdSuspend :: proc(port: c.int) -> c.int ---
+	ksceUsbdSuspendPhase2 :: proc(port: c.int, flag: c.int) -> c.int ---
+	ksceUsbdResume :: proc(port: c.int) -> c.int ---
+
+	ksceUsbdHostStop :: proc(port: c.int) -> c.int ---
+	ksceUsbdHostStart :: proc(port: c.int) -> c.int ---
+
+	/**
+	* Get device speed
+	*
+	* @return 0 on success, < 0 on error
+	*
+	* @param device_id device id
+	* @param[out] speed device speed
+	*
+	*/
+	ksceUsbdGetDeviceSpeed :: proc(device_id: c.int, speed: ^c.uint8_t) -> c.int ---
+
+	ksceUsbd_05073925 :: proc(device_id: sce.UID, unk1: ^c.int, unk2: ^c.int) -> c.int ---
+	ksceUsbd_7938DAC7 :: proc(pipe_id: sce.UID) -> c.int --- // clear halt?
 }

@@ -5,6 +5,7 @@ import sce "../common"
 
 foreign import libkernel "system:SceLibKernel_stub"
 foreign import iofilemgr "system:SceIofilemgr_stub"
+foreign import iofilemgrkern "system:SceIofilemgrForDriver_stub"
 
 @(link_prefix = "sceIo")
 foreign libkernel {
@@ -334,4 +335,271 @@ foreign iofilemgr {
   SetPriority :: proc(fd: sce.UID, priority: c.int) -> c.int ---
   SetProcessDefaultPriority :: proc(priority: c.int) -> c.int ---
   SetThreadDefaultPriority :: proc(priority: c.int) -> c.int ---
+}
+
+foreign iofilemgrkern {
+  /**
+  * Send a devctl command to a device.
+  *
+  * @par Example: Sending a simple command to a device
+  * @code
+  * SceIoDevInfo info
+  * ksceIoDevctl("ux0:", 0x3001, NULL, 0, &info, sizeof(SceIoDevInfo))
+  * @endcode
+  *
+  * @param dev - String for the device to send the devctl to (e.g. "ux0:")
+  * @param cmd - The command to send to the device
+  * @param indata - A data block to send to the device, if NULL sends no data
+  * @param inlen - Length of indata, if 0 sends no data
+  * @param outdata - A data block to receive the result of a command, if NULL receives no data
+  * @param outlen - Length of outdata, if 0 receives no data
+  * @return 0 on success, < 0 on error
+  */
+  ksceIoDevctl :: proc(dev: cstring, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
+
+  /**
+  * Open a directory
+  *
+  * @par Example:
+  * @code
+  * int dfd
+  * dfd = ksceIoDopen("device:/")
+  * if(dfd >= 0)
+  * { Do something with the file descriptor }
+  * @endcode
+  * @param dirname - The directory to open for reading.
+  * @return If >= 0 then a valid file descriptor, otherwise a Sony error code.
+  */
+  ksceIoDopen :: proc(dirname: cstring) -> sce.UID ---
+
+  /**
+  * Reads an entry from an opened file descriptor.
+  *
+  * @param fd - Already opened file descriptor (using ::ksceIoDopen)
+  * @param dir - Pointer to an ::SceIoDirent structure to hold the file information
+  *
+  * @return Read status
+  * -   0 - No more directory entries left
+  * - > 0 - More directory entries to go
+  * - < 0 - Error
+  */
+  ksceIoDread :: proc(fd: sce.UID, dir: ^SceIoDirent) -> c.int ---
+
+  /**
+  * Close an opened directory file descriptor
+  *
+  * @param fd - Already opened file descriptor (using ::ksceIoDopen)
+  * @return < 0 on error
+  */
+  ksceIoDclose :: proc(fd: sce.UID) -> c.int ---
+
+  /**
+   * Open or create a file for reading or writing
+   *
+   * @par Example1: Open a file for reading
+   * @code
+   * if(!(fd = ksceIoOpen("device:/path/to/file", SCE_O_RDONLY, 0777)) {
+   *	// error
+   * }
+   * @endcode
+   * @par Example2: Open a file for writing, creating it if it doesn't exist
+   * @code
+   * if(!(fd = ksceIoOpen("device:/path/to/file", SCE_O_WRONLY|SCE_O_CREAT, 0777)) {
+   *	// error
+   * }
+   * @endcode
+   *
+   * @param file - Pointer to a string holding the name of the file to open
+   * @param flags - Libc styled flags that are or'ed together
+   * @param mode - File access mode (One or more ::SceIoMode).
+   * @return A non-negative integer is a valid fd, anything else an error
+   */
+  ksceIoOpen :: proc(file: cstring, flags: c.int, mode: sce.Mode) -> sce.UID ---
+
+  /**
+   * Delete a descriptor
+   *
+   * @code
+   * ksceIoClose(fd)
+   * @endcode
+   *
+   * @param fd - File descriptor to close
+   * @return < 0 on error
+   */
+  ksceIoClose :: proc(fd: sce.UID) -> c.int ---
+
+  /**
+   * Read input
+   *
+   * @par Example:
+   * @code
+   * bytes_read = ksceIoRead(fd, data, 100)
+   * @endcode
+   *
+   * @param fd - Opened file descriptor to read from
+   * @param data - Pointer to the buffer where the read data will be placed
+   * @param size - Size of the read in bytes
+   *
+   * @return The number of bytes read
+   */
+  ksceIoRead :: proc(fd: sce.UID, data: rawptr, size: sce.Size) -> c.int ---
+
+  /**
+   * Read input at offset
+   *
+   * @par Example:
+   * @code
+   * bytes_read = ksceIoPread(fd, data, 100, 0x1000)
+   * @endcode
+   *
+   * @param fd - Opened file descriptor to read from
+   * @param data - Pointer to the buffer where the read data will be placed
+   * @param size - Size of the read in bytes
+   * @param offset - Offset to read
+   *
+   * @return < 0 on error.
+   */
+  ksceIoPread :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
+
+  /**
+   * Write output
+   *
+   * @par Example:
+   * @code
+   * bytes_written = ksceIoWrite(fd, data, 100)
+   * @endcode
+   *
+   * @param fd - Opened file descriptor to write to
+   * @param data - Pointer to the data to write
+   * @param size - Size of data to write
+   *
+   * @return The number of bytes written
+   */
+  ksceIoWrite :: proc(fd: sce.UID, data: rawptr, size: sce.Size) -> c.int ---
+
+  /**
+   * Write output at offset
+   *
+   * @par Example:
+   * @code
+   * bytes_written = ksceIoPwrite(fd, data, 100, 0x1000)
+   * @endcode
+   *
+   * @param fd - Opened file descriptor to write to
+   * @param data - Pointer to the data to write
+   * @param size - Size of data to write
+   * @param offset - Offset to write
+   *
+   * @return The number of bytes written
+   */
+  ksceIoPwrite :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
+
+  /**
+   * Reposition read/write file descriptor offset
+   *
+   * @par Example:
+   * @code
+   * pos = ksceIoLseek(fd, -10, SCE_SEEK_END)
+   * @endcode
+   *
+   * @param fd - Opened file descriptor with which to seek
+   * @param offset - Relative offset from the start position given by whence
+   * @param whence - One of ::SceIoSeekMode.
+   *
+   * @return The position in the file after the seek.
+   */
+  ksceIoLseek :: proc(fd: sce.UID, offset: sce.Off, whence: c.int) -> sce.Off ---
+
+  /**
+   * Remove directory entry
+   *
+   * @param file - Path to the file to remove
+   * @return < 0 on error
+   */
+  ksceIoRemove :: proc(file: cstring) -> c.int ---
+
+  /**
+   * Change the name of a file
+   *
+   * @param oldname - The old filename
+   * @param newname - The new filename
+   * @return < 0 on error.
+   */
+  ksceIoRename :: proc(oldname: cstring, newname: cstring) -> c.int ---
+
+  /**
+    * Synchronize the file data on the device.
+    *
+    * @param device - The device to synchronize (e.g. msfat0:)
+    * @param unk - Unknown
+    */
+  ksceIoSync :: proc(device: cstring, unk: c.uint) -> c.int ---
+
+  /**
+   * Synchronize the file data for one file
+   *
+   * @param fd - Opened file descriptor to sync
+   *
+   * @return < 0 on error.
+   */
+  ksceIoSyncByFd :: proc(fd: sce.UID) -> c.int ---
+
+  /**
+   * Make a directory file
+   *
+   * @param dir - The path to the directory
+   * @param mode - Access mode (One or more ::SceIoAccessMode).
+   * @return Returns the value 0 if it's successful, otherwise -1
+   */
+  ksceIoMkdir :: proc(dir: cstring, mode: sce.Mode) -> c.int ---
+
+  /**
+   * Remove a directory file
+   *
+   * @param path - Removes a directory file pointed by the string path
+   * @return Returns the value 0 if it's successful, otherwise -1
+   */
+  ksceIoRmdir :: proc(path: cstring) -> c.int ---
+
+  /**
+    * Get the status of a file.
+    *
+    * @param file - The path to the file.
+    * @param stat - A pointer to a ::SceIoStat structure.
+    *
+    * @return < 0 on error.
+    */
+  ksceIoGetstat :: proc(file: cstring, stat: SceIoStat) -> c.int ---
+
+  /**
+    * Get the status of a file descriptor.
+    *
+    * @param fd - The file descriptor.
+    * @param stat - A pointer to a ::SceIoStat structure.
+    *
+    * @return < 0 on error.
+    */
+  ksceIoGetstatByFd :: proc(fd: sce.UID, stat: ^SceIoStat) -> c.int ---
+
+  /**
+    * Change the status of a file.
+    *
+    * @param file - The path to the file.
+    * @param stat - A pointer to a ::SceIoStat structure.
+    * @param bits - Bitmask defining which bits to change.
+    *
+    * @return < 0 on error.
+    */
+  ksceIoChstat :: proc(file: cstring, stat: ^SceIoStat, bits: c.int) -> c.int ---
+
+  /**
+    * Change the status of a file descriptor.
+    *
+    * @param fd - The file descriptor.
+    * @param stat - A pointer to an io_stat_t structure.
+    * @param bits - Bitmask defining which bits to change.
+    *
+    * @return < 0 on error.
+    */
+  ksceIoChstatByFd :: proc(fd: sce.UID, stat: ^SceIoStat, bits: c.int) -> c.int ---
 }

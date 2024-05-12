@@ -6,7 +6,6 @@ import sce "../common"
 SCE_LOCATION_DATA_INVALID :: -9999.0
 
 /** Location error codes */
-// TODO:
 SceLocationErrorCode :: enum c.uint {
 	SUCCESS                            = 0,
 

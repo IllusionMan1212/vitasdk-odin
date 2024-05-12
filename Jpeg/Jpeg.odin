@@ -7,6 +7,7 @@ foreign import jpeg "system:SceJpeg_stub"
 foreign import jpegarm "system:SceJpegArm_stub"
 foreign import jpegenc "system:SceJpegEnc_stub"
 foreign import jpegencarm "system:SceJpegEncArm_stub"
+foreign import jpegkern "system:SceAvcodecForDriver_stub"
 
 @(link_prefix = "sceJpeg")
 foreign jpeg {
@@ -255,4 +256,102 @@ foreign jpegencarm {
   * @return 0 on success, < 0 on error.
   */
   sceJpegArmEncoderSetHeaderMode :: proc(_context: SceJpegArmEncoderContext, mode: SceJpegArmEncoderHeaderMode) -> c.int ---
+}
+
+foreign jpegkern {
+  /**
+  * Initialize a jpeg encoder
+  *
+  * @param[in] _context - A pointer to a big enough allocated memory block
+  * @param[in] inWidth - Input width in pixels
+  * @param[in] inHeight - Input height in pixels
+  * @param[in] pixelformat - A valid ::SceJpegEncoderPixelFormat set of values
+  * @param[in] outBuffer - A physically continuous memory block 256 bytes aligned
+  * @param[in] outSize - Output size in bytes
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderInit :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int, pixelformat: SceJpegEncoderPixelFormat, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
+
+  /**
+  * Terminate a jpeg encoder
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderEnd :: proc(_context: SceJpegEncoderContext) -> c.int ---
+
+  /**
+  * Execute a jpeg encode
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] inBuffer - A physically continuous memory block 256 bytes aligned
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderEncode :: proc(_context: SceJpegEncoderContext, inBuffer: rawptr) -> c.int ---
+
+  /**
+  * Set encoder compression ratio
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] ratio - A value between 0 and 255 (higher = better compression, lower = better speed)
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderSetCompressionRatio :: proc(_context: SceJpegEncoderContext, ratio: c.int) -> c.int ---
+
+
+  /**
+  * Set encoder output address
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] outBuffer - A physically continuous memory block 256 bytes aligned
+  * @param[in] outSize - Output buffer size in bytes
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderSetOutputAddr :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
+
+  /**
+  * Execute a color conversion from ARGB to YCbCr
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] outBuffer - A physical continuous memory block 256 bytes aligned
+  * @param[in] inBuffer - A pointer to a valid ARGB buffer
+  * @param[in] inPitch - Input pitch value in pixels
+  * @param[in] inPixelFormat - A valid ::SceJpegEncoderPixelFormat set of values
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderCsc :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, inBuffer: rawptr, inPitch: c.int, inPixelFormat: SceJpegEncoderPixelFormat) -> c.int ---
+
+  /**
+  * Return required free size to allocate a jpeg encoder
+  *
+  * @return Required free memory size in bytes, < 0 on error.
+  */
+  ksceJpegEncoderGetContextSize :: proc() -> c.int ---
+
+  /**
+  * Set encoder valid region (?)
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] inWidth - Input width in pixels
+  * @param[in] inHeight - Input height in pixels
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderSetValidRegion :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int) -> c.int ---
+
+  /**
+  * Set header used for output file
+  *
+  * @param[in] _context - A pointer to an already initialized ::SceJpegEncoderContext
+  * @param[in] mode - One of ::SceJpegEncoderHeaderMode
+  *
+  * @return 0 on success, < 0 on error.
+  */
+  ksceJpegEncoderSetHeaderMode :: proc(_context: SceJpegEncoderContext, mode: c.int) -> c.int ---
 }

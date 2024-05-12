@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import ssl "system:SceSsl_stub"
 
-// TODO: should be c.int
 SceSslErrorCode :: enum c.uint {
 	BEFORE_INIT    = 0x80435001,
 	ALREADY_INITED = 0x80435020,

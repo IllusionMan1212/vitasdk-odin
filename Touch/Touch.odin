@@ -4,6 +4,7 @@ import "core:c"
 import sce "../common"
 
 foreign import touch "system:SceTouch_stub"
+foreign import touchkern "system:SceTouchForDriver_stub"
 
 @(link_prefix = "sceTouch")
 foreign touch {
@@ -66,4 +67,16 @@ foreign touch {
   * @param[in]	port	Port number.
   */
   DisableTouchForce :: proc(port: sce.UInt32) -> c.int ---
+}
+
+foreign touchkern {
+  /**
+  * Set touch enable flag
+  *
+  * @param[in] port   - The port number.
+  * @param[in] enable - The enable flag.
+  *
+  * @return 0 on success. < 0 on error.
+  */
+  ksceTouchSetEnableFlag :: proc(port: sce.UInt32, enable: sce.Bool) -> c.int ---
 }

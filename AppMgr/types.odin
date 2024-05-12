@@ -6,8 +6,7 @@ import apputil "../AppUtil"
 
 SCE_APPMGR_MAX_APP_NAME_LENGTH:: (31)
 
-// TODO: should be c.int
-SceAppMgrErrorCode :: enum i64 {
+SceAppMgrErrorCode :: enum c.uint {
 	BUSY               = 0x80802000, //!< Busy
 	STATE              = 0x80802013, //!< Invalid state
 	NULL_POINTER       = 0x80802016, //!< NULL pointer
@@ -168,4 +167,20 @@ SceSharedFbInfo :: struct {
 	unk3: [3]c.int,
 }
 
+SceAppMgrLaunchParam :: struct {
+	size: sce.Size,
+	unk_4: c.uint, //<! set to 0x80000000 to break on launch
+	unk_8: c.uint,
+	unk_C: c.uint,
+	unk_10: c.uint,
+	unk_14: c.uint,
+	unk_18: c.uint,
+	unk_1C: c.uint,
+	unk_20: c.uint,
+	unk_24: c.uint,
+	unk_28: c.uint,
+	unk_2C: c.uint,
+	unk_30: c.uint,
+}
+#assert(size_of(SceAppMgrLaunchParam) == 0x34)
 

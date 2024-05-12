@@ -4,6 +4,7 @@ import "core:c"
 import sce "../common"
 
 foreign import fios2 "system:SceFios2Kernel_stub"
+foreign import fios2kern "system:SceFios2KernelForDriver_stub"
 
 @(link_prefix = "_sceFiosKernelOverlay")
 foreign fios2 {
@@ -34,4 +35,50 @@ foreign fios2 {
 
   @(link_name = "sceFiosKernelOverlayAddForProcess02")
   AddForProcess02 :: proc(pid: sce.UID, overlay: ^SceFiosOverlay, outID: ^SceFiosOverlayID) -> c.int ---
+}
+
+foreign fios2kern {
+  /**
+  * Overlay process file system overlay
+  *
+  * @param[in]  overlay - Overlay config pointer
+  * @param[out] outID   - outID pointer
+  *
+  * @return     Error code or zero on success
+  */
+  ksceFiosKernelOverlayAdd :: proc(overlay: ^SceFiosOverlay, outID: ^SceFiosOverlayID) -> c.int ---
+
+  /**
+  * Overlay process file system overlay
+  *
+  * @param[in]  pid     - Process id
+  * @param[in]  overlay - Overlay config pointer
+  * @param[out] outID   - outID pointer
+  *
+  * @return     Error code or zero on success
+  */
+  ksceFiosKernelOverlayAddForProcess :: proc(pid: sce.UID, overlay: ^SceFiosOverlay, outID: ^SceFiosOverlayID) -> c.int ---
+
+  /**
+  * Remove process file system overlay
+  *
+  * @param[in] pid - Process id
+  * @param[in] id  - Overlay id
+  *
+  * @return     Error code or zero on success
+  */
+  ksceFiosKernelOverlayRemoveForProcess :: proc(pid: sce.UID, id: SceFiosOverlayID) -> c.int ---
+
+  /**
+  * Resolve process file system overlay with sync
+  *
+  * @param[in]  pid         - Process id
+  * @param[in]  resolveFlag - Some flags
+  * @param[in]  inPath      - Path input
+  * @param[out] outPath     - Path output
+  * @param[in]  maxPath     - Path output max length
+  *
+  * @return     Error code or zero on success
+  */
+  ksceFiosKernelOverlayResolveSync :: proc(pid: sce.UID, resolveFlag: c.int, inPath: cstring, outPath: [^]c.char, maxPath: sce.Size) -> c.int ---
 }

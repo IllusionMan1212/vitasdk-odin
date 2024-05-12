@@ -11,7 +11,6 @@ SCE_NOTIFICATIONUTIL_TEXT_MAX :: 0x3F
 /**
  * Error Codes
  */
-// TODO:
 SceNotificationUitlErrorCode :: enum c.uint {
 	INTERNAL = 0x80106300
 }

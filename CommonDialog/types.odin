@@ -9,8 +9,7 @@ import scePspnet "../PspnetAdhoc"
 SCE_COMMON_DIALOG_MAGIC_NUMBER :: 0xC0D1A109
 
 /* Errors */
-// TODO: should be c.int
-SceCommonDialogErrorCode :: enum i64 {
+SceCommonDialogErrorCode :: enum c.uint {
 	BUSY                            = 0x80020401,
 	NULL                            = 0x80020402,
 	INVALID_ARGUMENT                = 0x80020403,
@@ -110,7 +109,6 @@ when size_of(rawptr) == 4 {
 }
 
 
-// TODO:
 SceMsgDialogErrorCode :: enum c.uint {
 	//! Illegal parameter
 	SCE_MSG_DIALOG_ERROR_PARAM	= 0x80100A01
@@ -260,8 +258,7 @@ SceMsgDialogResult :: struct {
 #assert(size_of(SceMsgDialogResult) == 0x2C)
 
 
-// TODO:
-SceNetCheckDialoErrorCode :: enum c.uint {
+SceNetCheckDialogErrorCode :: enum c.uint {
 	PARAM                       = 0x80100C01,
 	INVALID_MODE                = 0x80100C02,
 	LACK_OF_LIBHTTP_POOL_SIZE   = 0x80100C03,

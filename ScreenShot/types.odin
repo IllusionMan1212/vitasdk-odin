@@ -24,7 +24,6 @@ SCE_SCREENSHOT_MAX_GAME_COMMENT_LEN :: (128)
 //! Max size of comment (description) (includes NUL terminator)
 SCE_SCREENSHOT_MAX_GAME_COMMENT_SIZE :: (SCE_SCREENSHOT_MAX_GAME_COMMENT_LEN * 4)
 
-// TODO:
 SceScreenshotErrorCode :: enum c.uint {
 	INVALID_ARGUMENT       = 0x80102F01,
 	NO_MEMORY              = 0x80102F02,

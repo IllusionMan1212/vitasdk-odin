@@ -3,8 +3,7 @@ package audiodec
 import "core:c"
 import sce "../common"
 
-// TODO: this should be c.int
-SceAudiodecErrorCode :: enum i64 {
+SceAudiodecErrorCode :: enum c.uint {
 	ERROR_API_FAIL                  = 0x807F0000,
 	ERROR_INVALID_TYPE              = 0x807F0001,
 	ERROR_INVALID_INIT_PARAM        = 0x807F0002,
@@ -33,8 +32,6 @@ SceAudiodecErrorCode :: enum i64 {
 }
 
 SCE_AUDIODEC_ALIGNMENT_SIZE : c.uint : 0x100
-// TODO:
-//#define SCE_AUDIODEC_ROUND_UP(size) ((size + SCE_AUDIODEC_ALIGNMENT_SIZE - 1) & ~(SCE_AUDIODEC_ALIGNMENT_SIZE - 1))
 
 SCE_AUDIODEC_WORD_LENGTH_16BITS :: 16
 

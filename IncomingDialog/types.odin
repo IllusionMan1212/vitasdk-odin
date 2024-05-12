@@ -19,7 +19,6 @@ SceIncomingDialogStatus :: enum c.int {
 /**
  * Error Codes
  */
-// TODO: should be c.int
 SceIncomingDialogErrorCode :: enum c.uint {
 	INVALID_ARG = 0x80106201
 }

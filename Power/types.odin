@@ -3,7 +3,6 @@ package power
 import "core:c"
 import sce "../common"
 
-// TODO: 
 ScePowerErrorCode :: enum c.uint {
 	INVALID_VALUE           = 0x802B0000,
 	ALREADY_REGISTERED      = 0x802B0001,
@@ -15,10 +14,10 @@ ScePowerErrorCode :: enum c.uint {
 #assert(size_of(ScePowerErrorCode) == 4)
 
 ScePowerCallbackType :: enum c.uint {
-	AFTER_SYSTEM_RESUME   = 0x00000080, /* TODO: confirm */
+	AFTER_SYSTEM_RESUME   = 0x00000080,
 	BATTERY_ONLINE        = 0x00000100,
-	THERMAL_SUSPEND       = 0x00000200, /* TODO: confirm */
-	LOW_BATTERY_SUSPEND   = 0x00000400, /* TODO: confirm */
+	THERMAL_SUSPEND       = 0x00000200,
+	LOW_BATTERY_SUSPEND   = 0x00000400,
 	LOW_BATTERY           = 0x00000800,
 	POWER_ONLINE          = 0x00001000,
 	SYSTEM_SUSPEND        = 0x00010000,
@@ -27,7 +26,7 @@ ScePowerCallbackType :: enum c.uint {
 	UNK_0x100000          = 0x00100000, /* Related to proc_event::display_switch */
 	APP_RESUME            = 0x00200000,
 	APP_SUSPEND           = 0x00400000,
-	APP_RESUMING          = 0x00800000, /* TODO: confirm */
+	APP_RESUMING          = 0x00800000,
 	BUTTON_PS_START_PRESS = 0x04000000,
 	BUTTON_PS_POWER_PRESS = 0x08000000,
 	BUTTON_PS_HOLD        = 0x10000000,

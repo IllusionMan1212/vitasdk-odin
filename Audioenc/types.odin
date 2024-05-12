@@ -3,8 +3,7 @@ package audioenc
 import "core:c"
 import sce "../common"
 
-// TODO: should be c.int
-SceAudioencErrorCode :: enum i64 {
+SceAudioencErrorCode :: enum c.uint {
 	API_FAIL             = 0x80860000,
 	INVALID_TYPE         = 0x80860001,
 	INVALID_INIT_PARAM   = 0x80860002,
@@ -23,8 +22,7 @@ SceAudioencErrorCode :: enum i64 {
 	UNSUPPORTED          = 0x8086000F
 }
 
-// TODO: should be c.int
-SceAudioencCelpErrorCode :: enum i64 {
+SceAudioencCelpErrorCode :: enum c.uint {
 	INVALID_CONFIG  = 0x80861001
 }
 

@@ -2,7 +2,6 @@ package videodec
 
 import "core:c"
 
-// TODO: 
 SceVideodecErrorCode :: enum c.uint {
 	INVALID_TYPE                 = 0x80620801,
 	INVALID_PARAM                = 0x80620802,
@@ -24,7 +23,6 @@ SceVideodecType :: enum c.int {
 	HW_AVCDEC = 0x1001
 }
 
-// TODO:
 SceAvcdecErrorCode :: enum c.uint {
 	INVALID_TYPE                 = 0x80620001,
 	INVALID_PARAM                = 0x80620002,

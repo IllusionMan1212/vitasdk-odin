@@ -3,7 +3,6 @@ package display
 import "core:c"
 import sce "../common"
 
-// TODO: should be c.int
 SceDisplayErrorCode :: enum c.uint {
 	OK                    = 0,
 	INVALID_HEAD          = 0x80290000,
@@ -52,5 +51,17 @@ SceDisplayFrameBuf :: struct {
 }
 when size_of(rawptr) == 4 {
 	#assert(size_of(SceDisplayFrameBuf) == 0x18)
+}
+
+/**
+ * Extended framebuffer information
+*/
+SceDisplayFrameBufInfo :: struct {
+	size: sce.Size,                //!< sizeof(SceDisplayFrameBufInfo)
+	pid: sce.UID,                  //!< PID of the process owning this framebuffer
+	vblankcount: c.uint,    //!< Amount of VBlanks this framebuffer has been displayed
+	paddr: c.uintptr_t,             //!< Physical address
+	framebuf: SceDisplayFrameBuf, //!< SceDisplayFrameBuf information
+	resolution: c.uint,     //!< Resolution
 }
 
