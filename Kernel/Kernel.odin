@@ -663,92 +663,92 @@ foreign libkernel {
     sceKernelGetTLSAddr :: proc(key: c.int) -> rawptr ---
 
     sceKernelAtomicSet8 :: proc(store: ^sce.Int8, value: sce.Int8) ---
-    sceKernelAtomicSet16 :: proc(store: sce.Int16, value: sce.Int16) ---
-    sceKernelAtomicSet32 :: proc(store: sce.Int32, value: sce.Int32) ---
-    sceKernelAtomicSet64 :: proc(store: sce.Int64, value: sce.Int64) ---
+    sceKernelAtomicSet16 :: proc(store: ^sce.Int16, value: sce.Int16) ---
+    sceKernelAtomicSet32 :: proc(store: ^sce.Int32, value: sce.Int32) ---
+    sceKernelAtomicSet64 :: proc(store: ^sce.Int64, value: sce.Int64) ---
 
-    sceKernelAtomicCompareAndSet8 :: proc(store: sce.Int8, value, SceInt8, new_value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicCompareAndSet16 :: proc(store: sce.Int16, value, SceInt16, new_value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicCompareAndSet32 :: proc(store: sce.Int32, value, SceInt32, new_value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicCompareAndSet64 :: proc(store: sce.Int64, value, SceInt64, new_value: sce.Int64) -> sce.Int64 ---
-
-
-    sceKernelAtomicAddAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicAddAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicAddAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicAddAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    sceKernelAtomicAddUnless8 :: proc(store: sce.Int8, value: sce.Int8, cmpv: sce.Int8) -> sce.Bool ---
-    sceKernelAtomicAddUnless16 :: proc(store: sce.Int16, value: sce.Int16, cmpv: sce.Int16) -> sce.Bool ---
-    sceKernelAtomicAddUnless32 :: proc(store: sce.Int32, value: sce.Int32, cmpv: sce.Int32) -> sce.Bool ---
-    sceKernelAtomicAddUnless64 :: proc(store: sce.Int64, value: sce.Int64, cmpv: sce.Int64) -> sce.Bool ---
-
-    sceKernelAtomicSubAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicSubAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicSubAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicSubAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    sceKernelAtomicAndAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicAndAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicAndAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicAndAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    sceKernelAtomicOrAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicOrAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicOrAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicOrAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    sceKernelAtomicXorAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicXorAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicXorAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicXorAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    sceKernelAtomicClearAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicClearAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicClearAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicClearAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicCompareAndSet8 :: proc(store: ^sce.Int8, value, SceInt8, new_value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicCompareAndSet16 :: proc(store: ^sce.Int16, value, SceInt16, new_value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicCompareAndSet32 :: proc(store: ^sce.Int32, value, SceInt32, new_value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicCompareAndSet64 :: proc(store: ^sce.Int64, value, SceInt64, new_value: sce.Int64) -> sce.Int64 ---
 
 
-    sceKernelAtomicGetAndSet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndSet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndSet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndSet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAddAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicAddAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicAddAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicAddAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    sceKernelAtomicGetAndAdd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndAdd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndAdd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndAdd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAddUnless8 :: proc(store: ^sce.Int8, value: sce.Int8, cmpv: sce.Int8) -> sce.Bool ---
+    sceKernelAtomicAddUnless16 :: proc(store: ^sce.Int16, value: sce.Int16, cmpv: sce.Int16) -> sce.Bool ---
+    sceKernelAtomicAddUnless32 :: proc(store: ^sce.Int32, value: sce.Int32, cmpv: sce.Int32) -> sce.Bool ---
+    sceKernelAtomicAddUnless64 :: proc(store: ^sce.Int64, value: sce.Int64, cmpv: sce.Int64) -> sce.Bool ---
 
-    sceKernelAtomicGetAndSub8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndSub16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndSub32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndSub64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicSubAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicSubAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicSubAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicSubAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    sceKernelAtomicGetAndAnd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndAnd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndAnd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndAnd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAndAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicAndAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicAndAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicAndAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    sceKernelAtomicGetAndOr8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndOr16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndOr32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndOr64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicOrAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicOrAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicOrAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicOrAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    sceKernelAtomicGetAndXor8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndXor16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndXor32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndXor64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicXorAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicXorAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicXorAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicXorAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    sceKernelAtomicGetAndClear8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    sceKernelAtomicGetAndClear16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    sceKernelAtomicGetAndClear32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    sceKernelAtomicGetAndClear64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicClearAndGet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicClearAndGet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicClearAndGet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicClearAndGet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
 
-    sceKernelAtomicClearMask8 :: proc(store: sce.Int8, value: sce.Int8) ---
-    sceKernelAtomicClearMask16 :: proc(store: sce.Int16, value: sce.Int16) ---
-    sceKernelAtomicClearMask32 :: proc(store: sce.Int32, value: sce.Int32) ---
-    sceKernelAtomicClearMask64 :: proc(store: sce.Int64, value: sce.Int64) ---
+    sceKernelAtomicGetAndSet8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndSet16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndSet32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndSet64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndAdd8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndAdd16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndAdd32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndAdd64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndSub8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndSub16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndSub32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndSub64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndAnd8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndAnd16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndAnd32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndAnd64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndOr8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndOr16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndOr32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndOr64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndXor8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndXor16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndXor32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndXor64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndClear8 :: proc(store: ^sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndClear16 :: proc(store: ^sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndClear32 :: proc(store: ^sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndClear64 :: proc(store: ^sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+
+    sceKernelAtomicClearMask8 :: proc(store: ^sce.Int8, value: sce.Int8) ---
+    sceKernelAtomicClearMask16 :: proc(store: ^sce.Int16, value: sce.Int16) ---
+    sceKernelAtomicClearMask32 :: proc(store: ^sce.Int32, value: sce.Int32) ---
+    sceKernelAtomicClearMask64 :: proc(store: ^sce.Int64, value: sce.Int64) ---
 
     sceKernelAtomicDecIfPositive8 :: proc(store: ^sce.Int8) -> sce.Int8 ---
     sceKernelAtomicDecIfPositive16 :: proc(store: ^sce.Int16) -> sce.Int16 ---
