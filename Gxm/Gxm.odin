@@ -25,13 +25,13 @@ foreign gxm {
 	sceGxmGetNotificationRegion :: proc() -> ^c.uint ---
 	sceGxmNotificationWait :: proc(#by_ptr notification: SceGxmNotification) -> c.int ---
 
-	sceGxmMapMemory :: proc(base: rawptr, size: SceSize, attr: SceGxmMemoryAttribFlags) -> c.int ---
+	sceGxmMapMemory :: proc(base: rawptr, size: sce.Size, attr: SceGxmMemoryAttribFlags) -> c.int ---
 	sceGxmUnmapMemory :: proc(base: rawptr) -> c.int ---
 
-	sceGxmMapVertexUsseMemory :: proc(base: rawptr, size: SceSize, offset: ^c.uint) -> c.int ---
+	sceGxmMapVertexUsseMemory :: proc(base: rawptr, size: sce.Size, offset: ^c.uint) -> c.int ---
 	sceGxmUnmapVertexUsseMemory :: proc(base: rawptr) -> c.int ---
 
-	sceGxmMapFragmentUsseMemory :: proc(base: rawptr, size: SceSize, offset: ^c.uint) -> c.int ---
+	sceGxmMapFragmentUsseMemory :: proc(base: rawptr, size: sce.Size, offset: ^c.uint) -> c.int ---
 	sceGxmUnmapFragmentUsseMemory :: proc(base: rawptr) -> c.int ---
 
 	sceGxmDisplayQueueAddEntry :: proc(oldBuffer: ^SceGxmSyncObject, newBuffer: ^SceGxmSyncObject, callbackData: rawptr) -> c.int ---
@@ -46,7 +46,7 @@ foreign gxm {
 	sceGxmCreateDeferredContext :: proc(#by_ptr params: SceGxmDeferredContextParams, _context: ^^SceGxmContext) -> c.int ---
 	sceGxmDestroyDeferredContext :: proc(_context: ^SceGxmContext) -> c.int ---
 
-	sceGxmSetValidationEnable :: proc(_context: ^SceGxmContext, enable: SceBool) ---
+	sceGxmSetValidationEnable :: proc(_context: ^SceGxmContext, enable: sce.Bool) ---
 
 	sceGxmSetVertexProgram :: proc(_context: ^SceGxmContext, #by_ptr vertexProgram: SceGxmVertexProgram) --- 
 	sceGxmSetFragmentProgram :: proc(_context: ^SceGxmContext, #by_ptr fragmentProgram: SceGxmFragmentProgram) ---
@@ -128,7 +128,7 @@ foreign gxm {
 
 	sceGxmColorSurfaceInit :: proc(surface: ^SceGxmColorSurface, colorFormat: SceGxmColorFormat, surfaceType: SceGxmColorSurfaceType, scaleMode: SceGxmColorSurfaceScaleMode, outputRegisterSize: SceGxmOutputRegisterSize, width: c.uint, height: c.uint, strideInPixels: c.uint, data: rawptr) -> c.int ---
 	sceGxmColorSurfaceInitDisabled :: proc(surface: ^SceGxmColorSurface) -> c.int ---
-	sceGxmColorSurfaceIsEnabled :: proc(#by_ptr surface: SceGxmColorSurface) -> SceBool ---
+	sceGxmColorSurfaceIsEnabled :: proc(#by_ptr surface: SceGxmColorSurface) -> sce.Bool ---
 	sceGxmColorSurfaceGetClip :: proc(#by_ptr surface: SceGxmColorSurface, xMin: ^c.uint, yMin: ^c.uint, xMax: ^c.uint, yMax: ^c.uint) ---
 	sceGxmColorSurfaceSetClip :: proc(surface: ^SceGxmColorSurface, xMin: c.uint, yMin: c.uint, xMax: c.uint, yMax: c.uint) ---
 
@@ -149,7 +149,7 @@ foreign gxm {
 	sceGxmDepthStencilSurfaceSetBackgroundDepth :: proc(surface: ^SceGxmDepthStencilSurface, backgroundDepth: c.float) ---
 	sceGxmDepthStencilSurfaceGetBackgroundStencil :: proc(#by_ptr surface: SceGxmDepthStencilSurface) -> c.uchar ---
 	sceGxmDepthStencilSurfaceSetBackgroundStencil :: proc(surface: ^SceGxmDepthStencilSurface, backgroundStencil: c.uchar) ---
-	sceGxmDepthStencilSurfaceIsEnabled :: proc(#by_ptr surface: SceGxmDepthStencilSurface) -> SceBool ---
+	sceGxmDepthStencilSurfaceIsEnabled :: proc(#by_ptr surface: SceGxmDepthStencilSurface) -> sce.Bool ---
 	sceGxmDepthStencilSurfaceSetForceLoadMode :: proc(surface: ^SceGxmDepthStencilSurface, forceLoad: SceGxmDepthStencilForceLoadMode) ---
 	sceGxmDepthStencilSurfaceGetForceLoadMode :: proc(#by_ptr surface: SceGxmDepthStencilSurface) -> SceGxmDepthStencilForceLoadMode ---
 	sceGxmDepthStencilSurfaceSetForceStoreMode :: proc(surface: ^SceGxmDepthStencilSurface, forceStore: SceGxmDepthStencilForceStoreMode ) ---
@@ -166,9 +166,9 @@ foreign gxm {
 	sceGxmProgramCheck :: proc(#by_ptr program: SceGxmProgram) -> c.int ---
 	sceGxmProgramGetSize :: proc(#by_ptr program: SceGxmProgram) -> c.uint ---
 	sceGxmProgramGetType :: proc(#by_ptr program: SceGxmProgram) -> SceGxmProgramType ---
-	sceGxmProgramIsDiscardUsed :: proc(#by_ptr program: SceGxmProgram) -> SceBool ---
-	sceGxmProgramIsDepthReplaceUsed :: proc(#by_ptr program: SceGxmProgram) -> SceBool ---
-	sceGxmProgramIsSpriteCoordUsed :: proc(#by_ptr program: SceGxmProgram) -> SceBool ---
+	sceGxmProgramIsDiscardUsed :: proc(#by_ptr program: SceGxmProgram) -> sce.Bool ---
+	sceGxmProgramIsDepthReplaceUsed :: proc(#by_ptr program: SceGxmProgram) -> sce.Bool ---
+	sceGxmProgramIsSpriteCoordUsed :: proc(#by_ptr program: SceGxmProgram) -> sce.Bool ---
 	sceGxmProgramGetDefaultUniformBufferSize :: proc(#by_ptr program: SceGxmProgram) -> c.uint ---
 	sceGxmProgramGetParameterCount :: proc(#by_ptr program: SceGxmProgram) -> c.uint ---
 
@@ -185,7 +185,7 @@ foreign gxm {
 	sceGxmProgramParameterGetArraySize :: proc(#by_ptr parameter: SceGxmProgramParameter) -> c.uint ---
 	sceGxmProgramParameterGetResourceIndex :: proc(#by_ptr parameter: SceGxmProgramParameter) -> c.uint ---
 	sceGxmProgramParameterGetContainerIndex :: proc(#by_ptr parameter: SceGxmProgramParameter) -> c.uint ---
-	sceGxmProgramParameterIsSamplerCube :: proc(#by_ptr parameter: SceGxmProgramParameter) -> SceBool ---
+	sceGxmProgramParameterIsSamplerCube :: proc(#by_ptr parameter: SceGxmProgramParameter) -> sce.Bool ---
 
 	sceGxmFragmentProgramGetProgram :: proc(#by_ptr fragmentProgram: SceGxmFragmentProgram) -> ^SceGxmProgram ---
 	sceGxmVertexProgramGetProgram :: proc(#by_ptr vertexProgram: SceGxmVertexProgram) -> ^SceGxmProgram ---
@@ -292,7 +292,7 @@ foreign gxm {
 	sceGxmGetRenderTargetMemSize :: proc(#by_ptr params: SceGxmRenderTargetParams, driverMemSize: ^c.uint) -> c.int ---
 	sceGxmCreateRenderTarget :: proc(#by_ptr params: SceGxmRenderTargetParams, renderTarget: ^^SceGxmRenderTarget) -> c.int ---
 	sceGxmRenderTargetGetHostMem :: proc(#by_ptr renderTarget: SceGxmRenderTarget, hostMem: ^rawptr) -> c.int ---
-	sceGxmRenderTargetGetDriverMemBlock :: proc(#by_ptr renderTarget: SceGxmRenderTarget, driverMemBlock: ^SceUID) -> c.int ---
+	sceGxmRenderTargetGetDriverMemBlock :: proc(#by_ptr renderTarget: SceGxmRenderTarget, driverMemBlock: ^sce.UID) -> c.int ---
 	sceGxmDestroyRenderTarget :: proc(renderTarget: ^SceGxmRenderTarget) -> c.int ---
 
 	sceGxmSetUniformDataF :: proc(uniformBuffer: rawptr, #by_ptr parameter: SceGxmProgramParameter, componentOffset: c.uint, componentCount: c.uint, sourceData: ^c.float) -> c.int ---
