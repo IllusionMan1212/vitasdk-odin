@@ -72,7 +72,6 @@ foreign npdrm {
   scePsmDrmGetRifKey :: proc(#by_ptr license_buf: ScePsmDrmLicense, keydata: [^]c.char, flags: c.int) -> c.int ---
 }
 
-@(link_prefix = "_sceNpDrmPackage")
 foreign npdrmpackage {
   /**
   * Read the header of the PKG and initialize the context
@@ -86,7 +85,7 @@ foreign npdrmpackage {
   *
   * @return 0 on success, != 0 on error
   */
-  Check :: proc(buffer: rawptr, size: sce.Size, zero: c.int, identifier: c.uint) -> c.int ---
+  _sceNpDrmPackageCheck :: proc(buffer: rawptr, size: sce.Size, zero: c.int, identifier: c.uint) -> c.int ---
 
   /**
   * Decrypt a PKG
@@ -97,7 +96,7 @@ foreign npdrmpackage {
   *
   * @return 0 on success, != 0 on error
   */
-  Decrypt :: proc(#no_alias buffer: rawptr, size: sce.Size, #no_alias opt: ^_sceNpDrmPackageDecrypt_opt) -> c.int ---
+  _sceNpDrmPackageDecrypt :: proc(#no_alias buffer: rawptr, size: sce.Size, #no_alias opt: ^_sceNpDrmPackageDecrypt_opt) -> c.int ---
 }
 
 foreign npdrmkern {

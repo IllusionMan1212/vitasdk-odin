@@ -6,35 +6,33 @@ import sce "../common"
 foreign import fios2 "system:SceFios2Kernel_stub"
 foreign import fios2kern "system:SceFios2KernelForDriver_stub"
 
-@(link_prefix = "_sceFiosKernelOverlay")
 foreign fios2 {
-  Add :: proc(overlay: ^SceFiosKernelOverlay, out_id: ^SceFiosKernelOverlayID) -> c.int ---
-  AddForProcess :: proc(target_process: sce.UID, overlay: ^SceFiosKernelOverlay, out_id: ^SceFiosKernelOverlayID) -> c.int ---
-  DHChstatSync :: proc(dh: SceFiosKernelOverlayDH, new_stat: ^SceFiosNativeStat, cbit: c.uint) -> c.int ---
-  DHCloseSync :: proc(dh: SceFiosKernelOverlayDH) -> c.int ---
+  _sceFiosKernelOverlayAdd :: proc(overlay: ^SceFiosKernelOverlay, out_id: ^SceFiosKernelOverlayID) -> c.int ---
+  _sceFiosKernelOverlayAddForProcess :: proc(target_process: sce.UID, overlay: ^SceFiosKernelOverlay, out_id: ^SceFiosKernelOverlayID) -> c.int ---
+  _sceFiosKernelOverlayDHChstatSync :: proc(dh: SceFiosKernelOverlayDH, new_stat: ^SceFiosNativeStat, cbit: c.uint) -> c.int ---
+  _sceFiosKernelOverlayDHCloseSync :: proc(dh: SceFiosKernelOverlayDH) -> c.int ---
 
-  DHOpenSync :: proc(out_dh: ^SceFiosKernelOverlayDH, path: cstring, from_order: sce.UInt8, args: ^SceFiosDHOpenSyncSyscallArgs) -> c.int ---
-  DHReadSync :: proc(dh: SceFiosKernelOverlayDH, out_entry: ^SceFiosNativeDirEntry) -> c.int ---
-  DHStatSync :: proc(dh: SceFiosKernelOverlayDH, out_stat: ^SceFiosNativeStat) -> c.int ---
-  DHSyncSync :: proc(dh: SceFiosKernelOverlayDH, flag: c.int) -> c.int ---
-  GetInfo :: proc(id: SceFiosKernelOverlayID, out_overlay: ^SceFiosKernelOverlay) -> c.int ---
-  GetInfoForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID, out_overlay: ^SceFiosKernelOverlay) -> c.int ---
+  _sceFiosKernelOverlayDHOpenSync :: proc(out_dh: ^SceFiosKernelOverlayDH, path: cstring, from_order: sce.UInt8, args: ^SceFiosDHOpenSyncSyscallArgs) -> c.int ---
+  _sceFiosKernelOverlayDHReadSync :: proc(dh: SceFiosKernelOverlayDH, out_entry: ^SceFiosNativeDirEntry) -> c.int ---
+  _sceFiosKernelOverlayDHStatSync :: proc(dh: SceFiosKernelOverlayDH, out_stat: ^SceFiosNativeStat) -> c.int ---
+  _sceFiosKernelOverlayDHSyncSync :: proc(dh: SceFiosKernelOverlayDH, flag: c.int) -> c.int ---
+  _sceFiosKernelOverlayGetInfo :: proc(id: SceFiosKernelOverlayID, out_overlay: ^SceFiosKernelOverlay) -> c.int ---
+  _sceFiosKernelOverlayGetInfoForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID, out_overlay: ^SceFiosKernelOverlay) -> c.int ---
 
-  GetList :: proc(pid: sce.UID, min_order: sce.UInt8, max_order: sce.UInt8, args: ^SceFiosGetListSyscallArgs) -> c.int ---
-  GetRecommendedScheduler :: proc(avail: c.int, partially_resolved_path: cstring, a3: ^sce.UInt64) -> c.int ---
-  Modify :: proc(id: SceFiosKernelOverlayID, new_value: ^SceFiosKernelOverlay) -> c.int ---
-  ModifyForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID, new_value: ^SceFiosKernelOverlay) -> c.int ---
-  Remove :: proc(id: SceFiosKernelOverlayID) -> c.int ---
-  RemoveForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID) -> c.int ---
+  _sceFiosKernelOverlayGetList :: proc(pid: sce.UID, min_order: sce.UInt8, max_order: sce.UInt8, args: ^SceFiosGetListSyscallArgs) -> c.int ---
+  _sceFiosKernelOverlayGetRecommendedScheduler :: proc(avail: c.int, partially_resolved_path: cstring, a3: ^sce.UInt64) -> c.int ---
+  _sceFiosKernelOverlayModify :: proc(id: SceFiosKernelOverlayID, new_value: ^SceFiosKernelOverlay) -> c.int ---
+  _sceFiosKernelOverlayModifyForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID, new_value: ^SceFiosKernelOverlay) -> c.int ---
+  _sceFiosKernelOverlayRemove :: proc(id: SceFiosKernelOverlayID) -> c.int ---
+  _sceFiosKernelOverlayRemoveForProcess :: proc(target_process: sce.UID, id: SceFiosKernelOverlayID) -> c.int ---
 
-  ResolveSync :: proc(pid: sce.UID, resolve_flag: c.int, in_path: cstring, args: ^SceFiosResolveSyncSyscallArgs) -> c.int ---
+  _sceFiosKernelOverlayResolveSync :: proc(pid: sce.UID, resolve_flag: c.int, in_path: cstring, args: ^SceFiosResolveSyncSyscallArgs) -> c.int ---
 
-  ResolveWithRangeSync :: proc(pid: sce.UID, resolve_flag: c.int, in_path: cstring, args: ^SceFiosResolveWithRangeSyncSyscallArgs) -> c.int ---
-  ThreadIsDisabled :: proc() -> c.int ---
-  ThreadSetDisabled :: proc(disabled: sce.Int32) -> c.int ---
+  _sceFiosKernelOverlayResolveWithRangeSync :: proc(pid: sce.UID, resolve_flag: c.int, in_path: cstring, args: ^SceFiosResolveWithRangeSyncSyscallArgs) -> c.int ---
+  _sceFiosKernelOverlayThreadIsDisabled :: proc() -> c.int ---
+  _sceFiosKernelOverlayThreadSetDisabled :: proc(disabled: sce.Int32) -> c.int ---
 
-  @(link_name = "sceFiosKernelOverlayAddForProcess02")
-  AddForProcess02 :: proc(pid: sce.UID, overlay: ^SceFiosOverlay, outID: ^SceFiosOverlayID) -> c.int ---
+  sceFiosKernelOverlayAddForProcess02 :: proc(pid: sce.UID, overlay: ^SceFiosOverlay, outID: ^SceFiosOverlayID) -> c.int ---
 }
 
 foreign fios2kern {

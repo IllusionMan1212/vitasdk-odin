@@ -14,7 +14,6 @@ import sce "../common"
 
 foreign import triggerutil "system:SceTriggerUtil_stub"
 
-@(link_prefix = "sceTriggerUtil")
 foreign triggerutil {
 	/**
 	* Register application start event that will be repeated on certain days
@@ -27,7 +26,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	RegisterDailyEvent :: proc(titleid: cstring, #by_ptr param: SceTriggerUtilEventParamDaily, eventId: c.int, a4: c.int, a5: c.int) -> c.int ---
+	sceTriggerUtilRegisterDailyEvent :: proc(titleid: cstring, #by_ptr param: SceTriggerUtilEventParamDaily, eventId: c.int, a4: c.int, a5: c.int) -> c.int ---
 
 	/**
 	* Register one time application start event
@@ -40,7 +39,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	RegisterOneTimeEvent :: proc(titleid: cstring, #by_ptr param: SceTriggerUtilEventParamOneTime, eventId: c.int, a4: c.int, a5: c.int) -> c.int ---
+	sceTriggerUtilRegisterOneTimeEvent :: proc(titleid: cstring, #by_ptr param: SceTriggerUtilEventParamOneTime, eventId: c.int, a4: c.int, a5: c.int) -> c.int ---
 
 	/**
 	* Unregister daily event for caller application
@@ -51,7 +50,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	UnregisterDailyEvent :: proc(eventId: c.int, a2: c.int, a3: c.int) -> c.int ---
+	sceTriggerUtilUnregisterDailyEvent :: proc(eventId: c.int, a2: c.int, a3: c.int) -> c.int ---
 
 	/**
 	* Unregister one time event for caller application
@@ -62,7 +61,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	UnregisterOneTimeEvent :: proc(eventId: c.int, a2: c.int, a3: c.int) -> c.int ---
+	sceTriggerUtilUnregisterOneTimeEvent :: proc(eventId: c.int, a2: c.int, a3: c.int) -> c.int ---
 
 	/**
 	* Get value from "Settings->System->Auto-Start Settings" for caller application. Required to be 1 to use 
@@ -73,7 +72,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetAutoStartStatus :: proc(status: ^c.int, a2: c.int, a3: c.int) -> c.int ---
+	sceTriggerUtilGetAutoStartStatus :: proc(status: ^c.int, a2: c.int, a3: c.int) -> c.int ---
 
 	/**
 	* Get one time event info for caller application
@@ -85,7 +84,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetOneTimeEventInfo :: proc(eventId: c.int, triggerTime: ^sce.RtcTick, a4: c.int, a5: c.int) -> c.int ---
+	sceTriggerUtilGetOneTimeEventInfo :: proc(eventId: c.int, triggerTime: ^sce.RtcTick, a4: c.int, a5: c.int) -> c.int ---
 
 	/**
 	* Get daily event info for caller application
@@ -97,7 +96,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetDailyEventInfo :: proc(eventId: c.int, param: ^SceTriggerUtilEventParamDaily, a5: c.int, a6: c.int) -> c.int ---
+	sceTriggerUtilGetDailyEventInfo :: proc(eventId: c.int, param: ^SceTriggerUtilEventParamDaily, a5: c.int, a6: c.int) -> c.int ---
 
 	/**
 	* Get info for user application that has registered  events
@@ -109,7 +108,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetUserAppInfo :: proc(titleid: cstring, appInfo: ^SceTriggerUtilUserAppInfo, a4: c.int, a5: c.int) -> c.int ---
+	sceTriggerUtilGetUserAppInfo :: proc(titleid: cstring, appInfo: ^SceTriggerUtilUserAppInfo, a4: c.int, a5: c.int) -> c.int ---
 
 	/**
 	* Get list of user applications that has registered  events. List contains null-separated title IDs
@@ -119,7 +118,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetRegisteredUserTitleIdList :: proc(titleIdBuffer: [^]c.char, numOfIds: c.int) -> c.int ---
+	sceTriggerUtilGetRegisteredUserTitleIdList :: proc(titleIdBuffer: [^]c.char, numOfIds: c.int) -> c.int ---
 
 	/**
 	* Get info for system application that has registered  events
@@ -131,7 +130,7 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetSystemAppInfo :: proc(titleid: cstring, appInfo: ^SceTriggerUtilSystemAppInfo, a4: c.int, a5: c.int) -> c.int ---
+	sceTriggerUtilGetSystemAppInfo :: proc(titleid: cstring, appInfo: ^SceTriggerUtilSystemAppInfo, a4: c.int, a5: c.int) -> c.int ---
 
 	/**
 	* Get list of system applications that has registered  events. List contains null-separated fake title IDs
@@ -141,5 +140,5 @@ foreign triggerutil {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	GetRegisteredSystemTitleIdList :: proc(buffer: [^]c.char, numOfIds: c.int) -> c.int ---
+	sceTriggerUtilGetRegisteredSystemTitleIdList :: proc(buffer: [^]c.char, numOfIds: c.int) -> c.int ---
 }

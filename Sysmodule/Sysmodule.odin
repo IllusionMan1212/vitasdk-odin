@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import sysmodule "system:SceSysmodule_stub"
 
-@(link_prefix = "sceSysmodule")
 foreign sysmodule {
 	/**
 	* Load a module.
@@ -14,7 +13,7 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 on error.
 	*/
-	LoadModule :: proc(id: SceSysmoduleModuleId) -> c.int ---
+	sceSysmoduleLoadModule :: proc(id: SceSysmoduleModuleId) -> c.int ---
 
 	/**
 	* Unload a module.
@@ -23,7 +22,7 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 on error.
 	*/
-	UnloadModule :: proc(id: SceSysmoduleModuleId) -> c.int ---
+	sceSysmoduleUnloadModule :: proc(id: SceSysmoduleModuleId) -> c.int ---
 
 	/**
 	* Check if a module is loaded.
@@ -32,7 +31,7 @@ foreign sysmodule {
 	*
 	* @return 0 if loaded, <0 otherwise.
 	*/
-	IsLoaded :: proc(id: SceSysmoduleModuleId) -> c.int ---
+	sceSysmoduleIsLoaded :: proc(id: SceSysmoduleModuleId) -> c.int ---
 
 	/**
 	* Load an internal module.
@@ -41,7 +40,7 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 on error.
 	*/
-	LoadModuleInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
+	sceSysmoduleLoadModuleInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
 
 	/**
 	* Unload an internal module.
@@ -50,7 +49,7 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 on error.
 	*/
-	UnloadModuleInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
+	sceSysmoduleUnloadModuleInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
 
 	/**
 	* Check if an internal module is loaded.
@@ -59,7 +58,7 @@ foreign sysmodule {
 	*
 	* @return 0 if loaded, <0 otherwise.
 	*/
-	IsLoadedInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
+	sceSysmoduleIsLoadedInternal :: proc(id: SceSysmoduleInternalModuleId) -> c.int ---
 
 	/**
 	* Load an internal module with custom arguments.
@@ -71,7 +70,7 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	LoadModuleInternalWithArg :: proc(id: SceSysmoduleInternalModuleId, args: sce.Size, argp: rawptr, #by_ptr option: SceSysmoduleOpt) -> c.int ---
+	sceSysmoduleLoadModuleInternalWithArg :: proc(id: SceSysmoduleInternalModuleId, args: sce.Size, argp: rawptr, #by_ptr option: SceSysmoduleOpt) -> c.int ---
 
 	/**
 	* Unload an internal module with custom arguments.
@@ -83,5 +82,5 @@ foreign sysmodule {
 	*
 	* @return 0 on success, <0 otherwise.
 	*/
-	UnloadModuleInternalWithArg :: proc(id: SceSysmoduleInternalModuleId, args: sce.Size, argp: rawptr, #by_ptr option: SceSysmoduleOpt) -> c.int ---
+	sceSysmoduleUnloadModuleInternalWithArg :: proc(id: SceSysmoduleInternalModuleId, args: sce.Size, argp: rawptr, #by_ptr option: SceSysmoduleOpt) -> c.int ---
 }

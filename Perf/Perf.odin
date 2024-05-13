@@ -63,16 +63,15 @@ _ScePerfArmPmonEventCode :: enum c.int {
 	PLE_REQ_PROGRAMMED     = 0xA5
 }
 
-@(link_prefix = "scePerf")
 foreign perf {
-  ArmPmonReset :: proc(thid: sce.UID) -> c.int ---
-  ArmPmonSelectEvent :: proc(thid: sce.UID, counter: sce.UInt32, event_code: sce.UInt8) -> c.int ---
-  ArmPmonStart :: proc(thid: sce.UID) -> c.int ---
-  ArmPmonStop :: proc(thid: sce.UID) -> c.int ---
-  ArmPmonGetCounterValue :: proc(thid: sce.UID, counter: sce.UInt32, value: ^sce.UInt32) -> c.int ---
-  ArmPmonSetCounterValue :: proc(thid: sce.UID, counter: sce.UInt32, value: sce.UInt32) -> c.int ---
-  ArmPmonSoftwareIncrement :: proc(mask: sce.UInt32) -> c.int ---
+  scePerfArmPmonReset :: proc(thid: sce.UID) -> c.int ---
+  scePerfArmPmonSelectEvent :: proc(thid: sce.UID, counter: sce.UInt32, event_code: sce.UInt8) -> c.int ---
+  scePerfArmPmonStart :: proc(thid: sce.UID) -> c.int ---
+  scePerfArmPmonStop :: proc(thid: sce.UID) -> c.int ---
+  scePerfArmPmonGetCounterValue :: proc(thid: sce.UID, counter: sce.UInt32, value: ^sce.UInt32) -> c.int ---
+  scePerfArmPmonSetCounterValue :: proc(thid: sce.UID, counter: sce.UInt32, value: sce.UInt32) -> c.int ---
+  scePerfArmPmonSoftwareIncrement :: proc(mask: sce.UInt32) -> c.int ---
 
-  GetTimebaseValue :: proc() -> sce.UInt64 ---
-  GetTimebaseFrequency :: proc() -> sce.UInt32 ---
+  scePerfGetTimebaseValue :: proc() -> sce.UInt64 ---
+  scePerfGetTimebaseFrequency :: proc() -> sce.UInt32 ---
 }

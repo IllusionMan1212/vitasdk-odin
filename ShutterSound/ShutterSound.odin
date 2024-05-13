@@ -16,8 +16,6 @@ SceShutterSoundType :: enum c.uint {
 	SAVE_VIDEO_END   = 2,
 }
 
-
-@(link_prefix = "sceShutterSound")
 foreign shuttersound {
   /**
   * Plays a shutter sound
@@ -26,5 +24,5 @@ foreign shuttersound {
   *
   * @return 0 on success, < 0 on error.
   */
-  Play :: proc(type: SceShutterSoundType) -> c.int ---
+  sceShutterSoundPlay :: proc(type: SceShutterSoundType) -> c.int ---
 }

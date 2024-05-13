@@ -4,7 +4,6 @@ import "core:c"
 
 foreign import shellsvc "system:SceShellSvc_stub"
 
-@(link_prefix = "sceShellUtil")
 foreign shellsvc {
   /**
   * Init events
@@ -13,7 +12,7 @@ foreign shellsvc {
   *
   * @return 0 on success, < 0 on error.
   */
-  InitEvents :: proc(unk: c.int) -> c.int ---
+  sceShellUtilInitEvents :: proc(unk: c.int) -> c.int ---
 
   /**
   * Register event handler
@@ -24,7 +23,7 @@ foreign shellsvc {
   *
   * @return 0 on success, < 0 on error.
   */
-  RegisterEventHandler :: proc(handler: ^SceShellUtilEventHandler, userData: rawptr) -> c.int ---
+  sceShellUtilRegisterEventHandler :: proc(handler: ^SceShellUtilEventHandler, userData: rawptr) -> c.int ---
 
   /**
   * Lock event
@@ -33,7 +32,7 @@ foreign shellsvc {
   *
   * @return 0 on success, < 0 on error.
   */
-  Lock :: proc(type: SceShellUtilLockType) -> c.int ---
+  sceShellUtilLock :: proc(type: SceShellUtilLockType) -> c.int ---
 
   /**
   * Unlock event
@@ -42,9 +41,9 @@ foreign shellsvc {
   *
   * @return 0 on success, < 0 on error.
   */
-  Unlock :: proc(type: SceShellUtilLockType) -> c.int ---
+  sceShellUtilUnlock :: proc(type: SceShellUtilLockType) -> c.int ---
 
 
-  RequestLaunchApp :: proc(param: ^SceShellUtilLaunchAppParam) -> c.int ---
-  LaunchAppRequestLaunchApp :: proc(param: ^SceShellUtilLaunchAppParam) -> c.int ---
+  sceShellUtilRequestLaunchApp :: proc(param: ^SceShellUtilLaunchAppParam) -> c.int ---
+  sceShellUtilLaunchAppRequestLaunchApp :: proc(param: ^SceShellUtilLaunchAppParam) -> c.int ---
 }

@@ -6,7 +6,6 @@ import sce "../common"
 foreign import udcd "system:SceUdcd_stub"
 foreign import udcdkern "system:SceUdcdForDriver_stub"
 
-@(link_prefix = "sceUdcd")
 foreign udcd {
 	/**
 	* Get device state
@@ -15,7 +14,7 @@ foreign udcd {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	GetDeviceState :: proc(state: ^SceUdcdDeviceState) -> c.int ---
+	sceUdcdGetDeviceState :: proc(state: ^SceUdcdDeviceState) -> c.int ---
 
 	/**
 	* Get device information
@@ -24,7 +23,7 @@ foreign udcd {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	GetDeviceInfo :: proc(devInfo: ^SceUdcdDeviceInfo) -> c.int ---
+	sceUdcdGetDeviceInfo :: proc(devInfo: ^SceUdcdDeviceInfo) -> c.int ---
 
 	/**
 	* Get state of a specific USB driver
@@ -33,7 +32,7 @@ foreign udcd {
 	*
 	* @return SCE_UDCD_STATUS_DRIVER_STARTED if the driver has been started, SCE_UDCD_STATUS_DRIVER_REGISTERED if it is stopped
 	*/
-	GetDrvState :: proc(driverName: cstring) -> c.int ---
+	sceUdcdGetDrvState :: proc(driverName: cstring) -> c.int ---
 
 	/**
 	* Register callback
@@ -43,7 +42,7 @@ foreign udcd {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	RegisterCallback :: proc(cbid: sce.UID, state: c.int) -> c.int ---
+	sceUdcdRegisterCallback :: proc(cbid: sce.UID, state: c.int) -> c.int ---
 
 	/**
 	* Unregister callback
@@ -52,7 +51,7 @@ foreign udcd {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	UnregisterCallback :: proc(cbid: sce.UID) -> c.int ---
+	sceUdcdUnregisterCallback :: proc(cbid: sce.UID) -> c.int ---
 
 	/**
 	* Wait for state
@@ -62,7 +61,7 @@ foreign udcd {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	WaitState :: proc(waitParam: ^SceUdcdWaitParam, timeout: c.uint) -> c.int ---
+	sceUdcdWaitState :: proc(waitParam: ^SceUdcdWaitParam, timeout: c.uint) -> c.int ---
 }
 
 foreign udcdkern {

@@ -6,7 +6,6 @@ import sce "../common"
 foreign import usbd "system:SceUsbd_stub"
 foreign import usbdkern "system:SceUsbdForDriver_stub"
 
-@(link_prefix = "sceUsbd")
 foreign usbd {
 	/**
 	* Init usb subsystem
@@ -16,7 +15,7 @@ foreign usbd {
 	* @param[out] uid Pointer to uid
 	*
 	*/
-	Init :: proc(uid: ^sce.UID) -> c.int ---
+	sceUsbdInit :: proc(uid: ^sce.UID) -> c.int ---
 
 	/**
 	* Stop usb subsystem
@@ -26,7 +25,7 @@ foreign usbd {
 	* @param uid uid
 	*
 	*/
-	End :: proc(uid: sce.UID) -> c.int ---
+	sceUsbdEnd :: proc(uid: sce.UID) -> c.int ---
 
 	/**
 	* Get usb devices list
@@ -38,7 +37,7 @@ foreign usbd {
 	* @param[out] info pointer to receive device info
 	*
 	*/
-	GetDeviceList :: proc(uid: sce.UID, num: sce.Size, info: ^SceUsbdDeviceInfo) -> c.int --- // 8 devices max
+	sceUsbdGetDeviceList :: proc(uid: sce.UID, num: sce.Size, info: ^SceUsbdDeviceInfo) -> c.int --- // 8 devices max
 
 
 	/**
@@ -50,7 +49,7 @@ foreign usbd {
 	* @param device_id device id
 	*
 	*/
-	GetDescriptorSize :: proc(uid: sce.UID, device_id: c.uint) -> c.int ---
+	sceUsbdGetDescriptorSize :: proc(uid: sce.UID, device_id: c.uint) -> c.int ---
 
 	/**
 	* Get usb device descriptors (all)
@@ -63,7 +62,7 @@ foreign usbd {
 	* @param[in] size buffer size
 	*
 	*/
-	GetDescriptor :: proc(uid: sce.UID, device_id: sce.UID, descriptor: ^c.uint, size: sce.Size) -> c.int ---
+	sceUsbdGetDescriptor :: proc(uid: sce.UID, device_id: sce.UID, descriptor: ^c.uint, size: sce.Size) -> c.int ---
 
 
 	/**
@@ -76,7 +75,7 @@ foreign usbd {
 	* @param[out] speed device speed
 	*
 	*/
-	GetDeviceSpeed :: proc(uid: sce.UID, device_id: sce.UID, speed: ^c.uint) -> c.int ---
+	sceUsbdGetDeviceSpeed :: proc(uid: sce.UID, device_id: sce.UID, speed: ^c.uint) -> c.int ---
 
 	/**
 	* Register callback to usb event
@@ -90,7 +89,7 @@ foreign usbd {
 	*       And it's currently taken up by shell.
 	*
 	*/
-	RegisterCallback :: proc(cbid: sce.UID, flag: c.int) -> c.int ---
+	sceUsbdRegisterCallback :: proc(cbid: sce.UID, flag: c.int) -> c.int ---
 
 	/**
 	* Remove callback to usb event
@@ -102,7 +101,7 @@ foreign usbd {
 	* @note this checks process id
 	*
 	*/
-	UnregisterCallback :: proc(cbid: sce.UID) -> c.int ---
+	sceUsbdUnregisterCallback :: proc(cbid: sce.UID) -> c.int ---
 
 	/**
 	* Reset usb device
@@ -113,7 +112,7 @@ foreign usbd {
 	* @param[in] device_id device id
 	*
 	*/
-	ResetDevice :: proc(uid: sce.UID, device_id: sce.UID) -> c.int ---
+	sceUsbdResetDevice :: proc(uid: sce.UID, device_id: sce.UID) -> c.int ---
 
 	/**
 	* Attach specified driver to device
@@ -127,7 +126,7 @@ foreign usbd {
 	*
 	* @note device_id = (bus << 16) + device
 	*/
-	Attach :: proc(uid: sce.UID, driver_id: sce.UID, bus: sce.UInt, device: sce.UInt) -> c.int ---
+	sceUsbdAttach :: proc(uid: sce.UID, driver_id: sce.UID, bus: sce.UInt, device: sce.UInt) -> c.int ---
 
 	/**
 	* Get device address
@@ -140,7 +139,7 @@ foreign usbd {
 	*
 	* @note it is unknown what that function actually returns in addr, observed only 0
 	*/
-	GetDeviceAddress :: proc(uid: sce.UID, device_id: sce.UID, addr: ^SceUsbdDeviceAddress) -> c.int ---
+	sceUsbdGetDeviceAddress :: proc(uid: sce.UID, device_id: sce.UID, addr: ^SceUsbdDeviceAddress) -> c.int ---
 
 	/**
 	* Get transfer status
@@ -152,7 +151,7 @@ foreign usbd {
 	*
 	* @note it is unknown what that function actually returns in addr, observed only 0
 	*/
-	GetTransferStatus :: proc(transfer_id: sce.UID, status: ^SceUsbdTransferStatus) -> c.int ---
+	sceUsbdGetTransferStatus :: proc(transfer_id: sce.UID, status: ^SceUsbdTransferStatus) -> c.int ---
 
 	/**
 	* Get isochronous transfer status
@@ -164,7 +163,7 @@ foreign usbd {
 	*
 	* @note it is unknown what that function actually returns in addr, observed only 0
 	*/
-	GetIsochTransferStatus :: proc(transfer_id: sce.UID, status: ^SceUsbdIsochTransferStatus) -> c.int ---
+	sceUsbdGetIsochTransferStatus :: proc(transfer_id: sce.UID, status: ^SceUsbdIsochTransferStatus) -> c.int ---
 
 
 	/**
@@ -176,7 +175,7 @@ foreign usbd {
 	* @param[in] pipe endpoint to open
 	*
 	*/
-	OpenPipe :: proc(uid: sce.UID, pipe: ^SceUsbdDevicePipe) -> sce.UID ---
+	sceUsbdOpenPipe :: proc(uid: sce.UID, pipe: ^SceUsbdDevicePipe) -> sce.UID ---
 
 	/**
 	* Open endpoint communication pipe for default config endpoint
@@ -187,7 +186,7 @@ foreign usbd {
 	* @param[in] device_id device id
 	*
 	*/
-	OpenDefaultPipe :: proc(uid: sce.UID, device_id: sce.UID) -> sce.UID ---
+	sceUsbdOpenDefaultPipe :: proc(uid: sce.UID, device_id: sce.UID) -> sce.UID ---
 
 	/**
 	* Close endpoint communication pipe
@@ -198,7 +197,7 @@ foreign usbd {
 	* @param[in] pipe_id pipe uid
 	*
 	*/
-	ClosePipe :: proc(uid: sce.UID, pipe_id: sce.UID) -> c.int ---
+	sceUsbdClosePipe :: proc(uid: sce.UID, pipe_id: sce.UID) -> c.int ---
 
 	/**
 	* Transfer data to/from endpoint
@@ -209,7 +208,7 @@ foreign usbd {
 	* @param[in] data data to transfer
 	*
 	*/
-	TransferData :: proc(uid: sce.UID, data: ^SceUsbdTransferData) -> sce.UID ---
+	sceUsbdTransferData :: proc(uid: sce.UID, data: ^SceUsbdTransferData) -> sce.UID ---
 
 	/**
 	* Transfer data to/from endpoint isochronously
@@ -221,7 +220,7 @@ foreign usbd {
 	* @param[in] transfer data to transfer
 	*
 	*/
-	IsochTransferData :: proc(uid: sce.UID, pipe_id: sce.UID, transfer: ^SceUsbdIsochTransfer) -> c.int ---
+	sceUsbdIsochTransferData :: proc(uid: sce.UID, pipe_id: sce.UID, transfer: ^SceUsbdIsochTransfer) -> c.int ---
 
 	/**
 	* Receive usb event
@@ -232,7 +231,7 @@ foreign usbd {
 	* @param[out] event
 	*
 	*/
-	ReceiveEvent :: proc(uid: sce.UID, event: ^SceUsbdReceiveEvent) -> c.int ---
+	sceUsbdReceiveEvent :: proc(uid: sce.UID, event: ^SceUsbdReceiveEvent) -> c.int ---
 
 	/**
 	* Register logical device driver
@@ -243,7 +242,7 @@ foreign usbd {
 	* @param[in] name driver name, 255 max
 	*
 	*/
-	RegisterLdd :: proc(uid: sce.UID, name: cstring) -> sce.UID ---
+	sceUsbdRegisterLdd :: proc(uid: sce.UID, name: cstring) -> sce.UID ---
 
 	/**
 	* Register logical device driver for composite devices
@@ -254,7 +253,7 @@ foreign usbd {
 	* @param[in] name driver name, 255 max
 	*
 	*/
-	RegisterCompositeLdd :: proc(uid: sce.UID, name: cstring) -> sce.UID ---
+	sceUsbdRegisterCompositeLdd :: proc(uid: sce.UID, name: cstring) -> sce.UID ---
 
 	/**
 	* De-register logical device driver
@@ -265,7 +264,7 @@ foreign usbd {
 	* @param[in] name driver name, 255 max
 	*
 	*/
-	UnregisterLdd :: proc(uid: sce.UID, name: cstring) -> c.int ---
+	sceUsbdUnregisterLdd :: proc(uid: sce.UID, name: cstring) -> c.int ---
 
 	/**
 	* Attach composite driver to device
@@ -276,7 +275,7 @@ foreign usbd {
 	* @param[in] param parameters
 	*
 	*/
-	AttachCompositeLdd :: proc(uid: sce.UID, param: ^SceUsbdAttachCompositeParam) -> c.int ---
+	sceUsbdAttachCompositeLdd :: proc(uid: sce.UID, param: ^SceUsbdAttachCompositeParam) -> c.int ---
 }
 
 foreign usbdkern {

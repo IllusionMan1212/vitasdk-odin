@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import motion "system:SceMotion_stub"
 
-@(link_prefix = "sceMotion")
 foreign motion {
 	/**
 	* Gets the current motion state.
@@ -14,7 +13,7 @@ foreign motion {
 	*
 	* @return 0, <0 on error.
 	*/
-	GetState :: proc(motionState: ^SceMotionState) -> c.int ---
+	sceMotionGetState :: proc(motionState: ^SceMotionState) -> c.int ---
 
 	/**
 	* Gets the current motion sensor state
@@ -24,7 +23,7 @@ foreign motion {
 	*
 	* @return 0, <0 on error
 	*/
-	GetSensorState :: proc(sensorState: ^SceMotionSensorState, numRecords: c.int) -> c.int ---
+	sceMotionGetSensorState :: proc(sensorState: ^SceMotionSensorState, numRecords: c.int) -> c.int ---
 
 	/**
 	* Gets the location of the device's sensors in relation to its center point (in mm).
@@ -33,7 +32,7 @@ foreign motion {
 	*
 	* @return 0, <0 on error
 	*/
-	GetDeviceLocation :: proc(deviceLocation: ^SceMotionDeviceLocation) -> c.int ---
+	sceMotionGetDeviceLocation :: proc(deviceLocation: ^SceMotionDeviceLocation) -> c.int ---
 
 	/**
 	* Gets the basic orientation of the device in relation to gravity
@@ -48,7 +47,7 @@ foreign motion {
 	*
 	* @return 0, <0 on error
 	*/
-	GetBasicOrientation :: proc(basicOrientation: ^sce.FVector3) -> c.int ---
+	sceMotionGetBasicOrientation :: proc(basicOrientation: ^sce.FVector3) -> c.int ---
 
 	/**
 	* Rotate the yaw axis
@@ -57,7 +56,7 @@ foreign motion {
 	*
 	* @return 0
 	*/
-	RotateYaw :: proc(radians: c.float) -> c.int ---
+	sceMotionRotateYaw :: proc(radians: c.float) -> c.int ---
 
 	/**
 	* Get Status of tilt correction
@@ -65,7 +64,7 @@ foreign motion {
 	* @note - Enabled by default
 	* @return 1 if enabled, 0 if disabled
 	*/
-	GetTiltCorrection :: proc() -> c.int ---
+	sceMotionGetTiltCorrection :: proc() -> c.int ---
 
 	/**
 	* Activate/deactivate tilt correction
@@ -74,7 +73,7 @@ foreign motion {
 	*
 	* @return 0
 	*/
-	SetTiltCorrection :: proc(setValue: c.int) -> c.int ---
+	sceMotionSetTiltCorrection :: proc(setValue: c.int) -> c.int ---
 
 	/**
 	* Get status of deadbanding
@@ -83,7 +82,7 @@ foreign motion {
 	* @note - Enabled by default
 	* @return 1 if enabled, 0 if disabled
 	*/
-	GetDeadband :: proc() -> c.int ---
+	sceMotionGetDeadband :: proc() -> c.int ---
 
 	/**
 	* Activate/deactivate deadbanding
@@ -92,7 +91,7 @@ foreign motion {
 	*
 	* @return 0
 	*/
-	SetDeadband :: proc(setValue: c.int) -> c.int ---
+	sceMotionSetDeadband :: proc(setValue: c.int) -> c.int ---
 
 	/**
 	* Get status of gyroscope bias correction
@@ -100,7 +99,7 @@ foreign motion {
 	* @note - Enabled by default
 	* @return 1 if enabled, 0 if disabled
 	*/
-	GetGyroBiasCorrection :: proc() -> c.int ---
+	sceMotionGetGyroBiasCorrection :: proc() -> c.int ---
 
 	/**
 	* Activate/deactivate gyroscope bias correction
@@ -109,7 +108,7 @@ foreign motion {
 	*
 	* @return 0
 	*/
-	SetGyroBiasCorrection :: proc(setValue: c.int) -> c.int ---
+	sceMotionSetGyroBiasCorrection :: proc(setValue: c.int) -> c.int ---
 
 	/**
 	* Define the angle threshold for basic orientation
@@ -118,54 +117,54 @@ foreign motion {
 	*
 	* @return 0
 	*/
-	SetAngleThreshold :: proc(angle: c.float) -> c.int ---
+	sceMotionSetAngleThreshold :: proc(angle: c.float) -> c.int ---
 
 	/**
 	* Get the angle threshold for basic orientation
 	*
 	* @return angle in degrees
 	*/
-	GetAngleThreshold :: proc() -> c.float ---
+	sceMotionGetAngleThreshold :: proc() -> c.float ---
 
 	/**
 	* Set current orientation as origin
 	*
 	* @return 0, <0 on error
 	*/
-	Reset :: proc() -> c.int ---
+	sceMotionReset :: proc() -> c.int ---
 
 	/**
 	* Start magnetometer sampling
 	*
 	* @return 0, <0 on error
 	*/
-	MagnetometerOn :: proc() -> c.int ---
+	sceMotionMagnetometerOn :: proc() -> c.int ---
 
 	/**
 	* Stop magnetometer sampling
 	*
 	* @return 0, <0 on error
 	*/
-	MagnetometerOff :: proc() -> c.int ---
+	sceMotionMagnetometerOff :: proc() -> c.int ---
 
 	/**
 	* Get status of magnetometer sampling
 	*
 	* @return 1 if enabled, 0 if disabled
 	*/
-	GetMagnetometerState :: proc() -> c.int ---
+	sceMotionGetMagnetometerState :: proc() -> c.int ---
 
 	/**
 	* Start sampling
 	*
 	* @return 0, <0 on error
 	*/
-	StartSampling :: proc() -> c.int ---
+	sceMotionStartSampling :: proc() -> c.int ---
 
 	/**
 	* Stop sampling
 	*
 	* @return 0, <0 on error
 	*/
-	StopSampling :: proc() -> c.int ---
+	sceMotionStopSampling :: proc() -> c.int ---
 }

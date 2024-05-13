@@ -10,7 +10,6 @@ ScePfsRndDriveId :: struct {
 }
 #assert(size_of(ScePfsRndDriveId) == 0x10)
 
-@(link_prefix = "kscePfs")
 foreign pfsmgr {
   /**
   * Mount pfs directory
@@ -23,7 +22,7 @@ foreign pfsmgr {
   *
   * @return 0 on success, < 0 on error.
   */
-  Mount :: proc(path: cstring, #by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64, klicensee: rawptr, mode_index: c.uint16_t) -> c.int ---
+  kscePfsMount :: proc(path: cstring, #by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64, klicensee: rawptr, mode_index: c.uint16_t) -> c.int ---
 
   /**
   * Mount pfs directory without authid
@@ -35,7 +34,7 @@ foreign pfsmgr {
   *
   * @return 0 on success, < 0 on error.
   */
-  Mount2 :: proc(path: cstring, #by_ptr rnd_drive_id: ScePfsRndDriveId, klicensee: rawptr, mode_index: c.uint16_t) -> c.int ---
+  kscePfsMount2 :: proc(path: cstring, #by_ptr rnd_drive_id: ScePfsRndDriveId, klicensee: rawptr, mode_index: c.uint16_t) -> c.int ---
 
   /**
   * Unmount pfs directory
@@ -44,8 +43,8 @@ foreign pfsmgr {
   *
   * @return 0 on success, < 0 on error.
   */
-  Unmount :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId) -> c.int ---
+  kscePfsUnmount :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId) -> c.int ---
 
-  Approve :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64) -> c.int ---
-  Disapprove :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64) -> c.int ---
+  kscePfsApprove :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64) -> c.int ---
+  kscePfsDisapprove :: proc(#by_ptr rnd_drive_id: ScePfsRndDriveId, program_authority_id: sce.UInt64) -> c.int ---
 }

@@ -439,14 +439,13 @@ foreign appmgr {
 	sceSharedFbGetInfo :: proc(fb_id: sce.UID, info: ^SceSharedFbInfo) -> c.int ---
 }
 
-@(link_prefix = "ksceAppMgr")
 foreign appmgrkern {
 	/**
 	* @brief       Kill a process.
 	* @param[in]   pid The process to kill.
 	* @return      Zero on success, else < 0.
 	*/
-	KillProcess :: proc(pid: sce.UID) -> c.int ---
+	ksceAppMgrKillProcess :: proc(pid: sce.UID) -> c.int ---
 
 	/**
 	* @brief       Launch an application for debugging
@@ -460,5 +459,5 @@ foreign appmgrkern {
 	*
 	* @return   pid on success, else < 0.
 	*/
-	LaunchAppByPath :: proc(path: cstring, args: cstring, arg_size: sce.Size, type: c.uint, #by_ptr param: SceAppMgrLaunchParam, unk: rawptr) -> c.int ---
+	ksceAppMgrLaunchAppByPath :: proc(path: cstring, args: cstring, arg_size: sce.Size, type: c.uint, #by_ptr param: SceAppMgrLaunchParam, unk: rawptr) -> c.int ---
 }

@@ -13,8 +13,7 @@ PhotoExportParam :: struct {
 
 foreign import photoexport "system:ScePhotoExport_stub"
 
-@(link_prefix = "scePhotoExport")
 foreign photoexport {
-  FromData :: proc(data: rawptr, size: sce.Size, #by_ptr param: PhotoExportParam, workingMemory: rawptr, cancelCb: rawptr, user: rawptr, outPath: cstring, outPathSize: sce.Size) -> c.int ---
-  FromFile :: proc(path: cstring, #by_ptr param: PhotoExportParam, workingMemory: rawptr, cancelCb: rawptr, user: rawptr, outPath: cstring, outPathSize: sce.Size) -> c.int ---
+  scePhotoExportFromData :: proc(data: rawptr, size: sce.Size, #by_ptr param: PhotoExportParam, workingMemory: rawptr, cancelCb: rawptr, user: rawptr, outPath: cstring, outPathSize: sce.Size) -> c.int ---
+  scePhotoExportFromFile :: proc(path: cstring, #by_ptr param: PhotoExportParam, workingMemory: rawptr, cancelCb: rawptr, user: rawptr, outPath: cstring, outPathSize: sce.Size) -> c.int ---
 }

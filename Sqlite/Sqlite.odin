@@ -10,7 +10,6 @@ SceSqliteMallocMethods :: struct {
   xFree: #type ^proc "c" (_: rawptr),
 }
 
-@(link_prefix = "sceSqlite")
 foreign sqlite {
   /**
   * Wrapper for sqlite3_config(SQLITE_CONFIG_MALLOC)
@@ -19,5 +18,5 @@ foreign sqlite {
   *
   * @return 0 on success, < 0 on error.
   */
-  ConfigMallocMethods :: proc(methods: ^SceSqliteMallocMethods) -> c.int ---
+  sceSqliteConfigMallocMethods :: proc(methods: ^SceSqliteMallocMethods) -> c.int ---
 }

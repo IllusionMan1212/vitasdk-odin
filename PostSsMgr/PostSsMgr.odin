@@ -4,7 +4,6 @@ import "core:c"
 
 foreign import postssmgr "system:SceSblSsMgrForDriver_stub"
 
-@(link_prefix = "ksceSbl")
 foreign postssmgr {
 	/**
 	* Create the new RSA signature
@@ -16,7 +15,7 @@ foreign postssmgr {
 	*
 	* @return SCE_OK on success, < 0 on error
 	*/
-	RSA2048CreateSignature :: proc(rsa_signature: ^SceSblRsaDataParam, hash: ^SceSblRsaDataParam, private_key: SceSblRsaPrivateKeyParam, type: c.int) -> c.int ---
+	ksceSblRSA2048CreateSignature :: proc(rsa_signature: ^SceSblRsaDataParam, hash: ^SceSblRsaDataParam, private_key: SceSblRsaPrivateKeyParam, type: c.int) -> c.int ---
 
 	/**
 	* Verufy the new RSA signature
@@ -28,5 +27,5 @@ foreign postssmgr {
 	*
 	* @return SCE_OK on success, < 0 on error
 	*/
-	RSA2048VerifySignature :: proc(rsa_signature: ^SceSblRsaDataParam, hash: ^SceSblRsaDataParam, public_key: ^SceSblRsaPublicKeyParam, type: c.int) -> c.int ---
+	ksceSblRSA2048VerifySignature :: proc(rsa_signature: ^SceSblRsaDataParam, hash: ^SceSblRsaDataParam, public_key: ^SceSblRsaPublicKeyParam, type: c.int) -> c.int ---
 }

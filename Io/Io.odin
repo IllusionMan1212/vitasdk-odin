@@ -7,7 +7,6 @@ foreign import libkernel "system:SceLibKernel_stub"
 foreign import iofilemgr "system:SceIofilemgr_stub"
 foreign import iofilemgrkern "system:SceIofilemgrForDriver_stub"
 
-@(link_prefix = "sceIo")
 foreign libkernel {
   /**
   * Send a devctl command to a device.
@@ -26,7 +25,7 @@ foreign libkernel {
   * @param outlen - Length of outdata, if 0 receives no data
   * @return 0 on success, < 0 on error
   */
-  Devctl :: proc(dev: cstring, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
+  sceIoDevctl :: proc(dev: cstring, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
 
   /**
   * Perform an ioctl on a device.
@@ -39,7 +38,7 @@ foreign libkernel {
   * @param outlen - Length of outdata, if 0 receives no data
   * @return 0 on success, < 0 on error
   */
-  Ioctl :: proc(fd: sce.UID, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
+  sceIoIoctl :: proc(fd: sce.UID, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
 
   /**
   * Perform an ioctl :: proc a device: c.in. asynchronous: ^)
@@ -52,7 +51,7 @@ foreign libkernel {
   * @param outlen - Length of outdata, if 0 receives no data
   * @return 0 on success, < 0 on error
   */
-  IoctlAsync :: proc(fd: sce.UID, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
+  sceIoIoctlAsync :: proc(fd: sce.UID, cmd: c.uint, indata: rawptr, inlen: c.int, outdata: rawptr, outlen: c.int) -> c.int ---
 
   /**
   * Open a directory
@@ -67,7 +66,7 @@ foreign libkernel {
   * @param dirname - The directory to open for reading.
   * @return If >= 0 then a valid file descriptor, otherwise a Sony error code.
   */
-  Dopen :: proc(dirname: cstring) -> sce.UID ---
+  sceIoDopen :: proc(dirname: cstring) -> sce.UID ---
 
   /**
   * Reads an entry from an opened file descriptor.
@@ -80,7 +79,7 @@ foreign libkernel {
   * - > 0 - More directory entries to go
   * - < 0 - Error
   */
-  Dread :: proc(fd: sce.UID, dir: ^SceIoDirent) -> c.int ---
+  sceIoDread :: proc(fd: sce.UID, dir: ^SceIoDirent) -> c.int ---
 
   /**
   * Close an opened directory file descriptor
@@ -88,7 +87,7 @@ foreign libkernel {
   * @param fd - Already opened file descriptor (using ::sceIoDopen)
   * @return < 0 on error
   */
-  Dclose :: proc(fd: sce.UID) -> c.int ---
+  sceIoDclose :: proc(fd: sce.UID) -> c.int ---
 
   /**
   * Make a directory file
@@ -97,7 +96,7 @@ foreign libkernel {
   * @param mode - Access mode (One or more ::SceIoAccessMode).
   * @return Returns the value 0 if it's successful, otherwise -1
   */
-  Mkdir :: proc(dir: cstring, mode: SceIoAccessMode) -> c.int ---
+  sceIoMkdir :: proc(dir: cstring, mode: SceIoAccessMode) -> c.int ---
 
   /**
   * Remove a directory file
@@ -105,7 +104,7 @@ foreign libkernel {
   * @param path - Removes a directory file pointed by the string path
   * @return Returns the value 0 if it's successful, otherwise -1
   */
-  Rmdir :: proc(path: cstring) -> c.int ---
+  sceIoRmdir :: proc(path: cstring) -> c.int ---
 
   /**
   * Get the status of a file.
@@ -115,7 +114,7 @@ foreign libkernel {
   *
   * @return < 0 on error.
   */
-  Getstat :: proc(file: cstring, stat: ^SceIoStat) -> c.int ---
+  sceIoGetstat :: proc(file: cstring, stat: ^SceIoStat) -> c.int ---
 
   /**
   * Get the status of a file descriptor.
@@ -125,7 +124,7 @@ foreign libkernel {
   *
   * @return < 0 on error.
   */
-  GetstatByFd :: proc(fd: sce.UID, stat: ^SceIoStat) -> c.int ---
+  sceIoGetstatByFd :: proc(fd: sce.UID, stat: ^SceIoStat) -> c.int ---
 
   /**
   * Change the status of a file.
@@ -136,7 +135,7 @@ foreign libkernel {
   *
   * @return < 0 on error.
   */
-  Chstat :: proc(file: cstring, stat: ^SceIoStat, bits: c.int) -> c.int ---
+  sceIoChstat :: proc(file: cstring, stat: ^SceIoStat, bits: c.int) -> c.int ---
 
   /**
   * Change the status of a file descriptor.
@@ -147,10 +146,9 @@ foreign libkernel {
   *
   * @return < 0 on error.
   */
-  ChstatByFd :: proc(fd: sce.UID, buf: ^SceIoStat, cbit: c.uint) -> c.int ---
+  sceIoChstatByFd :: proc(fd: sce.UID, buf: ^SceIoStat, cbit: c.uint) -> c.int ---
 }
 
-@(link_prefix = "sceIo")
 foreign iofilemgr {
   /**
    * Open or create a file for reading or writing
@@ -173,7 +171,7 @@ foreign iofilemgr {
    * @param mode - One or more ::SceIoAccessMode flags or'ed together. Can also use Unix absolute permissions.
    * @return > 0 is a valid file handle, < 0 on error.
    */
-   Open :: proc(file: cstring, flags: SceIoMode, mode: sce.Mode) -> sce.UID ---
+   sceIoOpen :: proc(file: cstring, flags: SceIoMode, mode: sce.Mode) -> sce.UID ---
 
   /**
    * Delete a descriptor
@@ -185,7 +183,7 @@ foreign iofilemgr {
    * @param fd - File descriptor to close
    * @return < 0 on error
    */
-  Close :: proc(fd: sce.UID) -> c.int ---
+  sceIoClose :: proc(fd: sce.UID) -> c.int ---
 
   /**
    * Read input
@@ -201,7 +199,7 @@ foreign iofilemgr {
    *
    * @return The number of bytes read
    */
-  Read :: proc(fd: sce.UID, buf: rawptr, nbyte: sce.Size) -> sce.SSize ---
+  sceIoRead :: proc(fd: sce.UID, buf: rawptr, nbyte: sce.Size) -> sce.SSize ---
 
   /**
    * Read input at offset
@@ -218,7 +216,7 @@ foreign iofilemgr {
    *
    * @return < 0 on error.
    */
-  Pread :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
+  sceIoPread :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
 
   /**
    * Write output
@@ -234,7 +232,7 @@ foreign iofilemgr {
    *
    * @return The number of bytes written
    */
-  Write :: proc(fd: sce.UID, buf: rawptr, nbyte: sce.Size) -> sce.SSize ---
+  sceIoWrite :: proc(fd: sce.UID, buf: rawptr, nbyte: sce.Size) -> sce.SSize ---
 
   /**
    * Write output at offset
@@ -251,7 +249,7 @@ foreign iofilemgr {
    *
    * @return The number of bytes written
    */
-  Pwrite :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
+  sceIoPwrite :: proc(fd: sce.UID, data: rawptr, size: sce.Size, offset: sce.Off) -> c.int ---
 
   /**
    * Reposition read/write file descriptor offset
@@ -267,7 +265,7 @@ foreign iofilemgr {
    *
    * @return The position in the file after the seek.
    */
-  Lseek :: proc(fd: sce.UID, offset: sce.Off, whence: SceIoSeekMode) -> sce.Off ---
+  sceIoLseek :: proc(fd: sce.UID, offset: sce.Off, whence: SceIoSeekMode) -> sce.Off ---
 
   /**
    * Reposition read/write file descriptor offset (32bit mode)
@@ -283,7 +281,7 @@ foreign iofilemgr {
    *
    * @return The position in the file after the seek.
    */
-  Lseek32 :: proc(fd: sce.UID, offset: c.long, whence: SceIoSeekMode) -> c.long ---
+  sceIoLseek32 :: proc(fd: sce.UID, offset: c.long, whence: SceIoSeekMode) -> c.long ---
 
   /**
    * Remove directory entry
@@ -291,7 +289,7 @@ foreign iofilemgr {
    * @param file - Path to the file to remove
    * @return < 0 on error
    */
-  Remove :: proc(file: cstring) -> c.int ---
+  sceIoRemove :: proc(file: cstring) -> c.int ---
 
   /**
    * Change the name of a file
@@ -300,7 +298,7 @@ foreign iofilemgr {
    * @param newname - The new filename
    * @return < 0 on error.
    */
-  Rename :: proc(oldname: cstring, newname: cstring) -> c.int ---
+  sceIoRename :: proc(oldname: cstring, newname: cstring) -> c.int ---
 
   /**
     * Synchronize the file data on the device.
@@ -308,7 +306,7 @@ foreign iofilemgr {
     * @param device - The device to synchronize (e.g. msfat0:)
     * @param unk - Unknown
     */
-  Sync :: proc(device: cstring, flag: c.int) -> c.int ---
+  sceIoSync :: proc(device: cstring, flag: c.int) -> c.int ---
 
   /**
    * Synchronize the file data for one file
@@ -318,7 +316,7 @@ foreign iofilemgr {
    *
    * @return < 0 on error.
    */
-  SyncByFd :: proc(fd: sce.UID, flag: c.int) -> c.int ---
+  sceIoSyncByFd :: proc(fd: sce.UID, flag: c.int) -> c.int ---
 
   /**
     * Cancel an asynchronous operation on a file descriptor.
@@ -327,14 +325,14 @@ foreign iofilemgr {
     *
     * @return < 0 on error.
     */
-  Cancel :: proc(fd: sce.UID) -> c.int ---
+  sceIoCancel :: proc(fd: sce.UID) -> c.int ---
 
-  GetPriority :: proc(fd: sce.UID) -> c.int ---
-  GetProcessDefaultPriority :: proc() -> c.int ---
-  GetThreadDefaultPriority :: proc() -> c.int ---
-  SetPriority :: proc(fd: sce.UID, priority: c.int) -> c.int ---
-  SetProcessDefaultPriority :: proc(priority: c.int) -> c.int ---
-  SetThreadDefaultPriority :: proc(priority: c.int) -> c.int ---
+  sceIoGetPriority :: proc(fd: sce.UID) -> c.int ---
+  sceIoGetProcessDefaultPriority :: proc() -> c.int ---
+  sceIoGetThreadDefaultPriority :: proc() -> c.int ---
+  sceIoSetPriority :: proc(fd: sce.UID, priority: c.int) -> c.int ---
+  sceIoSetProcessDefaultPriority :: proc(priority: c.int) -> c.int ---
+  sceIoSetThreadDefaultPriority :: proc(priority: c.int) -> c.int ---
 }
 
 foreign iofilemgrkern {

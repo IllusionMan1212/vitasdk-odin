@@ -21,13 +21,12 @@ SceI2cDebugHandlers :: struct {
   write_read_end: #type ^proc "c" (bus: c.int, error: c.int, result: c.int),
 }
 
-@(link_prefix = "ksceI2c")
 foreign i2c {
-  Init :: proc(bus: c.int) -> c.int ---
-  Reset :: proc(bus: c.int) -> c.int ---
-  TransferRead :: proc(bus: c.int, addr: c.uint, buffer: [^]c.uchar, size: c.int) -> c.int ---
-  TransferWrite :: proc(bus: c.int, addr: c.uint, buffer: [^]c.uchar, size: c.int) -> c.int ---
-  TransferWriteRead :: proc(bus: c.int, write_addr: c.uint, write_buffer: [^]c.uchar, write_size: c.int, read_addr: c.uint, read_buffer: [^]c.uchar, read_size: c.int) -> c.int ---
+  ksceI2cInit :: proc(bus: c.int) -> c.int ---
+  ksceI2cReset :: proc(bus: c.int) -> c.int ---
+  ksceI2cTransferRead :: proc(bus: c.int, addr: c.uint, buffer: [^]c.uchar, size: c.int) -> c.int ---
+  ksceI2cTransferWrite :: proc(bus: c.int, addr: c.uint, buffer: [^]c.uchar, size: c.int) -> c.int ---
+  ksceI2cTransferWriteRead :: proc(bus: c.int, write_addr: c.uint, write_buffer: [^]c.uchar, write_size: c.int, read_addr: c.uint, read_buffer: [^]c.uchar, read_size: c.int) -> c.int ---
 
-  SetDebugHandlers :: proc(bus: c.int, debug_handlers: ^SceI2cDebugHandlers) -> c.int ---
+  ksceI2cSetDebugHandlers :: proc(bus: c.int, debug_handlers: ^SceI2cDebugHandlers) -> c.int ---
 }

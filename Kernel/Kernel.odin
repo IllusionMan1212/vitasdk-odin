@@ -60,7 +60,6 @@ SceKernelSystemInfo :: struct {
 }
 #assert(size_of(SceKernelSystemInfo) == 0x48)
 
-@(link_prefix = "sceKernel")
 foreign libkernel {
     /**
     * Fills the output buffer with random data.
@@ -70,7 +69,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error.
     */
-    GetRandomNumber :: proc(output: rawptr, size: sce.Size) -> c.int ---
+    sceKernelGetRandomNumber :: proc(output: rawptr, size: sce.Size) -> c.int ---
 
     /**
     * Gets the status of a specified callback.
@@ -81,7 +80,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    GetCallbackInfo :: proc(cb: sce.UID, infop: ^SceKernelCallbackInfo) -> c.int ---
+    sceKernelGetCallbackInfo :: proc(cb: sce.UID, infop: ^SceKernelCallbackInfo) -> c.int ---
 
     /**
     * Creates a new condition variable
@@ -98,7 +97,7 @@ foreign libkernel {
     * @param option - Condition variable options (normally set to 0)
     * @return A condition variable id
     */
-    CreateCond :: proc(name: cstring, attr: sce.UInt, mutexId: sce.UID, option: ^SceKernelCondOptParam) -> sce.UID ---
+    sceKernelCreateCond :: proc(name: cstring, attr: sce.UInt, mutexId: sce.UID, option: ^SceKernelCondOptParam) -> sce.UID ---
 
     /**
     * Waits for a signal of a condition variable
@@ -107,7 +106,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds (assumed)
     * @return < 0 On error.
     */
-    WaitCond :: proc(condId: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelWaitCond :: proc(condId: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Waits for a signal of a condition variable (with callbacks)
@@ -116,7 +115,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds (assumed)
     * @return < 0 On error.
     */
-    WaitCondCB :: proc(condId: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelWaitCondCB :: proc(condId: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Create an event flag.
@@ -133,7 +132,7 @@ foreign libkernel {
     * evid = sceKernelCreateEventFlag("wait_event", 0, 0, NULL)
     * @endcode
     */
-    CreateEventFlag :: proc(name: cstring, attr: c.int, bits: c.int, opt: ^SceKernelEventFlagOptParam) -> sce.UID ---
+    sceKernelCreateEventFlag :: proc(name: cstring, attr: c.int, bits: c.int, opt: ^SceKernelEventFlagOptParam) -> sce.UID ---
 
     /**
     * Poll an event flag for a given bit pattern.
@@ -144,7 +143,7 @@ foreign libkernel {
     * @param outBits - The bit pattern that was matched.
     * @return < 0 On error
     */
-    PollEventFlag :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint) -> c.int ---
+    sceKernelPollEventFlag :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint) -> c.int ---
 
     /**
     * Wait for an event flag for a given bit pattern.
@@ -156,7 +155,7 @@ foreign libkernel {
     * @param timeout  - Timeout in microseconds
     * @return < 0 On error
     */
-    WaitEventFlag :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitEventFlag :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Wait for an event flag for a given bit pattern with callback.
@@ -168,7 +167,7 @@ foreign libkernel {
     * @param timeout  - Timeout in microseconds
     * @return < 0 On error
     */
-    WaitEventFlagCB :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitEventFlagCB :: proc(evid: c.int, bits: c.uint, wait: c.uint, outBits: ^c.uint, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Get the status of an event flag.
@@ -178,20 +177,20 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    GetEventFlagInfo :: proc(event: sce.UID, info: ^SceKernelEventFlagInfo) -> c.int ---
+    sceKernelGetEventFlagInfo :: proc(event: sce.UID, info: ^SceKernelEventFlagInfo) -> c.int ---
 
-    CreateLwCond :: proc(pWork: ^SceKernelLwCondWork, pName: cstring, attr: c.uint, pLwMutex: ^SceKernelLwMutexWork, pOptParam: ^SceKernelLwCondOptParam) -> c.int ---
-    DeleteLwCond :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
-    SignalLwCond :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
-    SignalLwCondAll :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
-    SignalLwCondTo :: proc(pWork: ^SceKernelLwCondWork, threadId: sce.UID) -> c.int ---
-    WaitLwCond :: proc(pWork: ^SceKernelLwCondWork, pTimeout: ^c.uint) -> c.int ---
+    sceKernelCreateLwCond :: proc(pWork: ^SceKernelLwCondWork, pName: cstring, attr: c.uint, pLwMutex: ^SceKernelLwMutexWork, pOptParam: ^SceKernelLwCondOptParam) -> c.int ---
+    sceKernelDeleteLwCond :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
+    sceKernelSignalLwCond :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
+    sceKernelSignalLwCondAll :: proc(pWork: ^SceKernelLwCondWork) -> c.int ---
+    sceKernelSignalLwCondTo :: proc(pWork: ^SceKernelLwCondWork, threadId: sce.UID) -> c.int ---
+    sceKernelWaitLwCond :: proc(pWork: ^SceKernelLwCondWork, pTimeout: ^c.uint) -> c.int ---
 
-    CreateLwMutex :: proc(pWork: ^SceKernelLwMutexWork, pName: cstring, attr: c.uint, initCount: c.int, pOptParam: ^SceKernelLwMutexOptParam) -> c.int ---
-    DeleteLwMutex :: proc(pWork: ^SceKernelLwMutexWork) -> c.int ---
-    LockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, lockCount: c.int, pTimeout: ^c.uint) -> c.int ---
-    TryLockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, lockCount: c.int) -> c.int ---
-    UnlockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, unlockCount: c.int) -> c.int ---
+    sceKernelCreateLwMutex :: proc(pWork: ^SceKernelLwMutexWork, pName: cstring, attr: c.uint, initCount: c.int, pOptParam: ^SceKernelLwMutexOptParam) -> c.int ---
+    sceKernelDeleteLwMutex :: proc(pWork: ^SceKernelLwMutexWork) -> c.int ---
+    sceKernelLockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, lockCount: c.int, pTimeout: ^c.uint) -> c.int ---
+    sceKernelTryLockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, lockCount: c.int) -> c.int ---
+    sceKernelUnlockLwMutex :: proc(pWork: ^SceKernelLwMutexWork, unlockCount: c.int) -> c.int ---
 
     /**
     * Create a message pipe
@@ -204,7 +203,7 @@ foreign libkernel {
     *
     * @return The UID of the created pipe, < 0 on error
     */
-    CreateMsgPipe :: proc(name: cstring, type: c.int, attr: c.int, bufSize: c.uint, opt: rawptr) -> sce.UID ---
+    sceKernelCreateMsgPipe :: proc(name: cstring, type: c.int, attr: c.int, bufSize: c.uint, opt: rawptr) -> sce.UID ---
 
     /**
     * Send a message to a pipe
@@ -218,7 +217,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    SendMsgPipe :: proc(uid: sce.UID , message: rawptr, size: c.uint, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
+    sceKernelSendMsgPipe :: proc(uid: sce.UID , message: rawptr, size: c.uint, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
 
     /**
     * Send a message to a pipe (with callback)
@@ -232,7 +231,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    SendMsgPipeCB :: proc(uid: sce.UID, message: rawptr, size: c.uint, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
+    sceKernelSendMsgPipeCB :: proc(uid: sce.UID, message: rawptr, size: c.uint, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
 
     /**
     * Try to send a message to a pipe
@@ -245,7 +244,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    TrySendMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr) -> c.int ---
+    sceKernelTrySendMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr) -> c.int ---
 
     /**
     * Receive a message from a pipe
@@ -259,7 +258,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    ReceiveMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
+    sceKernelReceiveMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
 
     /**
     * Receive a message from a pipe (with callback)
@@ -273,7 +272,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    ReceiveMsgPipeCB :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
+    sceKernelReceiveMsgPipeCB :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr, timeout: ^c.uint) -> c.int ---
 
     /**
     * Receive a message from a pipe
@@ -286,7 +285,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    TryReceiveMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr) -> c.int ---
+    sceKernelTryReceiveMsgPipe :: proc(uid: sce.UID, message: rawptr, size: sce.Size, unk1: c.int, unk2: rawptr) -> c.int ---
 
 
     /**
@@ -298,7 +297,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    CancelMsgPipe :: proc(uid: sce.UID, psend: ^c.int, precv: ^c.int) -> c.int ---
+    sceKernelCancelMsgPipe :: proc(uid: sce.UID, psend: ^c.int, precv: ^c.int) -> c.int ---
 
     /**
     * Get the status of a Message Pipe
@@ -308,7 +307,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    GetMsgPipeInfo :: proc(uid: sce.UID, info: ^SceKernelMppInfo) -> c.int ---
+    sceKernelGetMsgPipeInfo :: proc(uid: sce.UID, info: ^SceKernelMppInfo) -> c.int ---
 
     /**
     * Creates a new mutex
@@ -325,7 +324,7 @@ foreign libkernel {
     * @param option - Mutex options (normally set to 0)
     * @return A mutex id
     */
-    CreateMutex :: proc(name: cstring, attr: sce.UInt, initCount: c.int, option: ^SceKernelMutexOptParam) -> sce.UID ---
+    sceKernelCreateMutex :: proc(name: cstring, attr: sce.UInt, initCount: c.int, option: ^SceKernelMutexOptParam) -> sce.UID ---
 
     /**
     * Lock a mutex
@@ -335,7 +334,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds (assumed)
     * @return < 0 On error.
     */
-    LockMutex :: proc(mutexid: sce.UID, lockCount: c.int, timeout: ^c.uint) -> c.int ---
+    sceKernelLockMutex :: proc(mutexid: sce.UID, lockCount: c.int, timeout: ^c.uint) -> c.int ---
 
     /**
     * Lock a mutex and handle callbacks if necessary.
@@ -345,7 +344,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds (assumed)
     * @return < 0 On error.
     */
-    LockMutexCB :: proc(mutexid: sce.UID, lockCount: c.int, timeout: ^c.uint) -> c.int ---
+    sceKernelLockMutexCB :: proc(mutexid: sce.UID, lockCount: c.int, timeout: ^c.uint) -> c.int ---
 
     /**
     * Cancels a mutex
@@ -355,7 +354,7 @@ foreign libkernel {
     * @param numWaitThreads - Number of threads waiting for the mutex
     * @return < 0 On error.
     */
-    CancelMutex :: proc(mutexid: sce.UID, newCount: c.int, numWaitThreads: ^c.int) -> c.int ---
+    sceKernelCancelMutex :: proc(mutexid: sce.UID, newCount: c.int, numWaitThreads: ^c.int) -> c.int ---
 
     /**
     * Retrieve information about a mutex.
@@ -365,7 +364,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    GetMutexInfo :: proc(mutexid: sce.UID, info: ^SceKernelMutexInfo) -> c.int ---
+    sceKernelGetMutexInfo :: proc(mutexid: sce.UID, info: ^SceKernelMutexInfo) -> c.int ---
 
     /**
     * Creates a new rwlock
@@ -381,7 +380,7 @@ foreign libkernel {
     * @param option - RWLock options (normally set to NULL)
     * @return RWLock id on success, < 0 on error
     */
-    CreateRWLock :: proc(name: cstring, attr: sce.UInt32, opt_param: ^SceKernelRWLockOptParam) -> sce.UID ---
+    sceKernelCreateRWLock :: proc(name: cstring, attr: sce.UInt32, opt_param: ^SceKernelRWLockOptParam) -> sce.UID ---
 
     /**
     * Lock a rwlock with read access
@@ -390,7 +389,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds, use NULL to disable it
     * @return 0 on success, < 0 on error
     */
-    LockReadRWLock :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelLockReadRWLock :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Lock a rwlock with write access
@@ -399,7 +398,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds, use NULL to disable it
     * @return 0 on success, < 0 on error
     */
-    LockWriteRWLock :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelLockWriteRWLock :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Lock a rwlock with read access and handle callbacks
@@ -408,7 +407,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds, use NULL to disable it
     * @return 0 on success, < 0 on error
     */
-    LockReadRWLockCB :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelLockReadRWLockCB :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Lock a rwlock with write access and handle callbacks
@@ -417,7 +416,7 @@ foreign libkernel {
     * @param timeout - Timeout in microseconds, use NULL to disable it
     * @return 0 on success, < 0 on error
     */
-    LockWriteRWLockCB :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
+    sceKernelLockWriteRWLockCB :: proc(rwlock_id: sce.UID, timeout: ^c.uint) -> c.int ---
 
     /**
     * Retrieve information about a rwlock.
@@ -427,7 +426,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    GetRWLockInfo :: proc(rwlock_id: sce.UID, info: ^SceKernelRWLockInfo) -> c.int ---
+    sceKernelGetRWLockInfo :: proc(rwlock_id: sce.UID, info: ^SceKernelRWLockInfo) -> c.int ---
 
     /**
     * Creates a new semaphore
@@ -445,7 +444,7 @@ foreign libkernel {
     * @param option - Sema options (normally set to 0)
     * @return A semaphore id
     */
-    CreateSema :: proc(name: cstring, attr: sce.UInt, initVal: c.int, maxVal: c.int, option: ^SceKernelSemaOptParam) -> sce.UID ---
+    sceKernelCreateSema :: proc(name: cstring, attr: sce.UInt, initVal: c.int, maxVal: c.int, option: ^SceKernelSemaOptParam) -> sce.UID ---
 
 
     /**
@@ -462,7 +461,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    WaitSema :: proc(semaid: sce.UID, signal: c.int, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitSema :: proc(semaid: sce.UID, signal: c.int, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Lock a semaphore and handle callbacks if necessary.
@@ -478,7 +477,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    WaitSemaCB :: proc(semaid: sce.UID, signal: c.int, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitSemaCB :: proc(semaid: sce.UID, signal: c.int, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Cancels a semaphore
@@ -488,7 +487,7 @@ foreign libkernel {
     * @param numWaitThreads - Number of threads waiting for the semaphore
     * @return < 0 On error.
     */
-    CancelSema :: proc(semaid: sce.UID, setCount: c.int, numWaitThreads: ^c.int) -> c.int ---
+    sceKernelCancelSema :: proc(semaid: sce.UID, setCount: c.int, numWaitThreads: ^c.int) -> c.int ---
 
     /**
     * Retrieve information about a semaphore.
@@ -498,7 +497,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    GetSemaInfo :: proc(semaid: sce.UID, info: ^SceKernelSemaInfo) -> c.int ---
+    sceKernelGetSemaInfo :: proc(semaid: sce.UID, info: ^SceKernelSemaInfo) -> c.int ---
 
     /**
     * @brief Sleep current thread and wait for a signal. After it receives a signal, the thread wakes up.
@@ -510,7 +509,7 @@ foreign libkernel {
     * @param timeout the timeout if it's null, it waits indefinitely.
     * @return 0 on success
     */
-    WaitSignal :: proc(unk0: sce.UInt32, delay: sce.UInt32, timeout: ^sce.UInt32) -> c.int ---
+    sceKernelWaitSignal :: proc(unk0: sce.UInt32, delay: sce.UInt32, timeout: ^sce.UInt32) -> c.int ---
 
     /**
     * Create a thread
@@ -541,7 +540,7 @@ foreign libkernel {
 
     * @return UID of the created thread, or an error code.
     */
-    CreateThread :: proc(name: cstring, entry: SceKernelThreadEntry, initPriority: c.int, stackSize: sce.Size, attr: sce.UInt, cpuAffinityMask: c.int, option: ^SceKernelThreadOptParam) -> sce.UID ---
+    sceKernelCreateThread :: proc(name: cstring, entry: SceKernelThreadEntry, initPriority: c.int, stackSize: sce.Size, attr: sce.UInt, cpuAffinityMask: c.int, option: ^SceKernelThreadOptParam) -> sce.UID ---
 
 
     /**
@@ -551,7 +550,7 @@ foreign libkernel {
     * @param arglen - Length of the data pointed to by argp, in bytes
     * @param argp - Pointer to the arguments.
     */
-    StartThread :: proc(thid: sce.UID, arglen: sce.Size, argp: rawptr) -> c.int ---
+    sceKernelStartThread :: proc(thid: sce.UID, arglen: sce.Size, argp: rawptr) -> c.int ---
 
 
     /**
@@ -563,7 +562,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    WaitThreadEnd :: proc(thid: sce.UID, stat: ^c.int, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitThreadEnd :: proc(thid: sce.UID, stat: ^c.int, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Wait until a thread has ended and handle callbacks if necessary.
@@ -574,7 +573,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    WaitThreadEndCB :: proc(thid: sce.UID, stat: ^c.int, timeout: ^sce.UInt) -> c.int ---
+    sceKernelWaitThreadEndCB :: proc(thid: sce.UID, stat: ^c.int, timeout: ^sce.UInt) -> c.int ---
 
     /**
     * Modify the attributes of the current thread.
@@ -584,7 +583,7 @@ foreign libkernel {
     *
     * @return < 0 on error.
     */
-    ChangeCurrentThreadAttr :: proc(clearAttr: sce.UInt, setAttr: sce.UInt) -> c.int ---
+    sceKernelChangeCurrentThreadAttr :: proc(clearAttr: sce.UInt, setAttr: sce.UInt) -> c.int ---
 
 
     /**
@@ -592,7 +591,7 @@ foreign libkernel {
     *
     * @return The current thread priority
     */
-    GetThreadCurrentPriority :: proc() -> c.int ---
+    sceKernelGetThreadCurrentPriority :: proc() -> c.int ---
 
     /**
     * Get the exit status of a thread.
@@ -601,14 +600,14 @@ foreign libkernel {
     * @param[out] status - Status out pointer
     * @return The exit status
     */
-    GetThreadExitStatus :: proc(thid: sce.UID, status: ^c.int) -> c.int ---
+    sceKernelGetThreadExitStatus :: proc(thid: sce.UID, status: ^c.int) -> c.int ---
 
     /**
     * Check the thread stack?
     *
     * @return Unknown.
     */
-    CheckThreadStack :: proc() -> c.int ---
+    sceKernelCheckThreadStack :: proc() -> c.int ---
 
 
     /**
@@ -628,7 +627,7 @@ foreign libkernel {
     * @endcode
     * @return 0 if successful, otherwise the error code.
     */
-    GetThreadInfo :: proc(thid: sce.UID, info: ^SceKernelThreadInfo) -> c.int ---
+    sceKernelGetThreadInfo :: proc(thid: sce.UID, info: ^SceKernelThreadInfo) -> c.int ---
 
     /**
     * Retrive the runtime status of a thread.
@@ -638,14 +637,14 @@ foreign libkernel {
     *
     * @return 0 if successful, otherwise the error code.
     */
-    GetThreadRunStatus :: proc(thid: sce.UID, status: ^SceKernelThreadRunStatus) -> c.int ---
+    sceKernelGetThreadRunStatus :: proc(thid: sce.UID, status: ^SceKernelThreadRunStatus) -> c.int ---
 
     /**
     * Get the current thread Id
     *
     * @return The thread id of the calling thread.
     */
-    GetThreadId :: proc() -> c.int ---
+    sceKernelGetThreadId :: proc() -> c.int ---
 
     /**
     * Get the system information
@@ -654,117 +653,117 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error
     */
-    GetSystemInfo :: proc(info: ^SceKernelSystemInfo) -> c.int ---
+    sceKernelGetSystemInfo :: proc(info: ^SceKernelSystemInfo) -> c.int ---
 
     /**
     * @brief sceKernelGetTLSAddr get pointer to TLS key area for current thread
     * @param key - the TLS keyslot index
     * @return pointer to TLS key value
     */
-    GetTLSAddr :: proc(key: c.int) -> rawptr ---
+    sceKernelGetTLSAddr :: proc(key: c.int) -> rawptr ---
 
-    AtomicSet8 :: proc(store: ^sce.Int8, value: sce.Int8) ---
-    AtomicSet16 :: proc(store: sce.Int16, value: sce.Int16) ---
-    AtomicSet32 :: proc(store: sce.Int32, value: sce.Int32) ---
-    AtomicSet64 :: proc(store: sce.Int64, value: sce.Int64) ---
+    sceKernelAtomicSet8 :: proc(store: ^sce.Int8, value: sce.Int8) ---
+    sceKernelAtomicSet16 :: proc(store: sce.Int16, value: sce.Int16) ---
+    sceKernelAtomicSet32 :: proc(store: sce.Int32, value: sce.Int32) ---
+    sceKernelAtomicSet64 :: proc(store: sce.Int64, value: sce.Int64) ---
 
-    AtomicCompareAndSet8 :: proc(store: sce.Int8, value, SceInt8, new_value: sce.Int8) -> sce.Int8 ---
-    AtomicCompareAndSet16 :: proc(store: sce.Int16, value, SceInt16, new_value: sce.Int16) -> sce.Int16 ---
-    AtomicCompareAndSet32 :: proc(store: sce.Int32, value, SceInt32, new_value: sce.Int32) -> sce.Int32 ---
-    AtomicCompareAndSet64 :: proc(store: sce.Int64, value, SceInt64, new_value: sce.Int64) -> sce.Int64 ---
-
-
-    AtomicAddAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicAddAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicAddAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicAddAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    AtomicAddUnless8 :: proc(store: sce.Int8, value: sce.Int8, cmpv: sce.Int8) -> sce.Bool ---
-    AtomicAddUnless16 :: proc(store: sce.Int16, value: sce.Int16, cmpv: sce.Int16) -> sce.Bool ---
-    AtomicAddUnless32 :: proc(store: sce.Int32, value: sce.Int32, cmpv: sce.Int32) -> sce.Bool ---
-    AtomicAddUnless64 :: proc(store: sce.Int64, value: sce.Int64, cmpv: sce.Int64) -> sce.Bool ---
-
-    AtomicSubAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicSubAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicSubAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicSubAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    AtomicAndAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicAndAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicAndAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicAndAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    AtomicOrAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicOrAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicOrAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicOrAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    AtomicXorAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicXorAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicXorAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicXorAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-    AtomicClearAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicClearAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicClearAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicClearAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicCompareAndSet8 :: proc(store: sce.Int8, value, SceInt8, new_value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicCompareAndSet16 :: proc(store: sce.Int16, value, SceInt16, new_value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicCompareAndSet32 :: proc(store: sce.Int32, value, SceInt32, new_value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicCompareAndSet64 :: proc(store: sce.Int64, value, SceInt64, new_value: sce.Int64) -> sce.Int64 ---
 
 
-    AtomicGetAndSet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndSet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndSet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndSet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAddAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicAddAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicAddAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicAddAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    AtomicGetAndAdd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndAdd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndAdd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndAdd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAddUnless8 :: proc(store: sce.Int8, value: sce.Int8, cmpv: sce.Int8) -> sce.Bool ---
+    sceKernelAtomicAddUnless16 :: proc(store: sce.Int16, value: sce.Int16, cmpv: sce.Int16) -> sce.Bool ---
+    sceKernelAtomicAddUnless32 :: proc(store: sce.Int32, value: sce.Int32, cmpv: sce.Int32) -> sce.Bool ---
+    sceKernelAtomicAddUnless64 :: proc(store: sce.Int64, value: sce.Int64, cmpv: sce.Int64) -> sce.Bool ---
 
-    AtomicGetAndSub8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndSub16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndSub32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndSub64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicSubAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicSubAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicSubAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicSubAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    AtomicGetAndAnd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndAnd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndAnd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndAnd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicAndAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicAndAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicAndAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicAndAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    AtomicGetAndOr8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndOr16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndOr32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndOr64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicOrAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicOrAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicOrAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicOrAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    AtomicGetAndXor8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndXor16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndXor32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndXor64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicXorAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicXorAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicXorAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicXorAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    AtomicGetAndClear8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
-    AtomicGetAndClear16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
-    AtomicGetAndClear32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
-    AtomicGetAndClear64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
-
-
-    AtomicClearMask8 :: proc(store: sce.Int8, value: sce.Int8) ---
-    AtomicClearMask16 :: proc(store: sce.Int16, value: sce.Int16) ---
-    AtomicClearMask32 :: proc(store: sce.Int32, value: sce.Int32) ---
-    AtomicClearMask64 :: proc(store: sce.Int64, value: sce.Int64) ---
-
-    AtomicDecIfPositive8 :: proc(store: ^sce.Int8) -> sce.Int8 ---
-    AtomicDecIfPositive16 :: proc(store: ^sce.Int16) -> sce.Int16 ---
-    AtomicDecIfPositive32 :: proc(store: ^sce.Int32) -> sce.Int32 ---
-    AtomicDecIfPositive64 :: proc(store: ^sce.Int64) -> sce.Int64 ---
+    sceKernelAtomicClearAndGet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicClearAndGet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicClearAndGet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicClearAndGet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
 
-    LoadModule :: proc(path: cstring, flags: c.int, option: ^SceKernelLMOption) -> sce.UID ---
-    UnloadModule :: proc(modid: sce.UID, flags: c.int, option: ^SceKernelULMOption) -> c.int ---
+    sceKernelAtomicGetAndSet8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndSet16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndSet32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndSet64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    StartModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: rawptr, status: ^c.int) -> c.int ---
-    StopModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: rawptr, status: ^c.int) -> c.int ---
+    sceKernelAtomicGetAndAdd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndAdd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndAdd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndAdd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
 
-    LoadStartModule :: proc(path: cstring, args: sce.Size, argp: rawptr, flags: c.int, option: ^SceKernelLMOption, status: ^c.int) -> sce.UID ---
-    StopUnloadModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: ^SceKernelULMOption, status: ^c.int) -> c.int ---
+    sceKernelAtomicGetAndSub8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndSub16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndSub32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndSub64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndAnd8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndAnd16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndAnd32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndAnd64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndOr8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndOr16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndOr32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndOr64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndXor8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndXor16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndXor32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndXor64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+    sceKernelAtomicGetAndClear8 :: proc(store: sce.Int8, value: sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicGetAndClear16 :: proc(store: sce.Int16, value: sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicGetAndClear32 :: proc(store: sce.Int32, value: sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicGetAndClear64 :: proc(store: sce.Int64, value: sce.Int64) -> sce.Int64 ---
+
+
+    sceKernelAtomicClearMask8 :: proc(store: sce.Int8, value: sce.Int8) ---
+    sceKernelAtomicClearMask16 :: proc(store: sce.Int16, value: sce.Int16) ---
+    sceKernelAtomicClearMask32 :: proc(store: sce.Int32, value: sce.Int32) ---
+    sceKernelAtomicClearMask64 :: proc(store: sce.Int64, value: sce.Int64) ---
+
+    sceKernelAtomicDecIfPositive8 :: proc(store: ^sce.Int8) -> sce.Int8 ---
+    sceKernelAtomicDecIfPositive16 :: proc(store: ^sce.Int16) -> sce.Int16 ---
+    sceKernelAtomicDecIfPositive32 :: proc(store: ^sce.Int32) -> sce.Int32 ---
+    sceKernelAtomicDecIfPositive64 :: proc(store: ^sce.Int64) -> sce.Int64 ---
+
+
+    sceKernelLoadModule :: proc(path: cstring, flags: c.int, option: ^SceKernelLMOption) -> sce.UID ---
+    sceKernelUnloadModule :: proc(modid: sce.UID, flags: c.int, option: ^SceKernelULMOption) -> c.int ---
+
+    sceKernelStartModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: rawptr, status: ^c.int) -> c.int ---
+    sceKernelStopModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: rawptr, status: ^c.int) -> c.int ---
+
+    sceKernelLoadStartModule :: proc(path: cstring, args: sce.Size, argp: rawptr, flags: c.int, option: ^SceKernelLMOption, status: ^c.int) -> sce.UID ---
+    sceKernelStopUnloadModule :: proc(modid: sce.UID, args: sce.Size, argp: rawptr, flags: c.int, option: ^SceKernelULMOption, status: ^c.int) -> c.int ---
 
     /**
     * Exit current Process with specified return code
@@ -773,7 +772,7 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error.
     */
-    ExitProcess :: proc(res: c.int) -> c.int ---
+    sceKernelExitProcess :: proc(res: c.int) -> c.int ---
 
     /**
     * Get the process time of the current process.
@@ -782,23 +781,21 @@ foreign libkernel {
     *
     * @return 0 on success, < 0 on error.
     */
-    GetProcessTime :: proc(pSysClock: ^sce.KernelSysClock) -> c.int ---
+    sceKernelGetProcessTime :: proc(pSysClock: ^sce.KernelSysClock) -> c.int ---
 
     /**
     * Get the lower 32 bits part of process time of the current process.
     *
     * @return process time of the current process
     */
-    GetProcessTimeLow :: proc() -> sce.UInt32 ---
+    sceKernelGetProcessTimeLow :: proc() -> sce.UInt32 ---
 
     /**
     * Get the process time of the current process.
     *
     * @return process time of the current process
     */
-    GetProcessTimeWide :: proc() -> sce.UInt64 ---
+    sceKernelGetProcessTimeWide :: proc() -> sce.UInt64 ---
 
-
-
-    GetOpenPsId :: proc(id: ^SceKernelOpenPsId) -> c.int ---
+    sceKernelGetOpenPsId :: proc(id: ^SceKernelOpenPsId) -> c.int ---
 }

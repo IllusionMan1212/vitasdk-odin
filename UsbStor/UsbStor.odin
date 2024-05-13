@@ -9,7 +9,6 @@ SceUsbstorVstorType :: enum c.int {
 	CDROM   = 5
 }
 
-@(link_prefix = "sceUsbstorVStor")
 foreign usbstor {
   /**
   * Set image file path
@@ -18,7 +17,7 @@ foreign usbstor {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetImgFilePath :: proc(path: cstring) -> c.int ---
+  sceUsbstorVStorSetImgFilePath :: proc(path: cstring) -> c.int ---
 
   /**
   * Set USB descriptor device information
@@ -28,7 +27,7 @@ foreign usbstor {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetDeviceInfo :: proc(name: cstring, version: cstring) -> c.int ---
+  sceUsbstorVStorSetDeviceInfo :: proc(name: cstring, version: cstring) -> c.int ---
 
   /**
   * Start USB virtual storage
@@ -37,12 +36,12 @@ foreign usbstor {
   *
   * @return 0 on success, < 0 on error.
   */
-  Start :: proc(type: SceUsbstorVstorType) -> c.int ---
+  sceUsbstorVStorStart :: proc(type: SceUsbstorVstorType) -> c.int ---
 
   /**
   * Stop USB virtual storage
   *
   * @return 0 on success, < 0 on error.
   */
-  Stop :: proc() -> c.int ---
+  sceUsbstorVStorStop :: proc() -> c.int ---
 }

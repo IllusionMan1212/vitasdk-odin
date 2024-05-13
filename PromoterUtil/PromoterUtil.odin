@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import promoterutil "system:ScePromoterUtil_stub"
 
-@(link_prefix = "scePromoterUtility")
 foreign promoterutil {
 	/**
 	* Init the promoter utility.
@@ -13,14 +12,14 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	Init :: proc() -> c.int ---
+	scePromoterUtilityInit :: proc() -> c.int ---
 
 	/**
 	* Deinit the promoter utility.
 	*
 	* @return 0 on success.
 	*/
-	Exit :: proc() -> c.int ---
+	scePromoterUtilityExit :: proc() -> c.int ---
 
 	/**
 	* Delete a package from the LiveArea.
@@ -29,7 +28,7 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	DeletePkg :: proc(titleid: cstring) -> c.int ---
+	scePromoterUtilityDeletePkg :: proc(titleid: cstring) -> c.int ---
 
 	/**
 	* Update the LiveArea resources of an app
@@ -38,7 +37,7 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	UpdateLiveArea :: proc(args: ^ScePromoterUtilityLAUpdate) -> c.int ---
+	scePromoterUtilityUpdateLiveArea :: proc(args: ^ScePromoterUtilityLAUpdate) -> c.int ---
 
 	/**
 	* Install Content Manager import contents and create bubbles without checking license files.
@@ -47,7 +46,7 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	PromoteImport :: proc(params: ^ScePromoterUtilityImportParams) -> c.int ---
+	scePromoterUtilityPromoteImport :: proc(params: ^ScePromoterUtilityImportParams) -> c.int ---
 
 	/**
 	* Install a package from a directory, and add an icon on the LiveArea.
@@ -57,7 +56,7 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	PromotePkg :: proc(path: cstring, sync: c.int) -> c.int ---
+	scePromoterUtilityPromotePkg :: proc(path: cstring, sync: c.int) -> c.int ---
 
 	/**
 	* Install a package from a directory and generate a rif.
@@ -67,7 +66,7 @@ foreign promoterutil {
 	*
 	* @return 0 on success.
 	*/
-	PromotePkgWithRif :: proc(path: cstring, sync: c.int) -> c.int ---
+	scePromoterUtilityPromotePkgWithRif :: proc(path: cstring, sync: c.int) -> c.int ---
 
 	/**
 	* Returns the state of an operation.
@@ -76,7 +75,7 @@ foreign promoterutil {
 	*
 	* @return < 0 if failed.
 	*/
-	GetState :: proc(state: ^c.int) -> c.int ---
+	scePromoterUtilityGetState :: proc(state: ^c.int) -> c.int ---
 
 	/**
 	* Returns the result of a finished operation
@@ -85,7 +84,7 @@ foreign promoterutil {
 	*
 	* @return < 0 if failed.
 	*/
-	GetResult :: proc(res: ^c.int) -> c.int ---
+	scePromoterUtilityGetResult :: proc(res: ^c.int) -> c.int ---
 
 	/**
 	* Check if titleid exists
@@ -94,5 +93,5 @@ foreign promoterutil {
 	*
 	* @return 0 if exists, < 0 otherwise.
 	*/
-	CheckExist :: proc(titleid: cstring, res: ^c.int) -> c.int ---
+	scePromoterUtilityCheckExist :: proc(titleid: cstring, res: ^c.int) -> c.int ---
 }

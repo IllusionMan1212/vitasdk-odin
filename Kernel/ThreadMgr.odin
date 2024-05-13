@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import threadmgr "system:SceKernelThreadMgr_stub"
 
-@(link_prefix = "sceKernel")
 foreign threadmgr {
     /**
     * Create callback
@@ -23,7 +22,7 @@ foreign threadmgr {
     *
     * @return >= 0 A callback id which can be used in subsequent functions, < 0 an error.
     */
-    CreateCallback :: proc(name: cstring, attr: c.uint, func: SceKernelCallbackFunction, userData: rawptr) -> c.int ---
+    sceKernelCreateCallback :: proc(name: cstring, attr: c.uint, func: SceKernelCallbackFunction, userData: rawptr) -> c.int ---
 
     /**
     * Delete a callback
@@ -32,7 +31,7 @@ foreign threadmgr {
     *
     * @return 0 on success, < 0 on error
     */
-    DeleteCallback :: proc(cb: sce.UID) -> c.int ---
+    sceKernelDeleteCallback :: proc(cb: sce.UID) -> c.int ---
 
     /**
     * Notify a callback
@@ -42,7 +41,7 @@ foreign threadmgr {
     *
     * @return 0 on success, < 0 on error
     */
-    NotifyCallback :: proc(cb: sce.UID, arg2: c.int) -> c.int ---
+    sceKernelNotifyCallback :: proc(cb: sce.UID, arg2: c.int) -> c.int ---
 
     /**
     * Cancel a callback ?
@@ -51,7 +50,7 @@ foreign threadmgr {
     *
     * @return 0 on success, < 0 on error
     */
-    CancelCallback :: proc(cb: sce.UID) -> c.int ---
+    sceKernelCancelCallback :: proc(cb: sce.UID) -> c.int ---
 
     /**
     * Get the callback count
@@ -60,14 +59,14 @@ foreign threadmgr {
     *
     * @return The callback count, < 0 on error
     */
-    GetCallbackCount :: proc(cb: sce.UID) -> c.int ---
+    sceKernelGetCallbackCount :: proc(cb: sce.UID) -> c.int ---
 
     /**
     * Check callback ?
     *
     * @return Something or another
     */
-    CheckCallback :: proc() -> c.int ---
+    sceKernelCheckCallback :: proc() -> c.int ---
 
     /**
     * Destroy a condition variable
@@ -75,7 +74,7 @@ foreign threadmgr {
     * @param condition variableid - The condition variable id returned from ::sceKernelCreateCond
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    DeleteCond :: proc(condId: sce.UID) -> c.int ---
+    sceKernelDeleteCond :: proc(condId: sce.UID) -> c.int ---
 
     /**
     * Open a condition variable
@@ -83,7 +82,7 @@ foreign threadmgr {
     * @param name - The name of the condition variable to open
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    OpenCond :: proc(name: cstring) -> c.int ---
+    sceKernelOpenCond :: proc(name: cstring) -> c.int ---
 
     /**
     * Close a condition variable
@@ -91,7 +90,7 @@ foreign threadmgr {
     * @param condition variableid - The condition variable id returned from ::sceKernelCreateCond
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    CloseCond :: proc(condId: sce.UID) -> c.int ---
+    sceKernelCloseCond :: proc(condId: sce.UID) -> c.int ---
 
     /**
     * Signals a condition variable
@@ -99,7 +98,7 @@ foreign threadmgr {
     * @param condId - The condition variable id returned from ::sceKernelCreateCond
     * @return < 0 On error.
     */
-    SignalCond :: proc(condId: sce.UID) -> c.int ---
+    sceKernelSignalCond :: proc(condId: sce.UID) -> c.int ---
 
     /**
     * Signals a condition variable to all threads waiting for it
@@ -107,7 +106,7 @@ foreign threadmgr {
     * @param condId - The condition variable id returned from ::sceKernelCreateCond
     * @return < 0 On error.
     */
-    SignalCondAll :: proc(condId: sce.UID) -> c.int ---
+    sceKernelSignalCondAll :: proc(condId: sce.UID) -> c.int ---
 
     /**
     * Signals a condition variable to a specific thread waiting for it
@@ -116,7 +115,7 @@ foreign threadmgr {
     * @param threadId - The thread id returned from ::sceKernelCreateThread
     * @return < 0 On error.
     */
-    SignalCondTo :: proc(condId: sce.UID, threadId: sce.UID) -> c.int ---
+    sceKernelSignalCondTo :: proc(condId: sce.UID, threadId: sce.UID) -> c.int ---
 
     /**
     * Set an event flag bit pattern.
@@ -126,7 +125,7 @@ foreign threadmgr {
     *
     * @return < 0 On error
     */
-    SetEventFlag :: proc(evid: sce.UID, bits: c.uint) -> c.int ---
+    sceKernelSetEventFlag :: proc(evid: sce.UID, bits: c.uint) -> c.int ---
 
     /**
     * Clear a event flag bit pattern
@@ -136,7 +135,7 @@ foreign threadmgr {
     *
     * @return < 0 on Error
     */
-    ClearEventFlag :: proc(evid: sce.UID, bits: c.uint) -> c.int ---
+    sceKernelClearEventFlag :: proc(evid: sce.UID, bits: c.uint) -> c.int ---
 
     /**
     * Delete an event flag
@@ -145,7 +144,7 @@ foreign threadmgr {
     *
     * @return < 0 On error
     */
-    DeleteEventFlag :: proc(evid: c.int) -> c.int ---
+    sceKernelDeleteEventFlag :: proc(evid: c.int) -> c.int ---
 
     /**
     * Delete a message pipe
@@ -154,7 +153,7 @@ foreign threadmgr {
     *
     * @return 0 on success, < 0 on error
     */
-    DeleteMsgPipe :: proc(uid: sce.UID) -> c.int ---
+    sceKernelDeleteMsgPipe :: proc(uid: sce.UID) -> c.int ---
 
     /**
     * Destroy a mutex
@@ -162,7 +161,7 @@ foreign threadmgr {
     * @param mutexid - The mutex id returned from ::sceKernelCreateMutex
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    DeleteMutex :: proc(mutexid: sce.UID) -> c.int ---
+    sceKernelDeleteMutex :: proc(mutexid: sce.UID) -> c.int ---
 
 
     /**
@@ -171,7 +170,7 @@ foreign threadmgr {
     * @param name - The name of the mutex to open
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    OpenMutex :: proc(name: cstring) -> c.int ---
+    sceKernelOpenMutex :: proc(name: cstring) -> c.int ---
 
     /**
     * Close a mutex
@@ -179,7 +178,7 @@ foreign threadmgr {
     * @param mutexid - The mutex id returned from ::sceKernelCreateMutex
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    CloseMutex :: proc(mutexid: sce.UID) -> c.int ---
+    sceKernelCloseMutex :: proc(mutexid: sce.UID) -> c.int ---
 
 
     /**
@@ -189,7 +188,7 @@ foreign threadmgr {
     * @param lockCount - The value to increment to the lock count of the mutex
     * @return < 0 On error.
     */
-    TryLockMutex :: proc(mutexid: sce.UID, lockCount: c.int) -> c.int ---
+    sceKernelTryLockMutex :: proc(mutexid: sce.UID, lockCount: c.int) -> c.int ---
 
     /**
     * Try to unlock a mutex (non-blocking)
@@ -198,7 +197,7 @@ foreign threadmgr {
     * @param unlockCount - The value to decrement to the lock count of the mutex
     * @return < 0 On error.
     */
-    UnlockMutex :: proc(mutexid: sce.UID, unlockCount: c.int) -> c.int ---
+    sceKernelUnlockMutex :: proc(mutexid: sce.UID, unlockCount: c.int) -> c.int ---
 
     /**
     * Destroy a rwlock
@@ -206,7 +205,7 @@ foreign threadmgr {
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    DeleteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelDeleteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
 
     /**
     * Open a rwlock
@@ -214,7 +213,7 @@ foreign threadmgr {
     * @param name - The name of the rwlock to open
     * @return RWLock id on success, < 0 on error
     */
-    OpenRWLock :: proc(name: cstring) -> sce.UID ---
+    sceKernelOpenRWLock :: proc(name: cstring) -> sce.UID ---
 
     /**
     * Close a rwlock
@@ -222,14 +221,14 @@ foreign threadmgr {
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    CloseRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelCloseRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
     /**
     * Try to lock a rwlock with read access (non-blocking)
     *
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    TryLockReadRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelTryLockReadRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
 
     /**
     * Try to lock a rwlock with write access (non-blocking)
@@ -237,7 +236,7 @@ foreign threadmgr {
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    TryLockWriteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelTryLockWriteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
 
     /**
     * Try to unlock a rwlock with read access (non-blocking)
@@ -245,7 +244,7 @@ foreign threadmgr {
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    UnlockReadRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelUnlockReadRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
 
     /**
     * Try to unlock a rwlock with write access (non-blocking)
@@ -253,7 +252,7 @@ foreign threadmgr {
     * @param rwlock_id - The rwlock id returned from ::sceKernelCreateRWLock
     * @return 0 on success, < 0 on error
     */
-    UnlockWriteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
+    sceKernelUnlockWriteRWLock :: proc(rwlock_id: sce.UID) -> c.int ---
 
     /**
     * Destroy a semaphore
@@ -261,7 +260,7 @@ foreign threadmgr {
     * @param semaid - The semaid returned from a previous create call.
     * @return Returns the value 0 if it's successful, otherwise -1
     */
-    DeleteSema :: proc(semaid: sce.UID) -> c.int ---
+    sceKernelDeleteSema :: proc(semaid: sce.UID) -> c.int ---
 
     /**
     * Send a signal to a semaphore
@@ -277,7 +276,7 @@ foreign threadmgr {
     *
     * @return < 0 On error.
     */
-    SignalSema :: proc(semaid: sce.UID, signal: c.int) -> c.int ---
+    sceKernelSignalSema :: proc(semaid: sce.UID, signal: c.int) -> c.int ---
 
     /**
     * Poll a semaphore.
@@ -287,11 +286,11 @@ foreign threadmgr {
     *
     * @return < 0 on error.
     */
-    PollSema :: proc(semaid: sce.UID, signal: c.int) -> c.int ---
+    sceKernelPollSema :: proc(semaid: sce.UID, signal: c.int) -> c.int ---
 
-    OpenSema :: proc(name: cstring) -> sce.UID ---
+    sceKernelOpenSema :: proc(name: cstring) -> sce.UID ---
 
-    CloseSema :: proc(semaid: sce.UID) -> c.int ---
+    sceKernelCloseSema :: proc(semaid: sce.UID) -> c.int ---
 
     /**
     * @brief Send a signal to the thread specified by thid. Note that it can send a signal to the current thread as well.
@@ -300,7 +299,7 @@ foreign threadmgr {
     * @return 0 on success
     * @return SCE_KERNEL_ERROR_ALREADY_SENT if the last signal was not consumed by sceKernelWaitSignal
     */
-    SendSignal :: proc(thid: sce.UID) -> c.int ---
+    sceKernelSendSignal :: proc(thid: sce.UID) -> c.int ---
 
     /**
     * Delate a thread
@@ -309,7 +308,7 @@ foreign threadmgr {
     *
     * @return < 0 on error.
     */
-    DeleteThread :: proc(thid: sce.UID) -> c.int ---
+    sceKernelDeleteThread :: proc(thid: sce.UID) -> c.int ---
 
 
     /**
@@ -317,7 +316,7 @@ foreign threadmgr {
     *
     * @param status - Exit status.
     */
-    ExitThread :: proc(status: c.int) -> c.int ---
+    sceKernelExitThread :: proc(status: c.int) -> c.int ---
 
 
     /**
@@ -325,7 +324,7 @@ foreign threadmgr {
     *
     * @param status - Exit status
     */
-    ExitDeleteThread :: proc(status: c.int) -> c.int ---
+    sceKernelExitDeleteThread :: proc(status: c.int) -> c.int ---
 
     /**
     * Delay the current thread by a specified number of microseconds
@@ -337,7 +336,7 @@ foreign threadmgr {
     * sceKernelDelayThread(1000000) // Delay for a second
     * @endcode
     */
-    DelayThread :: proc(delay: sce.UInt) -> c.int ---
+    sceKernelDelayThread :: proc(delay: sce.UInt) -> c.int ---
 
     /**
     * Delay the current thread by a specified number of microseconds and handle any callbacks.
@@ -349,7 +348,7 @@ foreign threadmgr {
     * sceKernelDelayThread(1000000) // Delay for a second
     * @endcode
     */
-    DelayThreadCB :: proc(delay: sce.UInt) -> c.int ---
+    sceKernelDelayThreadCB :: proc(delay: sce.UInt) -> c.int ---
 
     /**
     * Change the threads current priority.
@@ -366,7 +365,7 @@ foreign threadmgr {
     *
     * @return 0 if successful, otherwise the error code.
     */
-    ChangeThreadPriority :: proc(thid: sce.UID, priority: c.int) -> c.int ---
+    sceKernelChangeThreadPriority :: proc(thid: sce.UID, priority: c.int) -> c.int ---
 
 
     /**
@@ -376,7 +375,7 @@ foreign threadmgr {
     *
     * @return The free size.
     */
-    GetThreadStackFreeSize :: proc(thid: sce.UID) -> c.int ---
+    sceKernelGetThreadStackFreeSize :: proc(thid: sce.UID) -> c.int ---
 
     /**
     * Retrive the cpu affinity mask of a thread.
@@ -385,7 +384,7 @@ foreign threadmgr {
     *
     * @return current affinity mask if >= 0, otherwise the error code.
     */
-    GetThreadCpuAffinityMask :: proc(thid: sce.UID) -> c.int ---
+    sceKernelGetThreadCpuAffinityMask :: proc(thid: sce.UID) -> c.int ---
 
     /**
     * Set the cpu affinity mask of a thread.
@@ -395,14 +394,14 @@ foreign threadmgr {
     *
     * @return 0 if successful, otherwise the error code.
     */
-    ChangeThreadCpuAffinityMask :: proc(thid: sce.UID, mask: c.int) -> c.int ---
+    sceKernelChangeThreadCpuAffinityMask :: proc(thid: sce.UID, mask: c.int) -> c.int ---
 
     /**
     * Get the process ID of in the running thread.
     *
     * @return process ID of in the running thread
     */
-    GetProcessId :: proc() -> sce.UID ---
+    sceKernelGetProcessId :: proc() -> sce.UID ---
 
     /**
     * Get the type of a Threadmgr uid
@@ -411,7 +410,7 @@ foreign threadmgr {
     *
     * @return The type, < 0 on error
     */
-    GetThreadmgrUIDClass :: proc(uid: sce.UID) -> SceKernelIdListType ---
+    sceKernelGetThreadmgrUIDClass :: proc(uid: sce.UID) -> SceKernelIdListType ---
 
 
     /**
@@ -420,7 +419,7 @@ foreign threadmgr {
     * @param key - the TLS keyslot index
     * @return pointer to TLS memory
     */
-    GetThreadTLSAddr :: proc(thid: sce.UID, key: c.int) -> rawptr ---
+    sceKernelGetThreadTLSAddr :: proc(thid: sce.UID, key: c.int) -> rawptr ---
 
 
     /**
@@ -428,6 +427,5 @@ foreign threadmgr {
     *
     * @return The system time
     */
-    GetSystemTimeWide :: proc() -> sce.Int64 ---
-
+    sceKernelGetSystemTimeWide :: proc() -> sce.Int64 ---
 }

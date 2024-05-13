@@ -15,56 +15,55 @@ SceClibMspaceStats :: struct {
 }
 #assert(size_of(SceClibMspaceStats) == 0x10)
 
-@(link_prefix = "sceClib")
 foreign libkernel {
-    Abort :: proc() ---
+    sceClibAbort :: proc() ---
 
-    LookCtypeTable :: proc(ch: c.char) -> c.char ---
+    sceClibLookCtypeTable :: proc(ch: c.char) -> c.char ---
 
-    Tolower :: proc(ch: c.char) -> c.int ---
-    Toupper :: proc(ch: c.char) -> c.int ---
+    sceClibTolower :: proc(ch: c.char) -> c.int ---
+    sceClibToupper :: proc(ch: c.char) -> c.int ---
 
-    Printf :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
-    Dprintf :: proc(fd: sce.UID, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+    sceClibPrintf :: proc(fmt: cstring, #c_vararg args: ..any) -> c.int ---
+    sceClibDprintf :: proc(fd: sce.UID, fmt: cstring, #c_vararg args: ..any) -> c.int ---
 
-    Snprintf :: proc(dst: cstring, dst_max_size: sce.Size, fmt: cstring, #c_vararg args: ..any) -> c.int ---
-    Vsnprintf :: proc(dst: cstring, dst_max_size: sce.Size, fmt: cstring, args: c.va_list) -> c.int ---
+    sceClibSnprintf :: proc(dst: cstring, dst_max_size: sce.Size, fmt: cstring, #c_vararg args: ..any) -> c.int ---
+    sceClibVsnprintf :: proc(dst: cstring, dst_max_size: sce.Size, fmt: cstring, args: c.va_list) -> c.int ---
 
-    Strncpy :: proc(dst: cstring, src: cstring, len: sce.Size) -> cstring ---
-    Strncat :: proc(dst: cstring, src: cstring, len: sce.Size) -> cstring ---
+    sceClibStrncpy :: proc(dst: cstring, src: cstring, len: sce.Size) -> cstring ---
+    sceClibStrncat :: proc(dst: cstring, src: cstring, len: sce.Size) -> cstring ---
 
-    Strchr :: proc(s: cstring, ch: c.int) -> cstring ---
-    Strrchr :: proc(src: cstring, ch: c.int) -> cstring ---
-    Strstr :: proc(s1, s2: cstring) -> cstring ---
+    sceClibStrchr :: proc(s: cstring, ch: c.int) -> cstring ---
+    sceClibStrrchr :: proc(src: cstring, ch: c.int) -> cstring ---
+    sceClibStrstr :: proc(s1, s2: cstring) -> cstring ---
 
-    Strcmp :: proc(s1, s2: cstring) -> c.int ---
-    Strncmp :: proc(s1, s2: cstring, len: sce.Size) -> c.int ---
-    Strncasecmp :: proc(s1, s2: cstring, len: sce.Size) -> c.int ---
+    sceClibStrcmp :: proc(s1, s2: cstring) -> c.int ---
+    sceClibStrncmp :: proc(s1, s2: cstring, len: sce.Size) -> c.int ---
+    sceClibStrncasecmp :: proc(s1, s2: cstring, len: sce.Size) -> c.int ---
 
-    Strnlen :: proc(s1: cstring, max_len: sce.Size) -> sce.Size ---
+    sceClibStrnlen :: proc(s1: cstring, max_len: sce.Size) -> sce.Size ---
 
-    Memset :: proc(dst: rawptr, ch: c.int, len: sce.Size) -> rawptr ---
-    Memcpy :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
-    Memcpy_safe :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
-    Memmove :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
+    sceClibMemset :: proc(dst: rawptr, ch: c.int, len: sce.Size) -> rawptr ---
+    sceClibMemcpy :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
+    sceClibMemcpy_safe :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
+    sceClibMemmove :: proc(dst: rawptr, src: rawptr, len: sce.Size) -> rawptr ---
 
-    Memcmp :: proc(s1: rawptr, s2: rawptr, len: sce.Size) -> c.int ---
+    sceClibMemcmp :: proc(s1: rawptr, s2: rawptr, len: sce.Size) -> c.int ---
 
-    Memchr :: proc(src: rawptr, ch: c.int, len: sce.Size) -> rawptr ---
+    sceClibMemchr :: proc(src: rawptr, ch: c.int, len: sce.Size) -> rawptr ---
 
-    MspaceCreate :: proc(memblock: rawptr, size: sce.Size) -> SceClibMspace ---
-    MspaceDestroy :: proc(mspace: SceClibMspace) ---
+    sceClibMspaceCreate :: proc(memblock: rawptr, size: sce.Size) -> SceClibMspace ---
+    sceClibMspaceDestroy :: proc(mspace: SceClibMspace) ---
 
-    MspaceMallocUsableSize :: proc(ptr: rawptr) -> sce.Size ---
-    MspaceIsHeapEmpty :: proc(mspace: SceClibMspace) -> sce.Bool ---
+    sceClibMspaceMallocUsableSize :: proc(ptr: rawptr) -> sce.Size ---
+    sceClibMspaceIsHeapEmpty :: proc(mspace: SceClibMspace) -> sce.Bool ---
 
-    MspaceMallocStats :: proc(mspace: SceClibMspace, stats: ^SceClibMspaceStats) ---
-    MspaceMallocStatsFast :: proc(mspace: SceClibMspace, stats: ^SceClibMspaceStats) ---
+    sceClibMspaceMallocStats :: proc(mspace: SceClibMspace, stats: ^SceClibMspaceStats) ---
+    sceClibMspaceMallocStatsFast :: proc(mspace: SceClibMspace, stats: ^SceClibMspaceStats) ---
 
-    MspaceMalloc :: proc(mspace: SceClibMspace, size: sce.Size) -> rawptr ---
-    MspaceCalloc :: proc(mspace: SceClibMspace, num: sce.Size , size: sce.Size) -> rawptr ---
-    MspaceRealloc :: proc(mspace: SceClibMspace, ptr: rawptr, size: sce.Size) -> rawptr ---
-    MspaceReallocalign :: proc(mspace: SceClibMspace, ptr: rawptr, size: sce.Size, alignment: sce.Size) -> rawptr ---
-    MspaceMemalign :: proc(mspace: SceClibMspace, alignment: sce.Size, size: sce.Size) -> rawptr ---
-    MspaceFree :: proc(mspace: SceClibMspace, ptr: rawptr) ---
+    sceClibMspaceMalloc :: proc(mspace: SceClibMspace, size: sce.Size) -> rawptr ---
+    sceClibMspaceCalloc :: proc(mspace: SceClibMspace, num: sce.Size , size: sce.Size) -> rawptr ---
+    sceClibMspaceRealloc :: proc(mspace: SceClibMspace, ptr: rawptr, size: sce.Size) -> rawptr ---
+    sceClibMspaceReallocalign :: proc(mspace: SceClibMspace, ptr: rawptr, size: sce.Size, alignment: sce.Size) -> rawptr ---
+    sceClibMspaceMemalign :: proc(mspace: SceClibMspace, alignment: sce.Size, size: sce.Size) -> rawptr ---
+    sceClibMspaceFree :: proc(mspace: SceClibMspace, ptr: rawptr) ---
 }

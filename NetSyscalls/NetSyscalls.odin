@@ -6,25 +6,24 @@ foreign import net_syscalls "system:SceNetPsForSyscalls_stub"
 
 SceNetSyscallParameter :: struct{} // missing struct
 
-@(link_prefix = "sceNetSyscall")
 foreign net_syscalls {
-  Accept :: proc(s: c.int, addr: rawptr, addrlen: rawptr) -> c.int ---
-  Bind :: proc(s: c.int, addr: rawptr, addrlen: c.int) -> c.int ---
-  Close :: proc(s: c.int) -> c.int ---
-  Connect :: proc(s: c.int, name: rawptr, namelen: c.int) -> c.int ---
-  Control :: proc(if_index: c.int, code: c.int, ptr: rawptr, len: c.int) -> c.int ---
-  DescriptorClose :: proc(id: c.int) -> c.int ---
-  DescriptorCreate :: proc(name: cstring, flags: c.int) -> c.int ---
-  DescriptorCtl :: proc(id: c.int, op: c.int, s: c.int, info: rawptr) -> c.int ---
-  DumpAbort :: proc(id: c.int, flags: c.int) -> c.int ---
-  DumpClose :: proc(id: c.int) -> c.int ---
-  DumpCreate :: proc(name: cstring, len: c.int, flags: c.int) -> c.int ---
-  DumpRead :: proc(id: c.int, buf: rawptr, len: c.int, pflags: rawptr) -> c.int ---
-  EpollAbort :: proc(eid: c.int, flags: c.int) -> c.int ---
-  EpollClose :: proc(eid: c.int) -> c.int ---
-  EpollCreate :: proc(name: cstring, flags: c.int) -> c.int ---
-  EpollCtl :: proc(eid: c.int, op: c.int, id: c.int, event: rawptr) -> c.int ---
-  EpollWait :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallAccept :: proc(s: c.int, addr: rawptr, addrlen: rawptr) -> c.int ---
+  sceNetSyscallBind :: proc(s: c.int, addr: rawptr, addrlen: c.int) -> c.int ---
+  sceNetSyscallClose :: proc(s: c.int) -> c.int ---
+  sceNetSyscallConnect :: proc(s: c.int, name: rawptr, namelen: c.int) -> c.int ---
+  sceNetSyscallControl :: proc(if_index: c.int, code: c.int, ptr: rawptr, len: c.int) -> c.int ---
+  sceNetSyscallDescriptorClose :: proc(id: c.int) -> c.int ---
+  sceNetSyscallDescriptorCreate :: proc(name: cstring, flags: c.int) -> c.int ---
+  sceNetSyscallDescriptorCtl :: proc(id: c.int, op: c.int, s: c.int, info: rawptr) -> c.int ---
+  sceNetSyscallDumpAbort :: proc(id: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallDumpClose :: proc(id: c.int) -> c.int ---
+  sceNetSyscallDumpCreate :: proc(name: cstring, len: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallDumpRead :: proc(id: c.int, buf: rawptr, len: c.int, pflags: rawptr) -> c.int ---
+  sceNetSyscallEpollAbort :: proc(eid: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallEpollClose :: proc(eid: c.int) -> c.int ---
+  sceNetSyscallEpollCreate :: proc(name: cstring, flags: c.int) -> c.int ---
+  sceNetSyscallEpollCtl :: proc(eid: c.int, op: c.int, id: c.int, event: rawptr) -> c.int ---
+  sceNetSyscallEpollWait :: proc(param: ^SceNetSyscallParameter) -> c.int ---
 
   /**
   * @brief Get net if list
@@ -34,22 +33,22 @@ foreign net_syscalls {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetIfList :: proc(list: rawptr, n: c.int) -> c.int ---
+  sceNetSyscallGetIfList :: proc(list: rawptr, n: c.int) -> c.int ---
 
-  GetSockinfo :: proc(s: c.int, ptr: rawptr, n: c.int, flags: c.int) -> c.int ---
-  Getpeername :: proc(s: c.int, name: rawptr, namelen: rawptr) -> c.int ---
-  Getsockname :: proc(s: c.int, name: rawptr, namelen: rawptr) -> c.int ---
-  Getsockopt :: proc(param: ^SceNetSyscallParameter) -> c.int ---
-  IcmConnect :: proc(s: c.int, flags: c.int) -> c.int ---
-  Ioctl :: proc(s: c.int, com: c.uint, data: rawptr) -> c.int ---
-  Listen :: proc(s: c.int, backlog: c.int) -> c.int ---
-  Recvfrom :: proc(param: ^SceNetSyscallParameter) -> c.int ---
-  Recvmsg :: proc(s: c.int, msg: rawptr, flags: c.int) -> c.int ---
-  Sendmsg :: proc(s: c.int, msg: rawptr, flags: c.int) -> c.int ---
-  Sendto :: proc(param: ^SceNetSyscallParameter) -> c.int ---
-  Setsockopt :: proc(param: ^SceNetSyscallParameter) -> c.int ---
-  Shutdown :: proc(s: c.int, how: c.int) -> c.int ---
-  Socket :: proc(name: cstring, domain: c.int, type: c.int, protocol: c.int) -> c.int ---
-  SocketAbort :: proc(s: c.int, flags: c.int) -> c.int ---
-  Sysctl :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallGetSockinfo :: proc(s: c.int, ptr: rawptr, n: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallGetpeername :: proc(s: c.int, name: rawptr, namelen: rawptr) -> c.int ---
+  sceNetSyscallGetsockname :: proc(s: c.int, name: rawptr, namelen: rawptr) -> c.int ---
+  sceNetSyscallGetsockopt :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallIcmConnect :: proc(s: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallIoctl :: proc(s: c.int, com: c.uint, data: rawptr) -> c.int ---
+  sceNetSyscallListen :: proc(s: c.int, backlog: c.int) -> c.int ---
+  sceNetSyscallRecvfrom :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallRecvmsg :: proc(s: c.int, msg: rawptr, flags: c.int) -> c.int ---
+  sceNetSyscallSendmsg :: proc(s: c.int, msg: rawptr, flags: c.int) -> c.int ---
+  sceNetSyscallSendto :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallSetsockopt :: proc(param: ^SceNetSyscallParameter) -> c.int ---
+  sceNetSyscallShutdown :: proc(s: c.int, how: c.int) -> c.int ---
+  sceNetSyscallSocket :: proc(name: cstring, domain: c.int, type: c.int, protocol: c.int) -> c.int ---
+  sceNetSyscallSocketAbort :: proc(s: c.int, flags: c.int) -> c.int ---
+  sceNetSyscallSysctl :: proc(param: ^SceNetSyscallParameter) -> c.int ---
 }

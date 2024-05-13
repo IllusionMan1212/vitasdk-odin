@@ -9,21 +9,20 @@ foreign import jpegenc "system:SceJpegEnc_stub"
 foreign import jpegencarm "system:SceJpegEncArm_stub"
 foreign import jpegkern "system:SceAvcodecForDriver_stub"
 
-@(link_prefix = "sceJpeg")
 foreign jpeg {
-  InitMJpeg :: proc(decoderCount: sce.Int32) -> c.int ---
+  sceJpegInitMJpeg :: proc(decoderCount: sce.Int32) -> c.int ---
 
-  InitMJpegWithParam :: proc(params: ^SceJpegMJpegInitParam) -> c.int ---
+  sceJpegInitMJpegWithParam :: proc(params: ^SceJpegMJpegInitParam) -> c.int ---
 
-  FinishMJpeg :: proc() -> c.int ---
+  sceJpegFinishMJpeg :: proc() -> c.int ---
 
-  GetOutputInfo :: proc(jpegData: [^]sce.UInt8,
+  sceJpegGetOutputInfo :: proc(jpegData: [^]sce.UInt8,
   jpegSize: sce.Size,
   format: sce.Int32,
   mode: sce.Int32,
   output: ^SceJpegOutputInfo) -> c.int ---
 
-  DecodeMJpegYCbCr :: proc(jpegData: [^]sce.UInt8,
+  sceJpegDecodeMJpegYCbCr :: proc(jpegData: [^]sce.UInt8,
   jpegSize: sce.Size,
   mode: sce.Int32,
   output: [^]sce.UInt8,
@@ -31,7 +30,7 @@ foreign jpeg {
   buffer: rawptr,
   bufferSize: sce.Size) -> c.int ---
 
-  MJpegCsc :: proc(rgba: [^]sce.UInt8,
+  sceJpegMJpegCsc :: proc(rgba: [^]sce.UInt8,
   yuv: [^]sce.UInt8,
   yuvSize: sce.Size,
   imageWidth: sce.Int32,
@@ -63,7 +62,6 @@ foreign jpegarm {
   pOutputInfo: ^SceJpegOutputInfo) -> c.int ---
 }
 
-@(link_prefix = "sceJpegEncoder")
 foreign jpegenc {
   /**
   * Initialize a jpeg encoder
@@ -77,7 +75,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  Init :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int, pixelformat: SceJpegEncoderPixelFormat, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
+  sceJpegEncoderInit :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int, pixelformat: SceJpegEncoderPixelFormat, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
 
   /**
   * Initialize a jpeg encoder with param
@@ -86,7 +84,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  InitWithParam :: proc(_context: SceJpegEncoderContext, initParam: ^SceJpegEncoderInitParam) -> c.int ---
+  sceJpegEncoderInitWithParam :: proc(_context: SceJpegEncoderContext, initParam: ^SceJpegEncoderInitParam) -> c.int ---
 
   /**
   * Terminate a jpeg encoder
@@ -95,7 +93,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  End :: proc(_context: SceJpegEncoderContext) -> c.int ---
+  sceJpegEncoderEnd :: proc(_context: SceJpegEncoderContext) -> c.int ---
 
   /**
   * Execute a jpeg encode
@@ -105,7 +103,7 @@ foreign jpegenc {
   *
   * @return encoded jpeg size on success, < 0 on error.
   */
-  Encode :: proc(_context: SceJpegEncoderContext, inBuffer: rawptr) -> c.int ---
+  sceJpegEncoderEncode :: proc(_context: SceJpegEncoderContext, inBuffer: rawptr) -> c.int ---
 
   /**
   * Set encoder compression ratio
@@ -115,7 +113,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetCompressionRatio :: proc(_context: SceJpegEncoderContext, ratio: c.int) -> c.int ---
+  sceJpegEncoderSetCompressionRatio :: proc(_context: SceJpegEncoderContext, ratio: c.int) -> c.int ---
 
 
   /**
@@ -127,7 +125,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetOutputAddr :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
+  sceJpegEncoderSetOutputAddr :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, outSize: sce.Size) -> c.int ---
 
   /**
   * Execute a color conversion from ARGB to YCbCr
@@ -140,14 +138,14 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  Csc :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, inBuffer: rawptr, inPitch: c.int, inPixelFormat: SceJpegEncoderPixelFormat) -> c.int ---
+  sceJpegEncoderCsc :: proc(_context: SceJpegEncoderContext, outBuffer: rawptr, inBuffer: rawptr, inPitch: c.int, inPixelFormat: SceJpegEncoderPixelFormat) -> c.int ---
 
   /**
   * Return required free size to allocate a jpeg encoder
   *
   * @return Required free memory size in bytes, < 0 on error.
   */
-  GetContextSize :: proc() -> c.int ---
+  sceJpegEncoderGetContextSize :: proc() -> c.int ---
 
   /**
   * Set encoder valid region (?)
@@ -158,7 +156,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetValidRegion :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int) -> c.int ---
+  sceJpegEncoderSetValidRegion :: proc(_context: SceJpegEncoderContext, inWidth: c.int, inHeight: c.int) -> c.int ---
 
   /**
   * Set header used for output file
@@ -168,7 +166,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetHeaderMode :: proc(_context: SceJpegEncoderContext, mode: c.int) -> c.int ---
+  sceJpegEncoderSetHeaderMode :: proc(_context: SceJpegEncoderContext, mode: c.int) -> c.int ---
 }
 
 foreign jpegencarm {

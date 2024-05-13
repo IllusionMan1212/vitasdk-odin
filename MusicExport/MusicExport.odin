@@ -10,9 +10,8 @@ MusicExportParam :: struct {
 }
 #assert(size_of(MusicExportParam) == 0x80)
 
-@(link_prefix = "sceMusicExport")
 foreign musicexport {
-  FromFile :: proc(
+  sceMusicExportFromFile :: proc(
     path: cstring,
     #by_ptr param: MusicExportParam,
     workingMemory: rawptr,

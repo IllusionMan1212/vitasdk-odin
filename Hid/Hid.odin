@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import hid "system:SceHid_stub"
 
-@(link_prefix = "sceHid")
 foreign hid {
 	/**
 	* Enumerate hid keyboards.
@@ -13,8 +12,7 @@ foreign hid {
 	* @param[out]	handle	Buffer to receive keyboard hid handles.
 	* @param[int]	count   Number of keyboards to enumerate
 	*/
-	KeyboardEnumerate :: proc(handle: [^]c.int, count: c.int) -> c.int ---
-
+	sceHidKeyboardEnumerate :: proc(handle: [^]c.int, count: c.int) -> c.int ---
 
 	/**
 	* Get hid keyboard reports (blocking).
@@ -23,7 +21,7 @@ foreign hid {
 	* @param[in]	reports		Buffer to receive reports.
 	* @param[in]	nReports	Number of reports to receive.
 	*/
-	KeyboardRead :: proc(handle: sce.UInt32, reports: []^SceHidKeyboardReport, nReports: c.int) -> c.int ---
+	sceHidKeyboardRead :: proc(handle: sce.UInt32, reports: []^SceHidKeyboardReport, nReports: c.int) -> c.int ---
 
 	/**
 	* Get hid keyboard reports (non-blocking).
@@ -32,7 +30,7 @@ foreign hid {
 	* @param[in]	reports		Buffer to receive reports.
 	* @param[in]	nReports	Number of reports to receive.
 	*/
-	KeyboardPeek :: proc(handle: sce.UInt32, reports: [^]SceHidKeyboardReport, nReports: c.int) -> c.int ---
+	sceHidKeyboardPeek :: proc(handle: sce.UInt32, reports: [^]SceHidKeyboardReport, nReports: c.int) -> c.int ---
 
 	/**
 	* Enumerate hid mice.
@@ -40,7 +38,7 @@ foreign hid {
 	* @param[out]	handle	Buffer to receive mouse hid handles.
 	* @param[int]	count   Number of mice to enumerate
 	*/
-	MouseEnumerate :: proc(handle: [^]c.int, count: c.int) -> c.int ---
+	sceHidMouseEnumerate :: proc(handle: [^]c.int, count: c.int) -> c.int ---
 
 
 	/**
@@ -50,5 +48,5 @@ foreign hid {
 	* @param[in]	reports		Buffer to receive reports.
 	* @param[in]	nReports	Number of reports to receive.
 	*/
-	MouseRead :: proc(handle: sce.UInt32, reports: []^SceHidMouseReport, nReports: c.int) -> c.int ---
+	sceHidMouseRead :: proc(handle: sce.UInt32, reports: []^SceHidMouseReport, nReports: c.int) -> c.int ---
 }

@@ -18,8 +18,6 @@ sceImeParamInit :: #force_inline proc(param: ^SceImeParam) {
 	param.sdkVersion = sce.PSP2_SDK_VERSION
 }
 
-
-@(link_prefix = "sceIme")
 foreign ime {
 	sceImeDialogInit :: proc(param: ^SceImeDialogParam) -> sce.Int32 ---
 	sceImeDialogGetStatus :: proc() -> sceCommonDialog.SceCommonDialogStatus ---

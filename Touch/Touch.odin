@@ -6,7 +6,6 @@ import sce "../common"
 foreign import touch "system:SceTouch_stub"
 foreign import touchkern "system:SceTouchForDriver_stub"
 
-@(link_prefix = "sceTouch")
 foreign touch {
   /**
   * Get Touch Panel information
@@ -14,7 +13,7 @@ foreign touch {
   * @param[in]	port		Port number.
   * @param[out]	pPanelInfo	The buffer to get the Touch Panel information.
   */
-  GetPanelInfo :: proc(port: sce.UInt32, pPanelInfo: ^SceTouchPanelInfo) -> c.int ---
+  sceTouchGetPanelInfo :: proc(port: sce.UInt32, pPanelInfo: ^SceTouchPanelInfo) -> c.int ---
 
   /**
   * Get touch data (Blocking)
@@ -25,7 +24,7 @@ foreign touch {
   *
   * @return Buffers count, between 1 and 'nBufs'. <0 on error.
   */
-  Read :: proc(port: sce.UInt32, pData: ^SceTouchData, nBufs: sce.UInt32) -> c.int ---
+  sceTouchRead :: proc(port: sce.UInt32, pData: ^SceTouchData, nBufs: sce.UInt32) -> c.int ---
 
   /**
   * Get touch data (Polling)
@@ -36,7 +35,7 @@ foreign touch {
   *
   * @return Buffers count, between 1 and 'nBufs'. <0 on error.
   */
-  Peek :: proc(port: sce.UInt32, pData: ^SceTouchData, nBufs: sce.UInt32) -> c.int ---
+  sceTouchPeek :: proc(port: sce.UInt32, pData: ^SceTouchData, nBufs: sce.UInt32) -> c.int ---
 
   /**
   * Set sampling state of touch panel.
@@ -44,7 +43,7 @@ foreign touch {
   * @param[in]	port	Port number.
   * @param[in]	state	Sampling state.
   */
-  SetSamplingState :: proc(port: sce.UInt32, state: SceTouchSamplingState) -> c.int ---
+  sceTouchSetSamplingState :: proc(port: sce.UInt32, state: SceTouchSamplingState) -> c.int ---
 
   /**
   * Get sampling state of touch panel.
@@ -52,21 +51,21 @@ foreign touch {
   * @param[in]	port	Port number.
   * @param[out]	pState	The buffer to receive sampling state.
   */
-  GetSamplingState :: proc(port: sce.UInt32, pState: ^SceTouchSamplingState) -> c.int ---
+  sceTouchGetSamplingState :: proc(port: sce.UInt32, pState: ^SceTouchSamplingState) -> c.int ---
 
   /**
   * Enable touch force output.
   *
   * @param[in]	port	Port number.
   */
-  EnableTouchForce :: proc(port: sce.UInt32) -> c.int ---
+  sceTouchEnableTouchForce :: proc(port: sce.UInt32) -> c.int ---
 
   /**
   * Disable touch force output.
   *
   * @param[in]	port	Port number.
   */
-  DisableTouchForce :: proc(port: sce.UInt32) -> c.int ---
+  sceTouchDisableTouchForce :: proc(port: sce.UInt32) -> c.int ---
 }
 
 foreign touchkern {

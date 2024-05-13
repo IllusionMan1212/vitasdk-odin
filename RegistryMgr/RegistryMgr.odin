@@ -6,7 +6,6 @@ import sce "../common"
 foreign import registrymgr "system:SceRegistryMgr_stub"
 foreign import registrymgrkern "system:SceRegMgrForDriver_stub"
 
-@(link_prefix = "sceRegMgr")
 foreign registrymgr {
   /**
   * Get a key's information by category and name
@@ -18,7 +17,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetKeyBin :: proc(category: cstring, name: cstring, buf: rawptr, size: c.int) -> c.int ---
+  sceRegMgrGetKeyBin :: proc(category: cstring, name: cstring, buf: rawptr, size: c.int) -> c.int ---
 
   /**
   * Get a key's information by category and name
@@ -29,7 +28,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetKeyInt :: proc(category: cstring, name: cstring, buf: ^c.int) -> c.int ---
+  sceRegMgrGetKeyInt :: proc(category: cstring, name: cstring, buf: ^c.int) -> c.int ---
 
   /**
   * Get a key's information by category and name
@@ -41,7 +40,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetKeyStr :: proc(category: cstring, name: cstring, buf: [^]c.char, size: c.int) -> c.int ---
+  sceRegMgrGetKeyStr :: proc(category: cstring, name: cstring, buf: [^]c.char, size: c.int) -> c.int ---
 
   /**
   * Set a key's information by category and name
@@ -53,7 +52,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SetKeyBin :: proc(category: cstring, name: cstring, buf: rawptr, size: c.int) -> c.int ---
+  sceRegMgrSetKeyBin :: proc(category: cstring, name: cstring, buf: rawptr, size: c.int) -> c.int ---
 
   /**
   * Set a key's information by category and name
@@ -64,7 +63,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SetKeyInt :: proc(category: cstring, name: cstring, buf: c.int) -> c.int ---
+  sceRegMgrSetKeyInt :: proc(category: cstring, name: cstring, buf: c.int) -> c.int ---
 
   /**
   * Set a key's information by category and name
@@ -76,7 +75,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SetKeyStr :: proc(category: cstring, name: cstring, buf: [^]c.char, size: c.int) -> c.int ---
+  sceRegMgrSetKeyStr :: proc(category: cstring, name: cstring, buf: [^]c.char, size: c.int) -> c.int ---
 
   /**
   * Get all keys' initial information by category (from os0:kd/registry.db0)
@@ -87,7 +86,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetInitVals :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
+  sceRegMgrGetInitVals :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
 
   /**
   * Get all keys' information by category
@@ -98,7 +97,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetKeys :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
+  sceRegMgrGetKeys :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
 
   /**
   * Set all keys' information by category
@@ -109,7 +108,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SetKeys :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
+  sceRegMgrSetKeys :: proc(category: cstring, buf: [^]c.char, elements_number: c.int) -> c.int ---
 
   /**
   * Get a system param key's information by id
@@ -119,7 +118,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SystemParamGetInt :: proc(id: c.int, buf: ^c.int) -> c.int ---
+  sceRegMgrSystemParamGetInt :: proc(id: c.int, buf: ^c.int) -> c.int ---
 
   /**
   * Get a system param key's information by id
@@ -130,7 +129,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  SystemParamGetStr :: proc(id: c.int, buf: [^]c.char, size: c.int) -> c.int ---
+  sceRegMgrSystemParamGetStr :: proc(id: c.int, buf: [^]c.char, size: c.int) -> c.int ---
 
 
   /**
@@ -141,7 +140,7 @@ foreign registrymgr {
   *
   * @return 0 on success, < 0 on error
   */
-  GetRegVersion :: proc(version: c.int, buf: [^]c.char) -> c.int ---
+  sceRegMgrGetRegVersion :: proc(version: c.int, buf: [^]c.char) -> c.int ---
 }
 
 foreign registrymgrkern {

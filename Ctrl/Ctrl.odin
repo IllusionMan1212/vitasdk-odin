@@ -6,7 +6,6 @@ import sce "../common"
 foreign import ctrl "system:SceCtrl_stub"
 foreign import ctrlkern "system:SceCtrlForDriver_stub"
 
-@(link_prefix = "sceCtrl")
 foreign ctrl {
 	/**
 	* Set the controller mode.
@@ -275,7 +274,6 @@ foreign ctrl {
 	sceCtrlIsMultiControllerSupported :: proc() -> c.int ---
 }
 
-@(link_prefix = "ksceCtrl")
 foreign ctrlkern {
 	/**
 	* Set the controller mode.
@@ -284,7 +282,7 @@ foreign ctrlkern {
 	*
 	* @return The previous mode, <0 on error.
 	*/
-	SetSamplingMode :: proc(mode: c.int) -> c.int ---
+	ksceCtrlSetSamplingMode :: proc(mode: c.int) -> c.int ---
 
 	/**
 	* Get the current controller mode.
@@ -293,7 +291,7 @@ foreign ctrlkern {
 	*
 	* @return The current mode, <0 on error.
 	*/
-	 GetSamplingMode :: proc(pMode: ^c.int) -> c.int ---
+	ksceCtrlGetSamplingMode :: proc(pMode: ^c.int) -> c.int ---
 
 	/**
 	* Get the controller state information (polling, positive logic).
@@ -304,7 +302,7 @@ foreign ctrlkern {
 	*
 	* @return Buffers count, between 1 and 'count'. <0 on error.
 	*/
-	 PeekBufferPositive :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
+	ksceCtrlPeekBufferPositive :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
 
 	/**
 	* Get the controller state information (polling, negative logic).
@@ -315,7 +313,7 @@ foreign ctrlkern {
 	*
 	* @return Buffers count, between 1 and 'count'. <0 on error.
 	*/
-	 PeekBufferNegative :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
+	ksceCtrlPeekBufferNegative :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
 
 	/**
 	* Get the controller state information (blocking, positive logic).
@@ -326,7 +324,7 @@ foreign ctrlkern {
 	*
 	* @return Buffers count, between 1 and 'count'. <0 on error.
 	*/
-	 ReadBufferPositive :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
+	ksceCtrlReadBufferPositive :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
 
 	/**
 	* Get the controller state information (blocking, negative logic).
@@ -337,7 +335,7 @@ foreign ctrlkern {
 	*
 	* @return Buffers count, between 1 and 'count'. <0 on error.
 	*/
-	 ReadBufferNegative :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
+	ksceCtrlReadBufferNegative :: proc(port: c.int, pad_data: ^SceCtrlData, count: c.int) -> c.int ---
 
 	/**
 	* Set rules for button rapid fire
@@ -348,7 +346,7 @@ foreign ctrlkern {
 	*
 	* @return 0, <0 on error.
 	*/
-	 SetRapidFire :: proc(port: c.int, idx: c.int, #by_ptr pRule: SceCtrlRapidFireRule) -> c.int ---
+	ksceCtrlSetRapidFire :: proc(port: c.int, idx: c.int, #by_ptr pRule: SceCtrlRapidFireRule) -> c.int ---
 
 	/**
 	* Clear rules for button rapid fire
@@ -358,7 +356,7 @@ foreign ctrlkern {
 	*
 	* @return 0, <0 on error.
 	*/
-	 ClearRapidFire :: proc(port: c.int, idx: c.int) -> c.int ---
+	ksceCtrlClearRapidFire :: proc(port: c.int, idx: c.int) -> c.int ---
 
 	/**
 	* Get controller port information.
@@ -366,7 +364,7 @@ foreign ctrlkern {
 	* @param[out] info - see ::SceCtrlPortInfo
 	* @return 0, <0 on error
 	*/
-	 GetControllerPortInfo :: proc(info: ^SceCtrlPortInfo) -> c.int ---
+	ksceCtrlGetControllerPortInfo :: proc(info: ^SceCtrlPortInfo) -> c.int ---
 
 	/**
 	* Sets intercept
@@ -378,7 +376,7 @@ foreign ctrlkern {
 	*
 	* @return     0, < 0 on error
 	*/
-	 SetButtonIntercept :: proc(intercept: c.int) -> c.int ---
+	ksceCtrlSetButtonIntercept :: proc(intercept: c.int) -> c.int ---
 
 	/**
 	* Gets intercept
@@ -387,7 +385,7 @@ foreign ctrlkern {
 	*
 	* @return     0, < 0 on error
 	*/
-	 GetButtonIntercept :: proc(intercept: ^c.int) -> c.int ---
+	ksceCtrlGetButtonIntercept :: proc(intercept: ^c.int) -> c.int ---
 
 	/**
 	* Emulate buttons for the digital pad.
@@ -404,7 +402,7 @@ foreign ctrlkern {
 	*
 	* @return 0 on success.
 	*/
-	SetButtonEmulation :: proc(port: c.uint, slot: c.uchar, userButtons: c.uint, kernelButtons: c.uint, uiMake: c.uint) -> c.int ---
+	ksceCtrlSetButtonEmulation :: proc(port: c.uint, slot: c.uchar, userButtons: c.uint, kernelButtons: c.uint, uiMake: c.uint) -> c.int ---
 
 	/**
 	* Emulate values for the analog pad's X- and Y-axis.
@@ -424,7 +422,7 @@ foreign ctrlkern {
 	*
 	* @return 0 on success.
 	*/
-	SetAnalogEmulation :: proc(port: c.uint, slot: c.uchar, user_lX: c.uchar, user_lY: c.uchar, user_rX: c.uchar, user_rY: c.uchar, kernel_lX: c.uchar, kernel_lY: c.uchar, kernel_rX: c.uchar, kernel_rY: c.uchar, uiMake: c.uint) -> c.int ---
+	ksceCtrlSetAnalogEmulation :: proc(port: c.uint, slot: c.uchar, user_lX: c.uchar, user_lY: c.uchar, user_rX: c.uchar, user_rY: c.uchar, kernel_lX: c.uchar, kernel_lY: c.uchar, kernel_rX: c.uchar, kernel_rY: c.uchar, uiMake: c.uint) -> c.int ---
 
 	/**
 	* Register virtual controller driver.
@@ -435,7 +433,7 @@ foreign ctrlkern {
 	*
 	* @return 0 on success. <0 on error
 	*/
-	 RegisterVirtualControllerDriver :: proc(driver: ^SceCtrlVirtualControllerDriver) -> c.int ---
+	ksceCtrlRegisterVirtualControllerDriver :: proc(driver: ^SceCtrlVirtualControllerDriver) -> c.int ---
 
 	/**
 	* Update ctrl mask for non shell process
@@ -447,7 +445,7 @@ foreign ctrlkern {
 	*
 	* note - Some values cannot be clear/set.
 	*/
-	 UpdateMaskForNonShell :: proc(clear_mask: c.int, set_mask: c.int) -> c.int ---
+	ksceCtrlUpdateMaskForNonShell :: proc(clear_mask: c.int, set_mask: c.int) -> c.int ---
 
 	/**
 	* Update ctrl mask for all process
@@ -459,7 +457,7 @@ foreign ctrlkern {
 	*
 	* note - Some values cannot be clear/set.
 	*/
-	 UpdateMaskForAll :: proc(clear_mask: c.int, set_mask: c.int) -> c.int ---
+	ksceCtrlUpdateMaskForAll :: proc(clear_mask: c.int, set_mask: c.int) -> c.int ---
 
 	/**
 	* Get ctrl mask for non shell process
@@ -468,7 +466,7 @@ foreign ctrlkern {
 	*
 	* @return 0 on success. < 0 on error.
 	*/
-	 GetMaskForNonShell :: proc(mask: ^c.uint32_t) -> c.int ---
+	ksceCtrlGetMaskForNonShell :: proc(mask: ^c.uint32_t) -> c.int ---
 
 	/**
 	* Get ctrl mask for all process
@@ -477,5 +475,5 @@ foreign ctrlkern {
 	*
 	* @return 0 on success. < 0 on error.
 	*/
-	 GetMaskForAll :: proc(mask: ^c.uint32_t) -> c.int ---
+	ksceCtrlGetMaskForAll :: proc(mask: ^c.uint32_t) -> c.int ---
 }

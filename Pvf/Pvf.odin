@@ -5,41 +5,40 @@ import sce "../common"
 
 foreign import pvf "system:ScePvf_stub"
 
-GetCharGlyphImageClip :: GetCharGlyphImage_Clip
+scePvfGetCharGlyphImageClip :: scePvfGetCharGlyphImage_Clip
 
-@(link_prefix = "scePvf")
 foreign pvf {
-	NewLib :: proc(initParam: ^ScePvfInitRec, errorCode: ScePvfError) -> ScePvfLibId ---
-	DoneLib :: proc(libID: ScePvfLibId) -> ScePvfError ---
-	SetEM :: proc(libID: ScePvfLibId, emValue: ScePvfFloat32) -> ScePvfError ---
-	SetResolution :: proc(libID: ScePvfLibId, hResolution: ScePvfFloat32, vResolution: ScePvfFloat32) -> ScePvfError ---
-	GetNumFontList :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfInt ---
-	GetFontList :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, arraySize: ScePvfInt) -> ScePvfError ---
-	FindOptimumFont :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, errorCode: ScePvfError) -> ScePvfFontIndex ---
-	FindFont :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, errorCode: ScePvfError) -> ScePvfFontIndex ---
-	GetFontInfoByIndexNumber :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, fontIndex: ScePvfFontIndex) -> ScePvfError ---
-	Open :: proc(libID: ScePvfLibId, fontIndex: ScePvfFontIndex, mode: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenUserFile :: proc(libID: ScePvfLibId, filename: ScePvfPointer, mode: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenUserFileWithSubfontIndex :: proc(libID: ScePvfLibId, filename: ScePvfPointer, mode: ScePvfU32, subFontIndex: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenUserMemory :: proc(libID: ScePvfLibId, addr: ScePvfPointer, size: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenUserMemoryWithSubfontIndex :: proc(libID: ScePvfLibId, addr: ScePvfPointer, size: ScePvfU32, subFontIndex: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenDefaultJapaneseFontOnSharedMemory :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfFontId ---
-	OpenDefaultLatinFontOnSharedMemory :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfFontId ---
-	Close :: proc(fontID: ScePvfFontId) -> ScePvfError ---
-	Flush :: proc(fontID: ScePvfFontId) -> ScePvfError ---
-	SetCharSize :: proc(fontID: ScePvfFontId, hSize: ScePvfFloat32, vSize: ScePvfFloat32) -> ScePvfError ---
-	SetEmboldenRate :: proc(fontID: ScePvfFontId, emboldenRate: ScePvfFloat32) -> ScePvfError ---
-	SetSkewValue :: proc(fontID: ScePvfFontId, angleX: ScePvfFloat32, angleY: ScePvfFloat32) -> ScePvfError ---
-	IsElement :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode) -> ScePvfBool ---
-	GetFontInfo :: proc(fontID: ScePvfFontId, fontInfo: ^ScePvfFontInfo) -> ScePvfError ---
-	GetCharInfo :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, charInfo: ^ScePvfCharInfo) -> ScePvfError ---
-	GetKerningInfo :: proc(fontID: ScePvfFontId, leftCharCode: ScePvfCharCode, rightCharCode: ScePvfCharCode, pKerningInfo: ^ScePvfKerningInfo) -> ScePvfError ---
-	GetCharImageRect :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, rect: ^ScePvfIrect) -> ScePvfError ---
-	GetCharGlyphImage :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, imageBuffer: ^ScePvfUserImageBufferRec) -> ScePvfError ---
-	GetCharGlyphImage_Clip :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, imageBuffer: ^ScePvfUserImageBufferRec, clipX: ScePvfS32, clipY: ScePvfS32, clipWidth: ScePvfU32, clipHeight: ScePvfU32) -> ScePvfError ---
-	PixelToPointH :: proc(libID: ScePvfLibId, pixel: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
-	PixelToPointV :: proc(libID: ScePvfLibId, pixel: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
-	PointToPixelH :: proc(libID: ScePvfLibId, point: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
-	PointToPixelV :: proc(libID: ScePvfLibId, point: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
-	SetAltCharacterCode :: proc(libID: ScePvfLibId, charCode: ScePvfCharCode) -> ScePvfError ---
+	scePvfNewLib :: proc(initParam: ^ScePvfInitRec, errorCode: ScePvfError) -> ScePvfLibId ---
+	scePvfDoneLib :: proc(libID: ScePvfLibId) -> ScePvfError ---
+	scePvfSetEM :: proc(libID: ScePvfLibId, emValue: ScePvfFloat32) -> ScePvfError ---
+	scePvfSetResolution :: proc(libID: ScePvfLibId, hResolution: ScePvfFloat32, vResolution: ScePvfFloat32) -> ScePvfError ---
+	scePvfGetNumFontList :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfInt ---
+	scePvfGetFontList :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, arraySize: ScePvfInt) -> ScePvfError ---
+	scePvfFindOptimumFont :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, errorCode: ScePvfError) -> ScePvfFontIndex ---
+	scePvfFindFont :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, errorCode: ScePvfError) -> ScePvfFontIndex ---
+	scePvfGetFontInfoByIndexNumber :: proc(libID: ScePvfLibId, fontStyleInfo: ^ScePvfFontStyleInfo, fontIndex: ScePvfFontIndex) -> ScePvfError ---
+	scePvfOpen :: proc(libID: ScePvfLibId, fontIndex: ScePvfFontIndex, mode: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenUserFile :: proc(libID: ScePvfLibId, filename: ScePvfPointer, mode: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenUserFileWithSubfontIndex :: proc(libID: ScePvfLibId, filename: ScePvfPointer, mode: ScePvfU32, subFontIndex: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenUserMemory :: proc(libID: ScePvfLibId, addr: ScePvfPointer, size: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenUserMemoryWithSubfontIndex :: proc(libID: ScePvfLibId, addr: ScePvfPointer, size: ScePvfU32, subFontIndex: ScePvfU32, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenDefaultJapaneseFontOnSharedMemory :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfOpenDefaultLatinFontOnSharedMemory :: proc(libID: ScePvfLibId, errorCode: ScePvfError) -> ScePvfFontId ---
+	scePvfClose :: proc(fontID: ScePvfFontId) -> ScePvfError ---
+	scePvfFlush :: proc(fontID: ScePvfFontId) -> ScePvfError ---
+	scePvfSetCharSize :: proc(fontID: ScePvfFontId, hSize: ScePvfFloat32, vSize: ScePvfFloat32) -> ScePvfError ---
+	scePvfSetEmboldenRate :: proc(fontID: ScePvfFontId, emboldenRate: ScePvfFloat32) -> ScePvfError ---
+	scePvfSetSkewValue :: proc(fontID: ScePvfFontId, angleX: ScePvfFloat32, angleY: ScePvfFloat32) -> ScePvfError ---
+	scePvfIsElement :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode) -> ScePvfBool ---
+	scePvfGetFontInfo :: proc(fontID: ScePvfFontId, fontInfo: ^ScePvfFontInfo) -> ScePvfError ---
+	scePvfGetCharInfo :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, charInfo: ^ScePvfCharInfo) -> ScePvfError ---
+	scePvfGetKerningInfo :: proc(fontID: ScePvfFontId, leftCharCode: ScePvfCharCode, rightCharCode: ScePvfCharCode, pKerningInfo: ^ScePvfKerningInfo) -> ScePvfError ---
+	scePvfGetCharImageRect :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, rect: ^ScePvfIrect) -> ScePvfError ---
+	scePvfGetCharGlyphImage :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, imageBuffer: ^ScePvfUserImageBufferRec) -> ScePvfError ---
+	scePvfGetCharGlyphImage_Clip :: proc(fontID: ScePvfFontId, charCode: ScePvfCharCode, imageBuffer: ^ScePvfUserImageBufferRec, clipX: ScePvfS32, clipY: ScePvfS32, clipWidth: ScePvfU32, clipHeight: ScePvfU32) -> ScePvfError ---
+	scePvfPixelToPointH :: proc(libID: ScePvfLibId, pixel: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
+	scePvfPixelToPointV :: proc(libID: ScePvfLibId, pixel: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
+	scePvfPointToPixelH :: proc(libID: ScePvfLibId, point: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
+	scePvfPointToPixelV :: proc(libID: ScePvfLibId, point: ScePvfFloat32, errorCode: ScePvfError) -> ScePvfFloat32 ---
+	scePvfSetAltCharacterCode :: proc(libID: ScePvfLibId, charCode: ScePvfCharCode) -> ScePvfError ---
 }

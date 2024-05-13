@@ -16,7 +16,6 @@ VideoExportOutputParam :: struct {
 }
 #assert(size_of(VideoExportOutputParam) == 0x408)
 
-@(link_prefix = "sceVideoExport")
 foreign videoexport {
   /**
   * Export video file
@@ -32,7 +31,7 @@ foreign videoexport {
   *
   * @return 0 on success, < 0 on error.
   */
-  FromFile :: proc(
+  sceVideoExportFromFile :: proc(
     #by_ptr in_param: VideoExportInputParam,
     unk: c.int,
     workingMemory: rawptr,

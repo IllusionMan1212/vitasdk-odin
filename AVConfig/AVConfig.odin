@@ -10,7 +10,6 @@ SceAVConfigColorSpaceMode :: enum c.int {
 	HIGH_CONTRAST     = 1  //!< High Contrast Mode
 }
 
-@(link_prefix = "sceAVConfig")
 foreign avconfig {
   /**
   * Get the maximum brightness.
@@ -19,7 +18,7 @@ foreign avconfig {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetDisplayMaxBrightness :: proc(maxBrightness: ^c.int) -> c.int ---
+  sceAVConfigGetDisplayMaxBrightness :: proc(maxBrightness: ^c.int) -> c.int ---
 
   /**
   * Set the screen brightness.
@@ -28,7 +27,7 @@ foreign avconfig {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetDisplayBrightness :: proc(brightness: c.int) -> c.int ---
+  sceAVConfigSetDisplayBrightness :: proc(brightness: c.int) -> c.int ---
 
   /**
   * Get the shutter volume.
@@ -37,7 +36,7 @@ foreign avconfig {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetShutterVol :: proc(volume: ^c.int) -> c.int ---
+  sceAVConfigGetShutterVol :: proc(volume: ^c.int) -> c.int ---
 
   /**
   * Get the system volume.
@@ -46,7 +45,7 @@ foreign avconfig {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetSystemVol :: proc(volume: ^c.int) -> c.int ---
+  sceAVConfigGetSystemVol :: proc(volume: ^c.int) -> c.int ---
 
   /**
   * Set the system volume.
@@ -55,7 +54,7 @@ foreign avconfig {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetSystemVol :: proc(volume: c.int) -> c.int ---
+  sceAVConfigSetSystemVol :: proc(volume: c.int) -> c.int ---
 
   /**
   * Turns on mute.
@@ -63,7 +62,7 @@ foreign avconfig {
   * @return 0 on success, < 0 on error.
   *
   */
-  MuteOn :: proc() -> c.int ---
+  sceAVConfigMuteOn :: proc() -> c.int ---
 
   /**
   * Sets the color space mode on runtime.
@@ -73,5 +72,5 @@ foreign avconfig {
   * @return 0 on success, < 0 on error.
   * @note - This does not change color_space_mode in the registry.
   */
-  SetDisplayColorSpaceMode :: proc(csm: c.int) -> c.int ---
+  sceAVConfigSetDisplayColorSpaceMode :: proc(csm: c.int) -> c.int ---
 }

@@ -7,7 +7,6 @@ import "base:intrinsics"
 foreign import dmac "system:SceKernelDmacMgr_stub"
 foreign import dmac5 "system:SceSblSsMgr_stub"
 
-@(link_prefix = "sceDmac")
 foreign dmac {
   /**
   * DMA memcpy
@@ -18,7 +17,7 @@ foreign dmac {
   *
   * @return < 0 on error.
   */
-  Memcpy :: proc(dst: rawptr, src: rawptr, size: sce.Size) -> c.int ---
+  sceDmacMemcpy :: proc(dst: rawptr, src: rawptr, size: sce.Size) -> c.int ---
 
   /**
   * DMA memset
@@ -29,13 +28,13 @@ foreign dmac {
   *
   * @return < 0 on error.
   */
-  Memset :: proc(dst: rawptr, ch: c.int, size: sce.Size) -> c.int ---
+  sceDmacMemset :: proc(dst: rawptr, ch: c.int, size: sce.Size) -> c.int ---
 }
 
 AesCbcEnc :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key: rawptr, keysize: sce.Size, iv: rawptr) -> c.int {
 	param := SceSblDmac5EncDecParam{src = src, dst = dst, length = length, key = key, keysize = keysize, iv = iv}
 
-	return EncDec(
+	return sceSblDmac5EncDec(
 		&param,
 		1 | 8 | (((auto_cast keysize << 2) - 0x100) & 0x300)
 	)
@@ -44,7 +43,7 @@ AesCbcEnc :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key:
 AesCbcDec :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key: rawptr, keysize: sce.Size, iv: rawptr) -> c.int {
 	param := SceSblDmac5EncDecParam{src = src, dst = dst, length = length, key = key, keysize = keysize, iv = iv}
 
-	return EncDec(
+	return sceSblDmac5EncDec(
 		&param,
 		2 | 8 | (((auto_cast keysize << 2) - 0x100) & 0x300)
 	)
@@ -53,7 +52,7 @@ AesCbcDec :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key:
 AesCtrEnc :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key: rawptr, keysize: sce.Size, iv: rawptr) -> c.int {
 	param := SceSblDmac5EncDecParam{src = src, dst = dst, length = length, key = key, keysize = keysize, iv = iv}
 
-	return EncDec(
+	return sceSblDmac5EncDec(
 		&param,
 		1 | 0x20 | (((auto_cast keysize << 2) - 0x100) & 0x300)
 	)
@@ -62,7 +61,7 @@ AesCtrEnc :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key:
 AesCtrDec :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size, key: rawptr, keysize: sce.Size, iv: rawptr) -> c.int {
 	param := SceSblDmac5EncDecParam{src = src, dst = dst, length = length, key = key, keysize = keysize, iv = iv}
 
-	return EncDec(
+	return sceSblDmac5EncDec(
 		&param,
 		2 | 0x20 | (((auto_cast keysize << 2) - 0x100) & 0x300)
 	)
@@ -82,13 +81,12 @@ Sha256Digest :: #force_inline proc(src: rawptr, dst: rawptr, length: sce.Size) -
 	ctx.state[7] = auto_cast intrinsics.byte_swap(u32(0x5be0cd19))
 	ctx.length = 0
 
-	return HashTransform(
+	return sceSblDmac5HashTransform(
 		&param,
 		3 | 0x10, 0x800
 	)
 }
 
-@(link_prefix = "sceSblDmac5")
 foreign dmac5 {
   /**
   * @brief Execute DMAC5 encdec command
@@ -98,7 +96,7 @@ foreign dmac5 {
   *
   * @return 0 on success, else < 0.
   */
-  EncDec :: proc(param: ^SceSblDmac5EncDecParam, command: sce.UInt32) -> c.int ---
+  sceSblDmac5EncDec :: proc(param: ^SceSblDmac5EncDecParam, command: sce.UInt32) -> c.int ---
 
 
   /**
@@ -110,5 +108,5 @@ foreign dmac5 {
   *
   * @return 0 on success, else < 0.
   */
-  HashTransform :: proc(param: ^SceSblDmac5HashTransformParam, command: sce.UInt32, extra: sce.UInt32) -> c.int ---
+  sceSblDmac5HashTransform :: proc(param: ^SceSblDmac5HashTransformParam, command: sce.UInt32, extra: sce.UInt32) -> c.int ---
 }

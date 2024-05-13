@@ -5,42 +5,41 @@ import sce "../common"
 
 foreign import avplayer "system:SceAvPlayer_stub"
 
-@(link_prefix = "sceAvPlayer")
 foreign avplayer {
 	/**
 	* @param[in] data - Init data for the video player
 	*
 	* @return The video player handle on success, < 0 on error.
 	*/
-	Init :: proc(data: ^SceAvPlayerInitData) -> SceAvPlayerHandle ---
+	sceAvPlayerInit :: proc(data: ^SceAvPlayerInitData) -> SceAvPlayerHandle ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	Pause :: proc(handle: SceAvPlayerHandle) -> c.int ---
+	sceAvPlayerPause :: proc(handle: SceAvPlayerHandle) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	Resume :: proc(handle: SceAvPlayerHandle) -> c.int ---
+	sceAvPlayerResume :: proc(handle: SceAvPlayerHandle) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	Start :: proc(handle: SceAvPlayerHandle) -> c.int ---
+	sceAvPlayerStart :: proc(handle: SceAvPlayerHandle) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	Stop :: proc(handle: SceAvPlayerHandle) -> c.int ---
+	sceAvPlayerStop :: proc(handle: SceAvPlayerHandle) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -48,14 +47,14 @@ foreign avplayer {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	SetLooping :: proc(handle: SceAvPlayerHandle, looping: sce.Bool) -> c.int ---
+	sceAvPlayerSetLooping :: proc(handle: SceAvPlayerHandle, looping: sce.Bool) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return SCE_TRUE if the video playback is active, SCE_FALSE otherwise.
 	*/
-	IsActive :: proc(handle: SceAvPlayerHandle) -> sce.Bool ---
+	sceAvPlayerIsActive :: proc(handle: SceAvPlayerHandle) -> sce.Bool ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -63,14 +62,14 @@ foreign avplayer {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	AddSource :: proc(handle: SceAvPlayerHandle, filename: cstring) -> c.int ---
+	sceAvPlayerAddSource :: proc(handle: SceAvPlayerHandle, filename: cstring) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	Close :: proc(handle: SceAvPlayerHandle) -> c.int ---
+	sceAvPlayerClose :: proc(handle: SceAvPlayerHandle) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -78,7 +77,7 @@ foreign avplayer {
 	*
 	* @return SCE_TRUE if new data is available, SCE_FALSE otherwise.
 	*/
-	GetAudioData :: proc(handle: SceAvPlayerHandle, info: ^SceAvPlayerFrameInfo) -> sce.Bool ---
+	sceAvPlayerGetAudioData :: proc(handle: SceAvPlayerHandle, info: ^SceAvPlayerFrameInfo) -> sce.Bool ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -86,14 +85,14 @@ foreign avplayer {
 	*
 	* @return SCE_TRUE if new data is available, SCE_FALSE otherwise.
 	*/
-	GetVideoData :: proc(handle: SceAvPlayerHandle, info: ^SceAvPlayerFrameInfo) -> sce.Bool ---
+	sceAvPlayerGetVideoData :: proc(handle: SceAvPlayerHandle, info: ^SceAvPlayerFrameInfo) -> sce.Bool ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
 	*
 	* @return Current time on the video playback in milliseconds.
 	*/
-	CurrentTime :: proc(handle: SceAvPlayerHandle) -> c.uint64_t ---
+	sceAvPlayerCurrentTime :: proc(handle: SceAvPlayerHandle) -> c.uint64_t ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -101,7 +100,7 @@ foreign avplayer {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	JumpToTime :: proc(handle: SceAvPlayerHandle, offset: c.uint64_t) -> c.int ---
+	sceAvPlayerJumpToTime :: proc(handle: SceAvPlayerHandle, offset: c.uint64_t) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -109,7 +108,7 @@ foreign avplayer {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	SetTrickSpeed :: proc(handle: SceAvPlayerHandle, speed: c.int) -> c.int ---
+	sceAvPlayerSetTrickSpeed :: proc(handle: SceAvPlayerHandle, speed: c.int) -> c.int ---
 
 	/**
 	* @param[in] handle - A player handle created with ::sceAvPlayerInit
@@ -118,5 +117,5 @@ foreign avplayer {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	GetStreamInfo :: proc(handle: SceAvPlayerHandle, id: c.uint32_t, info: ^SceAvPlayerStreamInfo) -> c.int ---
+	sceAvPlayerGetStreamInfo :: proc(handle: SceAvPlayerHandle, id: c.uint32_t, info: ^SceAvPlayerStreamInfo) -> c.int ---
 }

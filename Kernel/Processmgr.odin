@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import processmgr "system:SceProcessmgr_stub"
 
-@(link_prefix = "sceKernel")
 foreign processmgr {
     /**
     * Cancel specified idle timers to prevent entering in power save processing.
@@ -14,7 +13,7 @@ foreign processmgr {
     *
     * @return 0
     */
-    PowerTick :: proc(type: SceKernelPowerTickType) -> c.int ---
+    sceKernelPowerTick :: proc(type: SceKernelPowerTickType) -> c.int ---
 
     /**
     * Locks certain timers from triggering.
@@ -23,7 +22,7 @@ foreign processmgr {
     *
     * @return 0
     */
-    PowerLock :: proc(type: SceKernelPowerTickType) -> c.int ---
+    sceKernelPowerLock :: proc(type: SceKernelPowerTickType) -> c.int ---
 
     /**
     * Unlocks certain timers.
@@ -32,19 +31,19 @@ foreign processmgr {
     *
     * @return 0
     */
-    PowerUnlock :: proc(type: SceKernelPowerTickType) -> c.int ---
+    sceKernelPowerUnlock :: proc(type: SceKernelPowerTickType) -> c.int ---
 
-    GetCurrentProcess :: proc() -> sce.UID ---
-    GetRemoteProcessTime :: proc(processId: sce.UID, pClock: ^sce.KernelSysClock) -> sce.Int32 ---
+    sceKernelGetCurrentProcess :: proc() -> sce.UID ---
+    sceKernelGetRemoteProcessTime :: proc(processId: sce.UID, pClock: ^sce.KernelSysClock) -> sce.Int32 ---
 
-    GetStderr :: proc() -> sce.UID ---
-    GetStdin :: proc() -> sce.UID ---
-    GetStdout :: proc() -> sce.UID ---
+    sceKernelGetStderr :: proc() -> sce.UID ---
+    sceKernelGetStdin :: proc() -> sce.UID ---
+    sceKernelGetStdout :: proc() -> sce.UID ---
 
-    GetProcessParam :: proc() -> rawptr ---
+    sceKernelGetProcessParam :: proc() -> rawptr ---
 
-    LibcClock :: proc() -> SceKernelClock ---
-    LibcTime :: proc(tloc: ^SceKernelTime) -> SceKernelTime ---
+    sceKernelLibcClock :: proc() -> SceKernelClock ---
+    sceKernelLibcTime :: proc(tloc: ^SceKernelTime) -> SceKernelTime ---
 
-    LibcGettimeofday :: proc(tv: ^SceKernelTimeval, tz: ^SceKernelTimezone) -> c.int ---
+    sceKernelLibcGettimeofday :: proc(tv: ^SceKernelTimeval, tz: ^SceKernelTimezone) -> c.int ---
 }

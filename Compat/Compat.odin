@@ -38,8 +38,6 @@ SceCtrlDataPsp :: struct {
 }
 #assert(size_of(SceCtrlDataPsp) == 0x10)
 
-
-@(link_prefix = "sceCompat")
 foreign compat {
   /**
   * Init compat
@@ -48,28 +46,28 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  InitEx :: proc(unk: c.int) -> c.int ---
+  sceCompatInitEx :: proc(unk: c.int) -> c.int ---
 
   /**
   * Uninit compat
   *
   * @return 0 on success, < 0 on error.
   */
-  Uninit :: proc() -> c.int ---
+  sceCompatUninit :: proc() -> c.int ---
 
   /**
   * Start compat
   *
   * @return 0 on success, < 0 on error.
   */
-  Start :: proc() -> c.int ---
+  sceCompatStart :: proc() -> c.int ---
 
   /**
   * Stop compat
   *
   * @return 0 on success, < 0 on error.
   */
-  Stop :: proc() -> c.int ---
+  sceCompatStop :: proc() -> c.int ---
 
   /**
   * Allocate cdram with hole
@@ -78,7 +76,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  AllocCdramWithHole :: proc(cdram: ^SceCompatCdram) -> c.int ---
+  sceCompatAllocCdramWithHole :: proc(cdram: ^SceCompatCdram) -> c.int ---
 
   /**
   * Framebuffer init
@@ -87,7 +85,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  FrameBufferInit :: proc(framebuffer: rawptr) -> c.int ---
+  sceCompatFrameBufferInit :: proc(framebuffer: rawptr) -> c.int ---
 
   /**
   * Set suspend semaphores
@@ -97,7 +95,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetSuspendSema :: proc(semaid1: sce.UID, semaid2: sce.UID) -> c.int ---
+  sceCompatSetSuspendSema :: proc(semaid1: sce.UID, semaid2: sce.UID) -> c.int ---
 
   /**
   * Suspend/resume compat
@@ -106,7 +104,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  SuspendResume :: proc(unk: c.int) -> c.int ---
+  sceCompatSuspendResume :: proc(unk: c.int) -> c.int ---
 
   /**
   * Cache operation
@@ -117,7 +115,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  Cache :: proc(mode: SceCompatCacheMode, addr: rawptr, size: sce.Size) -> c.int ---
+  sceCompatCache :: proc(mode: SceCompatCacheMode, addr: rawptr, size: sce.Size) -> c.int ---
 
   /**
   * Wait for special request
@@ -126,7 +124,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  WaitSpecialRequest :: proc(unk: c.int) -> c.int ---
+  sceCompatWaitSpecialRequest :: proc(unk: c.int) -> c.int ---
 
   /**
   * Interrupt code
@@ -135,21 +133,21 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  Interrupt :: proc(intr_code: c.int) -> c.int ---
+  sceCompatInterrupt :: proc(intr_code: c.int) -> c.int ---
 
   /**
   * LCDC sync
   *
   * @return 0 on success, < 0 on error.
   */
-  LCDCSync :: proc() -> c.int ---
+  sceCompatLCDCSync :: proc() -> c.int ---
 
   /**
   * Get primary head
   *
   * @return 0 on success, < 0 on error.
   */
-  GetPrimaryHead :: proc() -> c.int ---
+  sceCompatGetPrimaryHead :: proc() -> c.int ---
 
   /**
   * Get peripheral state
@@ -158,21 +156,21 @@ foreign compat {
   *
   * @return state on success, < 0 on error.
   */
-  GetPeripheralState :: proc(mode: SceCompatPeripheralMode) -> c.int ---
+  sceCompatGetPeripheralState :: proc(mode: SceCompatPeripheralMode) -> c.int ---
 
   /**
   * Get compat status
   *
   * @return status on success, < 0 on error.
   */
-  GetStatus :: proc() -> c.int ---
+  sceCompatGetStatus :: proc() -> c.int ---
 
   /**
   * Get update state
   *
   * @return state on success, < 0 on error.
   */
-  GetUpdateState :: proc() -> c.int ---
+  sceCompatGetUpdateState :: proc() -> c.int ---
 
   /**
   * Set update state
@@ -181,7 +179,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetUpdateState :: proc(state: c.int) -> c.int ---
+  sceCompatSetUpdateState :: proc(state: c.int) -> c.int ---
 
   /**
   * Set display config
@@ -191,7 +189,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetDisplayConfig :: proc(unk0: c.int, unk1: c.int) -> c.int ---
+  sceCompatSetDisplayConfig :: proc(unk0: c.int, unk1: c.int) -> c.int ---
 
   /**
   * Set RIF name
@@ -200,35 +198,35 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  SetRif :: proc(rif: cstring) -> c.int ---
+  sceCompatSetRif :: proc(rif: cstring) -> c.int ---
 
   /**
   * Get PSP system software version
   *
   * @return version on success, < 0 on error.
   */
-  GetPspSystemSoftwareVersion :: proc() -> c.int ---
+  sceCompatGetPspSystemSoftwareVersion :: proc() -> c.int ---
 
   /**
   * Get color space setting availability
   *
   * @return 1 if true, 0 if false, < 0 on error.
   */
-  AvailableColorSpaceSetting :: proc() -> c.int ---
+  sceCompatAvailableColorSpaceSetting :: proc() -> c.int ---
 
   /**
   * Check if pocket station application is available
   *
   * @return 1 if true, 0 if false, < 0 on error.
   */
-  CheckPocketStation :: proc() -> c.int ---
+  sceCompatCheckPocketStation :: proc() -> c.int ---
 
   /**
   * Check if current title is a pocket station game
   *
   * @return 1 if true, 0 if false, < 0 on error.
   */
-  IsPocketStationTitle :: proc() -> c.int ---
+  sceCompatIsPocketStationTitle :: proc() -> c.int ---
 
   /**
   * Wait for command and get request
@@ -238,7 +236,7 @@ foreign compat {
   *
   * @return pointer to request in PspEmu RAM on success, < 0 on error.
   */
-  WaitAndGetRequest :: proc(mode: c.int, id: c.int) -> c.int ---
+  sceCompatWaitAndGetRequest :: proc(mode: c.int, id: c.int) -> c.int ---
 
   /**
   * Read from shared sram
@@ -248,7 +246,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  ReadShared32 :: proc(location: c.int, value: ^c.int) -> c.int ---
+  sceCompatReadShared32 :: proc(location: c.int, value: ^c.int) -> c.int ---
 
   /**
   * Write to shared sram
@@ -258,7 +256,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  WriteShared32 :: proc(location: c.int, value: c.int) -> c.int ---
+  sceCompatWriteShared32 :: proc(location: c.int, value: c.int) -> c.int ---
 
   /**
   * Write shared control
@@ -267,7 +265,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  WriteSharedCtrl :: proc(pad_data: ^SceCtrlDataPsp) -> c.int ---
+  sceCompatWriteSharedCtrl :: proc(pad_data: ^SceCtrlDataPsp) -> c.int ---
 
   /**
   * Get title list
@@ -277,7 +275,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetTitleList :: proc(buf: rawptr, length: sce.Size) -> c.int ---
+  sceCompatGetTitleList :: proc(buf: rawptr, length: sce.Size) -> c.int ---
 
   /**
   * Get Memory Card device information
@@ -286,7 +284,7 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetDevInf :: proc(info: ^sceIo.SceIoDevInfo) -> c.int ---
+  sceCompatGetDevInf :: proc(info: ^sceIo.SceIoDevInfo) -> c.int ---
 
   /**
   * Get current secure tick
@@ -295,5 +293,5 @@ foreign compat {
   *
   * @return 0 on success, < 0 on error.
   */
-  GetCurrentSecureTick :: proc(tick: ^sce.RtcTick) -> c.int ---
+  sceCompatGetCurrentSecureTick :: proc(tick: ^sce.RtcTick) -> c.int ---
 }

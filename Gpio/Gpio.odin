@@ -20,16 +20,15 @@ SceGpioPortMode :: enum c.int {
 	INPUT	= 1,
 }
 
-@(link_prefix = "ksceGpio")
 foreign gpio {
-  PortRead :: proc(bus: c.int, port: c.int) -> c.int ---
-  PortSet :: proc(bus: c.int, port: c.int) -> c.int ---
-  PortClear :: proc(bus: c.int, port: c.int) -> c.int ---
-  PortReset :: proc(bus: c.int, port: c.int) -> c.int ---
-  SetPortMode :: proc(bus: c.int, port: c.int, mode: c.int) -> c.int ---
-  GetPortMode :: proc(bus: c.int, port: c.int) -> c.int ---
-  SetIntrMode :: proc(bus: c.int, port: c.int, intr_mode: c.int) -> c.int ---
-  GetIntrMode :: proc(bus: c.int, port: c.int) -> c.int ---
-  AcquireIntr :: proc(bus: c.int, port: c.int) -> c.int ---
-  QueryIntr :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioPortRead :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioPortSet :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioPortClear :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioPortReset :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioSetPortMode :: proc(bus: c.int, port: c.int, mode: c.int) -> c.int ---
+  ksceGpioGetPortMode :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioSetIntrMode :: proc(bus: c.int, port: c.int, intr_mode: c.int) -> c.int ---
+  ksceGpioGetIntrMode :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioAcquireIntr :: proc(bus: c.int, port: c.int) -> c.int ---
+  ksceGpioQueryIntr :: proc(bus: c.int, port: c.int) -> c.int ---
 }

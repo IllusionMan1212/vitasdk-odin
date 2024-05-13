@@ -11,35 +11,34 @@ sceIncomingDialogParamInit :: #force_inline proc(dialogParam: ^SceIncomingDialog
 	dialogParam.sdkVersion = sce.PSP2_SDK_VERSION
 }
 
-@(link_prefix = "sceIncomingDialog")
 foreign incomingdialog {
 	/**
 	* Initialize incoming dialog library, init_type must be 1.
 	*/
-	Initialize :: proc(init_type: c.int) -> sce.Int32 ---
+	sceIncomingDialogInitialize :: proc(init_type: c.int) -> sce.Int32 ---
 
 	/**
 	* Open incoming dialog.
 	*/
-	Open :: proc(dialogParam: ^SceIncomingDialogParam) -> sce.Int32 ---
+	sceIncomingDialogOpen :: proc(dialogParam: ^SceIncomingDialogParam) -> sce.Int32 ---
 
 	/**
 	* Returns current status of incoming dialog.
 	*/
-	GetStatus :: proc() -> sce.Int32 ---
+	sceIncomingDialogGetStatus :: proc() -> sce.Int32 ---
 
 	/**
 	* Force exit to LiveArea and show dialog window
 	*/
-	SwitchToDialog :: proc() -> sce.Int32 ---
+	sceIncomingDialogSwitchToDialog :: proc() -> sce.Int32 ---
 
 	/**
 	* Close incoming dialog.
 	*/
-	Close :: proc() -> sce.Int32 ---
+	sceIncomingDialogClose :: proc() -> sce.Int32 ---
 
 	/**
 	* Finish incoming dialog library
 	*/
-	Finish :: proc() -> sce.Int32 ---
+	sceIncomingDialogFinish :: proc() -> sce.Int32 ---
 }

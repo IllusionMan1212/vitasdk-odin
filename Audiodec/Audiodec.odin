@@ -5,19 +5,18 @@ import sce "../common"
 
 foreign import audiodec "system:SceAudiodec_stub"
 
-@(link_prefix = "sceAudiodec")
 foreign audiodec {
-  InitLibrary :: proc(codecType: sce.UInt32, pInitParam: ^SceAudiodecInitParam) -> sce.Int32 ---
-  TermLibrary :: proc(codecType: sce.UInt32) -> sce.Int32 ---
-  CreateDecoder :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32) -> sce.Int32 ---
-  DeleteDecoder :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
-  Decode :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
-  DecodeNFrames :: proc(pCtrl: ^SceAudiodecCtrl, nFrames: sce.UInt32) -> sce.Int32 ---
-  DecodeNStreams :: proc(pCtrls: []^SceAudiodecCtrl, nStreams: sce.UInt32) -> sce.Int32 ---
-  ClearContext :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
-  GetInternalError :: proc(pCtrl: ^SceAudiodecCtrl, pInternalError: ^sce.Int32) -> sce.Int32 ---
+  sceAudiodecInitLibrary :: proc(codecType: sce.UInt32, pInitParam: ^SceAudiodecInitParam) -> sce.Int32 ---
+  sceAudiodecTermLibrary :: proc(codecType: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecCreateDecoder :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecDeleteDecoder :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
+  sceAudiodecDecode :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
+  sceAudiodecDecodeNFrames :: proc(pCtrl: ^SceAudiodecCtrl, nFrames: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecDecodeNStreams :: proc(pCtrls: []^SceAudiodecCtrl, nStreams: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecClearContext :: proc(pCtrl: ^SceAudiodecCtrl) -> sce.Int32 ---
+  sceAudiodecGetInternalError :: proc(pCtrl: ^SceAudiodecCtrl, pInternalError: ^sce.Int32) -> sce.Int32 ---
 
-  GetContextSize :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32) -> sce.Int32 ---
-  CreateDecoderExternal :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32, vaContext: sce.UIntVAddr, contextSize: sce.UInt32) -> sce.Int32 ---
-  DeleteDecoderExternal :: proc(pCtrl: ^SceAudiodecCtrl, pvaContext: ^sce.UIntVAddr) -> sce.Int32 ---
+  sceAudiodecGetContextSize :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecCreateDecoderExternal :: proc(pCtrl: ^SceAudiodecCtrl, codecType: sce.UInt32, vaContext: sce.UIntVAddr, contextSize: sce.UInt32) -> sce.Int32 ---
+  sceAudiodecDeleteDecoderExternal :: proc(pCtrl: ^SceAudiodecCtrl, pvaContext: ^sce.UIntVAddr) -> sce.Int32 ---
 }

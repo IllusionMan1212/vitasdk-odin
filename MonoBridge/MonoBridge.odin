@@ -13,13 +13,12 @@ ScePssCryptoHandle :: struct {
 }
 #assert(size_of(ScePssCryptoHandle) == 0x10)
 
-@(link_prefix = "pss_")
 foreign monobridge {
-  crypto_open :: proc(handle: ^ScePssCryptoHandle, path: cstring) -> c.int ---
-  crypto_read :: proc(handle: ^ScePssCryptoHandle, mode: ^c.int) -> [^]c.char ---
-  crypto_close :: proc(handle: ^ScePssCryptoHandle) -> c.int ---
-  code_mem_alloc :: proc(_: ^sce.Size) -> rawptr ---
-  code_mem_flush_icache :: proc(_: rawptr, __: sce.Size) ---
-  code_mem_lock :: proc() ---
-  code_mem_unlock :: proc() ---
+  pss_crypto_open :: proc(handle: ^ScePssCryptoHandle, path: cstring) -> c.int ---
+  pss_crypto_read :: proc(handle: ^ScePssCryptoHandle, mode: ^c.int) -> [^]c.char ---
+  pss_crypto_close :: proc(handle: ^ScePssCryptoHandle) -> c.int ---
+  pss_code_mem_alloc :: proc(_: ^sce.Size) -> rawptr ---
+  pss_code_mem_flush_icache :: proc(_: rawptr, __: sce.Size) ---
+  pss_code_mem_lock :: proc() ---
+  pss_code_mem_unlock :: proc() ---
 }

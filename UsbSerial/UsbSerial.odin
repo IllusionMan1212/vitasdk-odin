@@ -6,7 +6,6 @@ import sce "../common"
 foreign import usbserial "system:SceUsbSerial_stub"
 foreign import usbserialkern "system:SceUsbSerialForDriver_stub"
 
-@(link_prefix = "sceUsbSerial")
 foreign usbserial {
   /**
   * Activate USB serial device
@@ -17,7 +16,7 @@ foreign usbserial {
   *
   * @note Wrapper for kernel function StartForDriver()
   */
-  Start :: proc() -> c.int ---
+  sceUsbSerialStart :: proc() -> c.int ---
 
   /**
   * Setup USB serial device
@@ -28,14 +27,14 @@ foreign usbserial {
   *
   * @note Wrapper for kernel function SetupForDriver()
   */
-  Setup :: proc(unk: c.int) -> c.int ---
+  sceUsbSerialSetup :: proc(unk: c.int) -> c.int ---
 
   /**
   * Close USB serial device
   *
   * @note Wrapper for kernel function CloseForDriver()
   */
-  Close :: proc() -> c.int ---
+  sceUsbSerialClose :: proc() -> c.int ---
 
   /**
   * Close USB serial device
@@ -44,7 +43,7 @@ foreign usbserial {
   *
   * @note Wrapper for kernel function StatusForDriver()
   */
-  Status :: proc() -> c.int ---
+  sceUsbSerialStatus :: proc() -> c.int ---
 
   /**
   * Get receive buffer length
@@ -53,7 +52,7 @@ foreign usbserial {
   *
   * @note Wrapper for kernel function GetLenForDriver()
   */
-  GetRecvBufferSize :: proc() -> c.uint ---
+  sceUsbSerialGetRecvBufferSize :: proc() -> c.uint ---
 
   /**
   * Send data
@@ -64,7 +63,7 @@ foreign usbserial {
   * @note max send length is 0x10000
   * @note Wrapper for kernel function SendForDriver()
   */
-  Send :: proc(buffer: rawptr, len: c.uint, unk1: c.int, unk2: c.int) -> c.uint ---
+  sceUsbSerialSend :: proc(buffer: rawptr, len: c.uint, unk1: c.int, unk2: c.int) -> c.uint ---
 
   /**
   * Receive Data
@@ -76,7 +75,7 @@ foreign usbserial {
   * @note max recv length is 0x10000
   * @note Wrapper for kernel function RecvForDriver()
   */
-  Recv :: proc(buffer: rawptr, max_len: c.uint, unk1: c.int, unk2: c.int) -> c.uint ---
+  sceUsbSerialRecv :: proc(buffer: rawptr, max_len: c.uint, unk1: c.int, unk2: c.int) -> c.uint ---
 }
 
 foreign usbserialkern {

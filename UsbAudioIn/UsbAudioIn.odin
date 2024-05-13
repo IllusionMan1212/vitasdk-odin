@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import usbaudioin "system:SceUsbAudioIn_stub"
 
-@(link_prefix = "sceUsbAudioIn")
 foreign usbaudioin {
     /**
     * Open usb audio device
@@ -16,7 +15,7 @@ foreign usbaudioin {
     * @param[in] bits - Bits per sample. Only 16 allowed
     * @param[in] rate - Bitrate in Hz. Only 48000 allowed
     */
-    OpenDevice :: proc(device_id: sce.UInt32, bits: c.int, rate: c.int) -> sce.Int32 ---
+    sceUsbAudioInOpenDevice :: proc(device_id: sce.UInt32, bits: c.int, rate: c.int) -> sce.Int32 ---
 
     /**
     * Close usb audio device
@@ -25,7 +24,7 @@ foreign usbaudioin {
     *
     * @param[in] device_id - Device id
     */
-    CloseDevice :: proc(device_id: sce.UInt32) -> sce.Int32 ---
+    sceUsbAudioInCloseDevice :: proc(device_id: sce.UInt32) -> sce.Int32 ---
 
     /**
     * Get available audio usb devices
@@ -38,7 +37,7 @@ foreign usbaudioin {
     *
     * @note While function accepts up to 127 as list_size it can only return maximum 7 devices
     */
-    GetDeviceIdList :: proc(list: ^SceUsbAudioInDeviceListItem, device_count: ^sce.UInt32, list_size: sce.UInt32) -> sce.Int32 ---
+    sceUsbAudioInGetDeviceIdList :: proc(list: ^SceUsbAudioInDeviceListItem, device_count: ^sce.UInt32, list_size: sce.UInt32) -> sce.Int32 ---
 
     /**
     * Get usb audio device info
@@ -48,7 +47,7 @@ foreign usbaudioin {
     * @param[in] device_id - Device id
     * @param[out] info - pointer to SceUsbAudioInDeviceInfo
     */
-    GetDeviceInformation :: proc(device_id: sce.UInt32, info: ^SceUsbAudioInDeviceInfo) -> sce.Int32 ---
+    sceUsbAudioInGetDeviceInformation :: proc(device_id: sce.UInt32, info: ^SceUsbAudioInDeviceInfo) -> sce.Int32 ---
 
     /**
     * Get usb audio device max volume
@@ -60,7 +59,7 @@ foreign usbaudioin {
     *
     * @note You should OpenDevice first to use this function
     */
-    GetMaxValueOfVolume :: proc(device_id: sce.UInt32, volume: ^sce.UInt32) -> sce.Int32 ---
+    sceUsbAudioInGetMaxValueOfVolume :: proc(device_id: sce.UInt32, volume: ^sce.UInt32) -> sce.Int32 ---
 
     /**
     * Get usb audio device min volume
@@ -72,7 +71,7 @@ foreign usbaudioin {
     *
     * @note You should OpenDevice first to use this function
     */
-    GetMinValueOfVolume :: proc(device_id: sce.UInt32, volume: ^sce.UInt32) -> sce.Int32 ---
+    sceUsbAudioInGetMinValueOfVolume :: proc(device_id: sce.UInt32, volume: ^sce.UInt32) -> sce.Int32 ---
 
     /**
     * Set usb audio device volume
@@ -84,7 +83,7 @@ foreign usbaudioin {
     *
     * @note You should OpenDevice first to use this function
     */
-    SetCurrentValueOfVolume :: proc(device_id: sce.UInt32, volume: sce.UInt32) -> sce.Int32 ---
+    sceUsbAudioInSetCurrentValueOfVolume :: proc(device_id: sce.UInt32, volume: sce.UInt32) -> sce.Int32 ---
 
     /**
     * Receive sound data from usb device
@@ -97,5 +96,5 @@ foreign usbaudioin {
     * @note You should call OpenDevice first to use this function
     * @note Data is in S16_MONO format. Granularity is 768 (thus buffer is 768*2)
     */
-    Input :: proc(device_id: sce.UInt32, buffer: rawptr) -> sce.Int32 ---
+    sceUsbAudioInInput :: proc(device_id: sce.UInt32, buffer: rawptr) -> sce.Int32 ---
 }

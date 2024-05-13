@@ -13,7 +13,6 @@ SceUsbservErrorCode :: enum c.uint {
 	FATAL          = 0x802480FF
 }
 
-@(link_prefix = "sceUsbServ")
 foreign usbserv {
   /**
   * Enable accessory port
@@ -21,7 +20,7 @@ foreign usbserv {
   * @return 0 on success, < 0 on error
   *
   */
-  AccessoryActivate :: proc() -> c.int ---
+  sceUsbServAccessoryActivate :: proc() -> c.int ---
 
   /**
   * Disable accessory port
@@ -29,7 +28,7 @@ foreign usbserv {
   * @return 0 on success, < 0 on error
   *
   */
-  AccessoryDeactivate :: proc() -> c.int ---
+  sceUsbServAccessoryDeactivate :: proc() -> c.int ---
 }
 
 foreign usbservkern {

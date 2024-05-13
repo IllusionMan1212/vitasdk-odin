@@ -5,7 +5,6 @@ import sce "../common"
 
 foreign import audioout "system:SceAudio_stub"
 
-@(link_prefix = "sceAudioOut")
 foreign audioout {
 	/**
 	* Initialize audio port
@@ -19,7 +18,7 @@ foreign audioout {
 	* @return port number, < 0 on error.
 	* @note - The volume is initially set to its max value (::SCE_AUDIO_OUT_MAX_VOL)
 	*/
-	OpenPort :: proc(type: SceAudioOutPortType, len: c.int, freq: c.int, mode: SceAudioOutMode) -> c.int ---
+	sceAudioOutOpenPort :: proc(type: SceAudioOutPortType, len: c.int, freq: c.int, mode: SceAudioOutMode) -> c.int ---
 
 	/**
 	* Release an audio port
@@ -28,7 +27,7 @@ foreign audioout {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	ReleasePort :: proc(port: c.int) -> c.int ---
+	sceAudioOutReleasePort :: proc(port: c.int) -> c.int ---
 
 	/**
 	* Output audio (blocking function)
@@ -40,7 +39,7 @@ foreign audioout {
 	* @note - if NULL is specified for *buf, the function will not return until the last
 	* output audio data has been output.
 	*/
-	Output :: proc(port: c.int, buf: rawptr) -> c.int ---
+	sceAudioOutOutput :: proc(port: c.int, buf: rawptr) -> c.int ---
 
 	/**
 	* Set volume of specified output audio port
@@ -51,7 +50,7 @@ foreign audioout {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	SetVolume :: proc(port: c.int, ch: SceAudioOutChannelFlag, vol: ^c.int) -> c.int ---
+	sceAudioOutSetVolume :: proc(port: c.int, ch: SceAudioOutChannelFlag, vol: ^c.int) -> c.int ---
 
 	/**
 	* Change configuration of specified output port
@@ -64,7 +63,7 @@ foreign audioout {
 	* @return 0 on success, < 0 on error.
 	* @note - If (-1) is specified for any argument (excepted for port), current configuration is used instead.
 	*/
-	SetConfig :: proc(port: c.int, len: sce.Size, freq: c.int, mode: SceAudioOutMode) -> c.int ---
+	sceAudioOutSetConfig :: proc(port: c.int, len: sce.Size, freq: c.int, mode: SceAudioOutMode) -> c.int ---
 
 	/**
 	* Get a parameter value of specified output port
@@ -74,7 +73,7 @@ foreign audioout {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	GetConfig :: proc(port: c.int, type: SceAudioOutConfigType) -> c.int ---
+	sceAudioOutGetConfig :: proc(port: c.int, type: SceAudioOutConfigType) -> c.int ---
 
 	/**
 	* Set 'Automatic Level Control' mode on the BGM port
@@ -84,7 +83,7 @@ foreign audioout {
 	*
 	* @return 0 on success, < 0 on error.
 	*/
-	SetAlcMode :: proc(mode: SceAudioOutAlcMode) -> c.int ---
+	sceAudioOutSetAlcMode :: proc(mode: SceAudioOutAlcMode) -> c.int ---
 
 	/**
 	* Get the number of remaining samples to be output on the specified port
@@ -93,7 +92,7 @@ foreign audioout {
 	*
 	* @return Number of samples on success, < 0 on error.
 	*/
-	GetRestSample :: proc(port: c.int) -> c.int ---
+	sceAudioOutGetRestSample :: proc(port: c.int) -> c.int ---
 
 	/**
 	* Get status of port type
@@ -103,5 +102,5 @@ foreign audioout {
 	*
 	* @return (1) if port is in use, (0) otherwise. < 0 on error.
 	*/
-	GetAdopt :: proc(type: SceAudioOutPortType) -> c.int ---
+	sceAudioOutGetAdopt :: proc(type: SceAudioOutPortType) -> c.int ---
 }
