@@ -202,7 +202,7 @@ SceImeTextFilter :: #type ^proc(
   outTextLength: ^sce.UInt32,
   srcText: [^]sce.WChar16,
   srcTextLength: sce.UInt32) -> sce.UInt32
-SceImeEventHandler :: #type ^proc(arg: rawptr, e: ^SceImeEventData)
+SceImeEventHandler :: #type ^proc(arg: rawptr, #by_ptr e: SceImeEventData)
 
 SceImeParam :: struct {
   sdkVersion: sce.UInt32,

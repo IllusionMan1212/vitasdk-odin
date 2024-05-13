@@ -1,6 +1,5 @@
 package audiodec
 
-import "core:c"
 import sce "../common"
 
 foreign import audiodec "system:SceAudiodec_stub"

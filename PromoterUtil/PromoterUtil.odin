@@ -1,7 +1,6 @@
 package promoterutil
 
 import "core:c"
-import sce "../common"
 
 foreign import promoterutil "system:ScePromoterUtil_stub"
 

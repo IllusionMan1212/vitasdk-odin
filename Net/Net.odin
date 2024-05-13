@@ -1,6 +1,7 @@
 package net
 
 import "core:c"
+
 foreign import net "system:SceNet_stub"
 foreign import netps "system:SceNetPsForDriver_stub"
 

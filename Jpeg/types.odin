@@ -141,4 +141,3 @@ SceJpegEncoderHeaderMode :: enum c.int {
 	MJPEG = 1   //!< MJPEG header mode
 }
 
-

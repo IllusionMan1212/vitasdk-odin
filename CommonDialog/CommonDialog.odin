@@ -12,20 +12,20 @@ _sceCommonDialogSetMagicNumber :: #force_inline proc "c" (param: ^SceCommonDialo
 }
 
 sceCommonDialogConfigParamInit :: #force_inline proc "c" (param: ^SceCommonDialogConfigParam) {
-	sceClib.Memset(param, 0x0, size_of(SceCommonDialogConfigParam))
+	sceClib.sceClibMemset(param, 0x0, size_of(SceCommonDialogConfigParam))
 	param.language = sce.SceSystemParamLang.MAX_VALUE
 	param.enterButtonAssign = sce.SceSystemParamEnterButtonAssign.MAX_VALUE
 	param.sdkVersion = sce.PSP2_SDK_VERSION
 }
 
 sceMsgDialogParamInit :: #force_inline proc "c" (param: ^SceMsgDialogParam) {
-	sceClib.Memset(param, 0x0, size_of(SceMsgDialogParam))
+	sceClib.sceClibMemset(param, 0x0, size_of(SceMsgDialogParam))
 	_sceCommonDialogSetMagicNumber(&param.commonParam)
 	param.sdkVersion = sce.PSP2_SDK_VERSION
 }
 
 sceNetCheckDialogParamInit :: #force_inline proc "c" (param: ^SceNetCheckDialogParam) {
-	sceClib.Memset(param, 0x0, size_of(SceNetCheckDialogParam))
+	sceClib.sceClibMemset(param, 0x0, size_of(SceNetCheckDialogParam))
 	_sceCommonDialogSetMagicNumber(&param.commonParam)
 	param.sdkVersion = sce.PSP2_SDK_VERSION
 	param.defaultAgeRestriction = SCE_NETCHECK_DIALOG_INITIAL_AGE_RESTRICTION

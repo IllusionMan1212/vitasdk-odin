@@ -1,7 +1,6 @@
 package pvf
 
 import "core:c"
-import sce "../common"
 
 foreign import pvf "system:ScePvf_stub"
 

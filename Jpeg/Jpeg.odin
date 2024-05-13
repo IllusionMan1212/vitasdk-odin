@@ -12,7 +12,7 @@ foreign import jpegkern "system:SceAvcodecForDriver_stub"
 foreign jpeg {
   sceJpegInitMJpeg :: proc(decoderCount: sce.Int32) -> c.int ---
 
-  sceJpegInitMJpegWithParam :: proc(params: ^SceJpegMJpegInitParam) -> c.int ---
+  sceJpegInitMJpegWithParam :: proc(#by_ptr params: SceJpegMJpegInitParam) -> c.int ---
 
   sceJpegFinishMJpeg :: proc() -> c.int ---
 
@@ -84,7 +84,7 @@ foreign jpegenc {
   *
   * @return 0 on success, < 0 on error.
   */
-  sceJpegEncoderInitWithParam :: proc(_context: SceJpegEncoderContext, initParam: ^SceJpegEncoderInitParam) -> c.int ---
+  sceJpegEncoderInitWithParam :: proc(_context: SceJpegEncoderContext, #by_ptr initParam: SceJpegEncoderInitParam) -> c.int ---
 
   /**
   * Terminate a jpeg encoder

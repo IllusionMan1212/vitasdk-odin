@@ -4,7 +4,6 @@ import "core:c"
 import sce "../common"
 
 // Error Codes
-
 SceFiberErrorCode :: enum c.uint {
 	NULL       = 0x80590001,
 	ALIGNMENT  = 0x80590002,

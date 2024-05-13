@@ -4,7 +4,6 @@ import "core:c"
 import sce "../common"
 
 // Error Codes
-
 SceGxmErrorCode :: enum c.uint {
 	UNINITIALIZED                                 = 0x805B0000,
 	ALREADY_INITIALIZED                           = 0x805B0001,

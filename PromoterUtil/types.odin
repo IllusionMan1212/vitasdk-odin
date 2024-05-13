@@ -1,7 +1,6 @@
 package promoterutil
 
 import "core:c"
-import sce "../common"
 
 /** Avalible types for ::ScePromoterUtilityImportParams **/
 ScePromoterUtilityPackageType :: enum c.int {

@@ -7,7 +7,7 @@ import sceClib "../Clib"
 foreign import incomingdialog "system:SceIncomingDialog_stub"
 
 sceIncomingDialogParamInit :: #force_inline proc(dialogParam: ^SceIncomingDialogParam) {
-	sceClib.Memset(dialogParam, 0x0, size_of(SceIncomingDialogParam))
+	sceClib.sceClibMemset(dialogParam, 0x0, size_of(SceIncomingDialogParam))
 	dialogParam.sdkVersion = sce.PSP2_SDK_VERSION
 }
 
